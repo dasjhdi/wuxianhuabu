@@ -45,3 +45,6 @@ CosyVoice/**
 !CosyVoice/README_voice.md
 !CosyVoice/voices/
 !CosyVoice/voices/**
+
+# 临时日志
+.git-add.log
