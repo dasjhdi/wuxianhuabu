@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>音色库 · 本地克隆</title>
+<style>
+  :root{color-scheme:light}
+  *{box-sizing:border-box}
+  body{margin:0;padding:28px 20px 60px;background:#f6f7f9;color:#1f2430;font:14px/1.65 system-ui,"Microsoft YaHei",sans-serif}
+  .wrap{max-width:880px;margin:0 auto}
+  h1{font-size:20px;margin:0 0 6px}
+  .sub{color:#6b7385;margin:0 0 22px;font-size:13px}
+  .card{background:#fff;border:1px solid #e3e6ec;border-radius:12px;padding:20px;margin-bottom:20px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  label{display:block;font-size:12px;color:#5b6472;margin-bottom:5px}
+  input[type=text],textarea{width:100%;padding:9px 11px;border:1px solid #d6dae2;border-radius:8px;font:inherit;background:#fff;outline:none}
+  textarea{min-height:86px;resize:vertical}
+  input[type=text]:focus,textarea:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+  .drop{margin-top:14px;border:1.5px dashed #c8cedb;border-radius:10px;padding:22px;text-align:center;color:#6b7385;cursor:pointer;background:#fafbfc;transition:.15s}
+  .drop.hover{border-color:#3b82f6;background:#f0f6ff;color:#2563eb}
+  .drop b{color:#1f2430}
+  .row{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+  button{border:0;border-radius:8px;padding:9px 16px;font:inherit;cursor:pointer}
+  .primary{background:#3b82f6;color:#fff}
+  .primary:disabled{background:#a9c3f0;cursor:not-allowed}
+  .ghost{background:#eef1f6;color:#465065}
+  .ghost:disabled{color:#a2a9b8;cursor:not-allowed}
+  .tip{font-size:12px;color:#8a92a3;margin-top:10px;line-height:1.7}
+  .item{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #eef0f4;flex-wrap:wrap}
+  .item:first-child{border-top:0}
+  .meta{flex:1;min-width:180px}
+  .meta .name{font-weight:600}
+  .meta .id{font-size:12px;color:#8a92a3}
+  audio{height:32px}
+  .del{background:#fdecec;color:#c0392b;padding:6px 10px;font-size:12px}
+  .msg{margin-top:0;font-size:13px}
+  .ok{color:#15803d}.err{color:#c0392b}
+  #errbar{display:none;background:#fdecec;border:1px solid #f5c2c0;color:#a4271f;padding:10px 14px;border-radius:8px;margin-bottom:16px;font-size:13px;white-space:pre-wrap}
+  footer{margin-top:24px;text-align:center;color:#a6adbb;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="errbar"></div>
+  <h1>音色库</h1>
+  <p class="sub">上传一段 10–30 秒的干净人声，填写与音频完全一致的文本，即可在画布中按角色选用。</p>
+
+  <form class="card" id="uploadForm">
+    <div class="grid">
+      <div><label>音色 ID（画布里显示为角色名，ID 用于建档）</label><input type="text" id="voiceId" placeholder="lingqingyan" required /></div>
+      <div><label>显示名（画布下拉里显示这个）</label><input type="text" id="voiceName" placeholder="凌清砚" /></div>
+    </div>
+    <div style="margin-top:14px"><label>音色备注（可选）</label><input type="text" id="voiceDesc" placeholder="低沉清冷，语速偏慢" /></div>
+    <div style="margin-top:14px"><label>逐字文本（必须与音频一字不差，含标点）</label><textarea id="promptText" placeholder="你听见云层裂开的声音了吗" required></textarea></div>
+
+    <div class="drop" id="drop">
+      <div><b>拖入音频</b> 或点击选择</div>
+      <div style="margin-top:6px;font-size:12px" id="fileName">支持 wav / mp3 / m4a / flac / ogg，10–30 秒最佳</div>
+      <input type="file" id="fileInput" accept="audio/*" hidden />
+    </div>
+
+    <div class="row">
+      <button class="primary" type="submit" id="submitBtn">保存音色</button>
+      <button class="ghost" type="button" id="resetBtn">清空</button>
+      <span class="msg" id="uploadMsg"></span>
+    </div>
+    <div class="tip">音频要求：单人说话、无背景音乐、无混响与回声；文本与音频不一致会明显影响克隆相似度。</div>
+  </form>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:6px">批量对比</div>
+    <div class="tip" style="margin-top:0;margin-bottom:12px">用同一句测试文本为所有角色生成样音，然后连续播放，横向比较音色。</div>
+    <input type="text" id="compareText" value="这句话是用来试听克隆效果的，听听像不像。" />
+    <div class="row">
+      <button class="primary" type="button" id="prepareBtn">生成全部样音</button>
+      <button class="ghost" type="button" id="playBtn">连播对比</button>
+      <button class="ghost" type="button" id="stopBtn">停止</button>
+      <span class="msg" id="compareMsg"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:6px">已注册音色</div>
+    <div id="list" class="tip">加载中…</div>
+    <audio id="player" controls style="display:none;width:100%;margin-top:14px"></audio>
+  </div>
+
+  <footer id="version">音色库 · 版本 v1.3</footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  const byId = function (id) { return document.getElementById(id); };
+  const errbar = byId('errbar');
+  window.addEventListener('error', function (event) {
+    errbar.style.display = 'block';
+    errbar.textContent = '脚本错误：' + (event.message || '未知错误');
+  });
+
+  let picked = null;
+  let stopRequested = false;
+  const drop = byId('drop');
+  const fileInput = byId('fileInput');
+
+  function showFile(file) {
+    picked = file;
+    byId('fileName').innerHTML = file
+      ? '<b>' + file.name + '</b>（' + (file.size / 1024 / 1024).toFixed(2) + ' MB）'
+      : '支持 wav / mp3 / m4a / flac / ogg，10–30 秒最佳';
+  }
+
+  drop.addEventListener('click', function () { fileInput.click(); });
+  drop.addEventListener('dragover', function (e) { e.preventDefault(); drop.classList.add('hover'); });
+  drop.addEventListener('dragleave', function () { drop.classList.remove('hover'); });
+  drop.addEventListener('drop', function (e) {
+    e.preventDefault();
+    drop.classList.remove('hover');
+    if (e.dataTransfer.files.length) showFile(e.dataTransfer.files[0]);
+  });
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files.length) showFile(fileInput.files[0]);
+  });
+  byId('resetBtn').addEventListener('click', function () {
+    byId('uploadForm').reset();
+    showFile(null);
+    byId('uploadMsg').textContent = '';
+  });
+
+  function playUrl(url) {
+    return new Promise(function (resolve) {
+      const player = byId('player');
+      player.style.display = 'block';
+      player.src = url;
+      const done = function () {
+        player.removeEventListener('ended', done);
+        player.removeEventListener('error', done);
+        resolve();
+      };
+      player.addEventListener('ended', done);
+      player.addEventListener('error', done);
+      player.play().catch(done);
+    });
+  }
+
+  async function playClone(voiceId, btn) {
+    if (btn) { btn.disabled = true; btn.textContent = '合成中…'; }
+    try {
+      const text = byId('compareText').value.trim() || '这句话是用来试听克隆效果的，听听像不像。';
+      const res = await fetch('/tts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text, voiceId: voiceId }),
+      });
+      if (!res.ok) throw new Error((await res.text()).slice(0, 120));
+      const player = byId('player');
+      player.style.display = 'block';
+      player.src = URL.createObjectURL(await res.blob());
+      await player.play().catch(function () {});
+    } catch (err) {
+      alert('试听失败：' + err.message);
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '试听克隆'; }
+    }
+  }
+
+  byId('uploadForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const msg = byId('uploadMsg');
+    msg.className = 'msg';
+    msg.textContent = '';
+    if (!picked) { msg.className = 'msg err'; msg.textContent = '请先选择参考音频'; return; }
+    const voiceId = byId('voiceId').value.trim();
+    if (!voiceId) { msg.className = 'msg err'; msg.textContent = '请填写音色 ID'; return; }
+
+    const data = new FormData();
+    data.append('voiceId', voiceId);
+    data.append('name', byId('voiceName').value.trim());
+    data.append('description', byId('voiceDesc').value.trim());
+    data.append('promptText', byId('promptText').value.trim());
+    data.append('file', picked);
+
+    byId('submitBtn').disabled = true;
+    msg.textContent = '上传中…';
+    try {
+      const res = await fetch('/voices', { method: 'POST', body: data });
+      const body = await res.json();
+      if (!res.ok) throw new Error(body.detail || '上传失败');
+      msg.className = 'msg ok';
+      msg.textContent = '已保存：' + body.voiceId + '（' + body.seconds + ' 秒），正在合成试听…';
+      byId('uploadForm').reset();
+      showFile(null);
+      loadList();
+      await playClone(voiceId, null);
+      msg.textContent = '已保存：' + body.voiceId + '（' + body.seconds + ' 秒）';
+    } catch (err) {
+      msg.className = 'msg err';
+      msg.textContent = err.message;
+    } finally {
+      byId('submitBtn').disabled = false;
+    }
+  });
+
+  function voiceIds() {
+    return Array.prototype.map.call(document.querySelectorAll('[data-voice]'), function (el) { return el.dataset.voice; });
+  }
+
+  byId('prepareBtn').addEventListener('click', async function () {
+    const text = byId('compareText').value.trim();
+    const msg = byId('compareMsg');
+    if (!text) { msg.className = 'msg err'; msg.textContent = '请先填写测试文本'; return; }
+    const ids = voiceIds();
+    if (!ids.length) { msg.className = 'msg err'; msg.textContent = '还没有音色'; return; }
+    const btn = byId('prepareBtn');
+    btn.disabled = true;
+    let ok = 0;
+    for (let i = 0; i < ids.length; i += 1) {
+      msg.className = 'msg';
+      msg.textContent = '生成中 ' + (i + 1) + '/' + ids.length + '：' + ids[i] + '…';
+      try {
+        const res = await fetch('/voices/' + encodeURIComponent(ids[i]) + '/sample', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: text }),
+        });
+        if (!res.ok) throw new Error((await res.json()).detail || '失败');
+        ok += 1;
+      } catch (err) {
+        msg.className = 'msg err';
+        msg.textContent = ids[i] + ' 生成失败：' + err.message;
+      }
+    }
+    btn.disabled = false;
+    if (ok === ids.length) {
+      msg.className = 'msg ok';
+      msg.textContent = '全部 ' + ok + ' 个样音已就绪，点「连播对比」';
+    } else {
+      msg.className = 'msg err';
+      msg.textContent = ok + '/' + ids.length + ' 个样音就绪';
+    }
+  });
+
+  byId('playBtn').addEventListener('click', async function () {
+    const ids = voiceIds();
+    const msg = byId('compareMsg');
+    if (!ids.length) return;
+    stopRequested = false;
+    const btn = byId('playBtn');
+    btn.disabled = true;
+    for (let i = 0; i < ids.length; i += 1) {
+      if (stopRequested) break;
+      msg.className = 'msg';
+      msg.textContent = '播放 ' + (i + 1) + '/' + ids.length + '：' + ids[i];
+      await playUrl('/voices/' + encodeURIComponent(ids[i]) + '/sample?t=' + Date.now());
+      if (!stopRequested) await new Promise(function (r) { setTimeout(r, 350); });
+    }
+    btn.disabled = false;
+    msg.className = 'msg ok';
+    msg.textContent = stopRequested ? '已停止' : '播放完毕（' + ids.length + ' 个）';
+  });
+
+  byId('stopBtn').addEventListener('click', function () {
+    stopRequested = true;
+    const player = byId('player');
+    player.pause();
+    byId('playBtn').disabled = false;
+  });
+
+  async function loadList() {
+    const box = byId('list');
+    try {
+      const res = await fetch('/voices');
+      const payload = await res.json();
+      const voices = payload.voices || [];
+      if (!voices.length) { box.textContent = '还没有音色，先上传一个吧'; return; }
+      box.innerHTML = voices.map(function (v) {
+        const detail = 'ID：' + v.voiceId + (v.description ? ' · ' + v.description : '') + (v.seconds ? ' · ' + v.seconds + ' 秒' : '');
+        return '<div class="item" data-voice="' + v.voiceId + '">' +
+          '<div class="meta"><div class="name">' + (v.name || v.voiceId) + '</div><div class="id">' + detail + '</div></div>' +
+          '<audio controls preload="none" src="/voices/' + encodeURIComponent(v.voiceId) + '/ref.wav"></audio>' +
+          '<button class="ghost test" data-id="' + v.voiceId + '">试听克隆</button>' +
+          '<button class="del" data-id="' + v.voiceId + '">删除</button>' +
+          '</div>';
+      }).join('');
+      Array.prototype.forEach.call(box.querySelectorAll('.test'), function (btn) {
+        btn.addEventListener('click', function () { playClone(btn.dataset.id, btn); });
+      });
+      Array.prototype.forEach.call(box.querySelectorAll('.del'), function (btn) {
+        btn.addEventListener('click', async function () {
+          if (!confirm('删除音色 ' + btn.dataset.id + '？')) return;
+          await fetch('/voices/' + encodeURIComponent(btn.dataset.id), { method: 'DELETE' });
+          loadList();
+        });
+      });
+    } catch (err) {
+      box.textContent = '读取失败：' + err.message;
+    }
+  }
+
+  loadList();
+})();
+</script>
+</body>
+</html>

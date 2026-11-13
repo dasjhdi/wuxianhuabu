@@ -1,0 +1,47 @@
+# ── 密钥与本地数据（绝不提交）──────────────────────────
+channel-server/.env
+channel-server/channel.db
+channel-server/**/__pycache__/
+tunnel/password.txt
+Toonflow-app/data/settings.json
+
+# ── 大文件：模型权重 / 安装包 / 二进制工具（另行准备）──
+models/
+wheels/
+tools/
+Toonflow-app/data/ffmpeg/
+CosyVoice/.venv/
+
+# ── 依赖与构建产物 ──
+node_modules/
+**/node_modules/
+Toonflow-app/build/
+*.tsbuildinfo
+
+# ── 运行时数据与缓存 ──
+Toonflow-app/nul
+Toonflow-app/data/thumbs/
+Toonflow-app/data/mediaTasks/
+Toonflow-app/data/canvasBackups/
+Toonflow-app/data/ext/
+Toonflow-app/data/skills/
+Toonflow-app/data/tools/
+Toonflow-app/data/nodes/*.bak*
+.workbuddy/
+__pycache__/
+*.pyc
+wuxianhuabudate/
+
+# ── 上游仓库的本地 git 备份（恢复方法见 .git-upstream-backup）──
+Toonflow-app/.git-upstream-backup/
+CosyVoice/.git-upstream-backup/
+
+# ── CosyVoice：只保留本地自研文件与音色库，上游源码不入库 ──
+CosyVoice/**
+!CosyVoice/server_local.py
+!CosyVoice/page.html
+!CosyVoice/import_voices.py
+!CosyVoice/check_voices.py
+!CosyVoice/README_voice.md
+!CosyVoice/voices/
+!CosyVoice/voices/**

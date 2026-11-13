@@ -1,0 +1,1 @@
+export default { id: 'demoNode', label: '示例节点' };
