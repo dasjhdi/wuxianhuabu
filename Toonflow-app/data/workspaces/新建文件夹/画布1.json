@@ -1,0 +1,1401 @@
+{
+  "toonflowCanvas": true,
+  "nodes": [
+    {
+      "id": "27cbdb2a-784f-468b-abd2-98e2097bbcc4",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 601,
+        "y": 647
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": ""
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gpt-image-2\"]",
+        "size": "1024x1024",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/27cbdb2a-784f-468b-abd2-98e2097bbcc4/imagee4470f35a30d4a44a569a3ec3a75145d0.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "e4470f35-a30d-4a44-a569-a3ec3a75145d",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "27cbdb2a-784f-468b-abd2-98e2097bbcc4",
+          "mediaType": "image",
+          "providerId": "toonflow",
+          "modelId": "gpt-image-2",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "9dacf059-28f9-4eaa-a0ce-93e1e44d1e3f",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 971,
+        "y": 709
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "生成一张古代茶楼场景图，要求符合现实，写实感，电影感",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "生成一张古代茶楼场景图，要求符合现实，写实感，电影感"
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gemini-3.1-flash-image\"]",
+        "size": "1K",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/9dacf059-28f9-4eaa-a0ce-93e1e44d1e3f/image5edbedd98fb64750ade32c2ce77025e60.jpg",
+              "mimeType": "image/jpeg"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "5edbedd9-8fb6-4750-ade3-2c2ce77025e6",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "9dacf059-28f9-4eaa-a0ce-93e1e44d1e3f",
+          "mediaType": "image",
+          "providerId": "toonflow",
+          "modelId": "gemini-3.1-flash-image",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "4f8b33e3-65f0-40c5-a1e0-156ca7c89c80",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1572,
+        "y": 638
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": ""
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gpt-image-2\"]",
+        "size": "1024x1024",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {}
+      }
+    },
+    {
+      "id": "4b3254ba-7f0b-4a62-8252-1c78f19474a8",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 776,
+        "y": 86
+      },
+      "data": {
+        "label": "图片",
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/4b3254ba-7f0b-4a62-8252-1c78f19474a8/a6afc9a5-b7b5-4882-9fde-57b0a44414fd.png",
+              "mimeType": "image/png"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 3373.5152127906895,
+        "y": -270.2343632822045
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "{{ref 1}}{{ref 2}}这俩张是店内视角，{{ref 3}}这张是店外建筑整体轮廓，现在请修改一下店外建筑的那张参考图，参考俩张店内视角的参考图，修改一下店外建筑的那张，使得从街道处看向大门内的场景和店内参考图视角保持一致，禁止cg风格，禁止贴图风格，并且要求光线光影保持现实生活中光线物理规律",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": ""
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%224c2f9a1d-e272-4467-b9a8-7c7851fb593c%22%2C%22image%22%5D\" data-value=\"{{ref 1}}\">1111111111111.png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": ""
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%22153083e9-0598-4139-9ff0-155393d5db22%22%2C%22image%22%5D\" data-value=\"{{ref 2}}\">333333333.png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "这俩张是店内视角，"
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%22acfbcc32-617a-4a50-9ae4-529a68c048df%22%2C%22image%22%5D\" data-value=\"{{ref 3}}\">222222222222222.png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "这张是店外建筑整体轮廓，现在请修改一下店外建筑的那张参考图，参考俩张店内视角的参考图，修改一下店外建筑的那张，使得从街道处看向大门内的场景和店内参考图视角保持一致，禁止cg风格，禁止贴图风格，并且要求光线光影保持现实生活中光线物理规律"
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gemini-nano-banana-2.1\"]",
+        "size": "1K",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/67bdd716-13cd-4254-aaa3-5202769ce8fc/image52d8064f39994a9ea569615fa4464db70.jpg",
+              "mimeType": "image/jpeg"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "52d8064f-3999-4a9e-a569-615fa4464db7",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+          "mediaType": "image",
+          "providerId": "toonflow",
+          "modelId": "gemini-nano-banana-2.1",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        },
+        "lighting": {
+          "azimuth": -70,
+          "elevation": -5,
+          "brightness": 50,
+          "lightColor": "#ffffff",
+          "rimLight": true,
+          "rimAzimuth": -180,
+          "rimElevation": 20,
+          "rimBrightness": 50,
+          "rimColor": "#ffffff",
+          "preset": "",
+          "smartMode": false,
+          "smartDesc": "",
+          "model": "[\"toonflow\",\"gemini-nano-banana-2.1\"]",
+          "size": "1K",
+          "ratio": "16:9"
+        }
+      },
+      "style": {
+        "width": "804.9999999999995px",
+        "height": "466.7499999999999px"
+      }
+    },
+    {
+      "id": "12ed3365-e6ca-44e9-be2a-16656c17f867",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 908,
+        "y": -290
+      },
+      "data": {
+        "label": "图片",
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/12ed3365-e6ca-44e9-be2a-16656c17f867/3910b512-ba40-4399-acc0-749345b54ad2.png",
+              "mimeType": "image/png"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "58a55c1b-8c13-49f5-a5ab-a0b4bd3b37f4",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1861.247955901687,
+        "y": -665.5396343646208
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "8K超高清，电影级写实摄影，清晨柔和侧逆光，古唐朝街角双层木构茶铺，歇山顶黑筒瓦，深褐色老旧实木梁柱，木格棂窗，青灰砖墙，门前青石板街巷，石板缝隙长着细碎小草，牌匾悬挂在二层下方，店内摆放四套原木方桌长凳，靠墙木架陈列一排古朴陶制茶罐，木架前方还有一掌柜台，掌柜台和木架之间有距离，并不是贴合起来的，右侧木楼梯通往二楼，远处连片古建民居，浅淡多云天空，自然柔和的树影落在地面，24mm广角镜头，f/2.8，ARRI相机拍摄，真实物理光影，木材有自然不均匀磨损纹理，材质粗糙真实，没有贴图感，无CG渲染感，氛围感宁静古朴，景深自然，画面干净，细节丰富",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "8K超高清，电影级写实摄影，清晨柔和侧逆光，古唐朝街角双层木构茶铺，歇山顶黑筒瓦，深褐色老旧实木梁柱，木格棂窗，青灰砖墙，门前青石板街巷，石板缝隙长着细碎小草，牌匾悬挂在二层下方，店内摆放四套原木方桌长凳，靠墙木架陈列一排古朴陶制茶罐，木架前方还有一掌柜台，掌柜台和木架之间有距离，并不是贴合起来的，右侧木楼梯通往二楼，远处连片古建民居，浅淡多云天空，自然柔和的树影落在地面，24mm广角镜头，f/2.8，ARRI相机拍摄，真实物理光影，木材有自然不均匀磨损纹理，材质粗糙真实，没有贴图感，无CG渲染感，氛围感宁静古朴，景深自然，画面干净，细节丰富"
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gpt-image-2\"]",
+        "size": "1024x1024",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/58a55c1b-8c13-49f5-a5ab-a0b4bd3b37f4/image207fb0d2ae6547dab8c2bad8ab495f7c0.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "207fb0d2-ae65-47da-b8c2-bad8ab495f7c",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "58a55c1b-8c13-49f5-a5ab-a0b4bd3b37f4",
+          "mediaType": "image",
+          "providerId": "toonflow",
+          "modelId": "gpt-image-2",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "4c2f9a1d-e272-4467-b9a8-7c7851fb593c",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 2353.482332464198,
+        "y": -438.36036258004486
+      },
+      "data": {
+        "label": "1111111111111.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/4c2f9a1d-e272-4467-b9a8-7c7851fb593c/bc74aab4-8f50-47ff-af41-1e307eeada28.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "153083e9-0598-4139-9ff0-155393d5db22",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 2395.0820809216357,
+        "y": -50.30210697666048
+      },
+      "data": {
+        "label": "333333333.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/153083e9-0598-4139-9ff0-155393d5db22/236fda58-acd5-49a3-97c0-342de0628501.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acfbcc32-617a-4a50-9ae4-529a68c048df",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 2356.7566355718636,
+        "y": 342.6621880560988
+      },
+      "data": {
+        "label": "222222222222222.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/acfbcc32-617a-4a50-9ae4-529a68c048df/c5e29cef-3631-4f8b-9449-69cae3f598f1.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "6eb64690-0f3e-4629-8bec-12d7ab6489f2",
+      "type": "remote-videoGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1756.9241928289507,
+        "y": 1121.1181707625744
+      },
+      "data": {
+        "label": "视频生成",
+        "prompt": "（0秒到3.5秒）：紫金天象·凌清砚首现，大远景→近景，仰角30°，末段缓摇接硬切。\n- 资产挂载：{{ref 1}}（角色：凌清砚）、{{ref 2}}（场景：落仙坊市）\n- 空间与主体：凌清砚位于画面正中高空云涡涡心，悬立俯视下方坊市；坊市屋脊占画面下缘。\n- 动态时间轴：0秒到2秒：湛蓝晴空白云缓移、坊市屋脊镀金边（平静日常）；天际墨色汇聚成云涡，涡心凝出一道极淡逆光人影，只见轮廓不见五官。2秒到3.5秒：紫金雷电树根状炸裂、云缝漏下刺目白光，硬切近景——人影随雷光凝清为凌清砚，双目睁开、眸光冷冽俯视。\n- 镜头基础信息：运镜主导＝末段缓摇——0秒起机位低置于坊市街面、24mm广角、仰角30°固定仰拍天空；2秒起镜头匀速极缓慢上摇约5°跟随云涡涡心人影（切出时摇动未停、运动中切出）；2秒处硬切至50mm近景，定机位仰拍凌清砚正面，焦点锁定面部，切后静止。\n- 物理与光影：雷电频闪为主光，人影由逆光剪影转正面冷白受光。\n- 音频与对白：本镜无台词。拟音与环境声：高空风啸骤停、云层撕裂低频轰鸣、三声紫金雷、史诗鼓点远入。\n- 尾帧与转场：近景定格凌清砚俯视姿态与目光落向下方；硬切至分镜2坊市街面。",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "（0秒到3.5秒）：紫金天象·凌清砚首现，大远景→近景，仰角30°，末段缓摇接硬切。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- 资产挂载："
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%2236480646-ca24-4439-8e3a-d0a2fd4d2fd4%22%2C%22image%22%5D\" data-value=\"{{ref 1}}\">pasted-media-1.png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "（角色：凌清砚）、"
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%22a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3%22%2C%22image%22%5D\" data-value=\"{{ref 2}}\">pasted-media-1.png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "（场景：落仙坊市）"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- 空间与主体：凌清砚位于画面正中高空云涡涡心，悬立俯视下方坊市；坊市屋脊占画面下缘。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- 动态时间轴：0秒到2秒：湛蓝晴空白云缓移、坊市屋脊镀金边（平静日常）；天际墨色汇聚成云涡，涡心凝出一道极淡逆光人影，只见轮廓不见五官。2秒到3.5秒：紫金雷电树根状炸裂、云缝漏下刺目白光，硬切近景——人影随雷光凝清为凌清砚，双目睁开、眸光冷冽俯视。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- 镜头基础信息：运镜主导＝末段缓摇——0秒起机位低置于坊市街面、24mm广角、仰角30°固定仰拍天空；2秒起镜头匀速极缓慢上摇约5°跟随云涡涡心人影（切出时摇动未停、运动中切出）；2秒处硬切至50mm近景，定机位仰拍凌清砚正面，焦点锁定面部，切后静止。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- 物理与光影：雷电频闪为主光，人影由逆光剪影转正面冷白受光。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- 音频与对白：本镜无台词。拟音与环境声：高空风啸骤停、云层撕裂低频轰鸣、三声紫金雷、史诗鼓点远入。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- 尾帧与转场：近景定格凌清砚俯视姿态与目光落向下方；硬切至分镜2坊市街面。"
+            }
+          ]
+        ],
+        "model": "[\"kunrou\",\"gemini-veo-3.1-fast\"]",
+        "resolution": "720p",
+        "mode": "[\"imageReference:4\"]",
+        "generateAudio": false,
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "VIDEO",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片、视频、音频、文本输入"
+          },
+          {
+            "id": "video",
+            "type": "source",
+            "dataType": "VIDEO",
+            "label": "视频输出"
+          }
+        ],
+        "outputs": {
+          "video": {
+            "dataType": "VIDEO",
+            "value": {
+              "url": "assets/6eb64690-0f3e-4629-8bec-12d7ab6489f2/videofaf63c03e8324ea7a1c4c6bc5ba24da30.mp4",
+              "mimeType": "video/mp4"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "faf63c03-e832-4ea7-a1c4-c6bc5ba24da3",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "6eb64690-0f3e-4629-8bec-12d7ab6489f2",
+          "mediaType": "video",
+          "providerId": "kunrou",
+          "modelId": "gemini-veo-3.1-fast",
+          "state": "succeeded",
+          "resumable": false,
+          "providerData": {
+            "kind": "video",
+            "taskId": "task_XQSR5AQ5OHViQaQN61dek2mhNxw5HPrb",
+            "model": "gemini-veo-3.1-fast"
+          },
+          "applied": true
+        },
+        "duration": 8
+      }
+    },
+    {
+      "id": "36480646-ca24-4439-8e3a-d0a2fd4d2fd4",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 950.3127976925854,
+        "y": 1045.373356946852
+      },
+      "data": {
+        "label": "pasted-media-1.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/36480646-ca24-4439-8e3a-d0a2fd4d2fd4/cbcc2029-223b-4ffc-a310-8334b7ea5135.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 893.3443705508134,
+        "y": 1384.047249046595
+      },
+      "data": {
+        "label": "pasted-media-1.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3/bf721b64-e23d-45e4-bb76-4bbd84b8626b.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "d12657ba-408a-44fc-8576-8d1651a21eaa",
+      "type": "remote-videoGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1597.7507805114756,
+        "y": 1784.6635426048258
+      },
+      "data": {
+        "label": "视频生成",
+        "prompt": "【镜头1】0.0秒-3.4秒\n画面描述：大远景，低角度仰拍，色温由 5600K 急降至 6500K、青紫压顶，画面从黑色渐显，底部出现转场字幕\"东州落仙坊市·正午\"（即梦生成）。然后湛蓝晴空自画面右上角被墨色云层吞噬，云层边缘翻卷成絮状，云腹内部有紫金色雷电炸开，雷光自云隙漏下，把下方青瓦屋脊染成暗紫色，天光由白转灰。\n音效：远处闷雷滚过；风声骤起，卷动屋角挂幡。\n台词：无\n字幕：无\n运镜：镜头缓缓向上抬起，低角度仰拍，速度极缓、幅度大，落幅停在天幕正中\n特写：云腹中炸开的那道紫金色电弧\n镜头结束状态：墨色云层已覆盖画面上方四分之三，一道紫金色电弧在云腹正中炸开，下方青瓦屋脊被雷光照亮一片。",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "【镜头1】0.0秒-3.4秒"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "画面描述：大远景，低角度仰拍，色温由 5600K 急降至 6500K、青紫压顶，画面从黑色渐显，底部出现转场字幕\"东州落仙坊市·正午\"（即梦生成）。然后湛蓝晴空自画面右上角被墨色云层吞噬，云层边缘翻卷成絮状，云腹内部有紫金色雷电炸开，雷光自云隙漏下，把下方青瓦屋脊染成暗紫色，天光由白转灰。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "音效：远处闷雷滚过；风声骤起，卷动屋角挂幡。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "台词：无"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "字幕：无"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "运镜：镜头缓缓向上抬起，低角度仰拍，速度极缓、幅度大，落幅停在天幕正中"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "特写：云腹中炸开的那道紫金色电弧"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "镜头结束状态：墨色云层已覆盖画面上方四分之三，一道紫金色电弧在云腹正中炸开，下方青瓦屋脊被雷光照亮一片。"
+            }
+          ]
+        ],
+        "model": "[\"kunrou\",\"gemini-veo-3.1-fast\"]",
+        "resolution": "720p",
+        "mode": "[\"imageReference:4\"]",
+        "generateAudio": false,
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "VIDEO",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片、视频、音频、文本输入"
+          },
+          {
+            "id": "video",
+            "type": "source",
+            "dataType": "VIDEO",
+            "label": "视频输出"
+          }
+        ],
+        "outputs": {
+          "video": {
+            "dataType": "VIDEO",
+            "value": {
+              "url": "assets/d12657ba-408a-44fc-8576-8d1651a21eaa/video74e29e5d22084af0bc77320a3b9e048b0.mp4",
+              "mimeType": "video/mp4"
+            }
+          }
+        },
+        "duration": 8,
+        "mediaTask": {
+          "taskId": "74e29e5d-2208-4af0-bc77-320a3b9e048b",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "d12657ba-408a-44fc-8576-8d1651a21eaa",
+          "mediaType": "video",
+          "providerId": "kunrou",
+          "modelId": "gemini-veo-3.1-fast",
+          "state": "succeeded",
+          "resumable": false,
+          "providerData": {
+            "kind": "video",
+            "taskId": "task_p82ff5hb0erg5sRye6u3HdFtORRsQTaC",
+            "model": "gemini-veo-3.1-fast"
+          },
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "17186be0-32b8-455f-ae41-fb43d771ab9c",
+      "type": "remote-audioGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 2809.886864668805,
+        "y": 1477.779467503625
+      },
+      "data": {
+        "label": "音频生成",
+        "prompt": "台词：“三千州，天下间，无论哪个道统，若以大欺小，我必登门拜访”\n角色：完美世界动画柳神，神性仙音，中性声线，雌雄难辨，不是普通女声也不是厚重男声。\n音色质感：底色温润通透，带着木质的沉静悠远，轻微空灵混响，像自万古时空传来，有淡淡的沧桑感；声压稳定，不尖不炸，中频饱满柔和，低频暗藏厚重力量。\n节奏与气息：语速舒缓从容，停顿悠长，气息绵长稳定，情绪高度克制，极少大起伏。\n语气分层：常态是悲悯淡然、俯瞰世间的平静；谈及石昊时藏着温柔护持；开战、立威时声线沉下来，威严肃穆，道韵压人，没有嘶吼，是神明自带的压迫感。\n禁忌：不要甜、不要娇、不要沙哑粗粝、不要急促激动、不要厚重烟嗓。",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "台词：“三千州，天下间，无论哪个道统，若以大欺小，我必登门拜访”"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "角色：完美世界动画柳神，神性仙音，中性声线，雌雄难辨，不是普通女声也不是厚重男声。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "音色质感：底色温润通透，带着木质的沉静悠远，轻微空灵混响，像自万古时空传来，有淡淡的沧桑感；声压稳定，不尖不炸，中频饱满柔和，低频暗藏厚重力量。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "节奏与气息：语速舒缓从容，停顿悠长，气息绵长稳定，情绪高度克制，极少大起伏。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "语气分层：常态是悲悯淡然、俯瞰世间的平静；谈及石昊时藏着温柔护持；开战、立威时声线沉下来，威严肃穆，道韵压人，没有嘶吼，是神明自带的压迫感。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "禁忌：不要甜、不要娇、不要沙哑粗粝、不要急促激动、不要厚重烟嗓。"
+            }
+          ]
+        ],
+        "model": "[\"kunrouAudio\",\"gemini-3.8-flash-tts\"]",
+        "language": "zh-CN",
+        "sampleRate": 24000,
+        "format": "wav",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片或音频限1个，文本不限"
+          },
+          {
+            "id": "audio",
+            "type": "source",
+            "dataType": "AUDIO",
+            "label": "音频输出"
+          }
+        ],
+        "outputs": {
+          "audio": {
+            "dataType": "AUDIO",
+            "value": {
+              "url": "assets/17186be0-32b8-455f-ae41-fb43d771ab9c/audioc3eaa67e8cd24672b2abd2b244f343d70.wav",
+              "mimeType": "audio/wav"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "c3eaa67e-8cd2-4672-b2ab-d2b244f343d7",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "17186be0-32b8-455f-ae41-fb43d771ab9c",
+          "mediaType": "audio",
+          "providerId": "kunrouAudio",
+          "modelId": "gemini-3.8-flash-tts",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "693de310-e17b-4fea-b6a0-578ec3fb216b",
+      "type": "remote-audioNode",
+      "initialized": false,
+      "position": {
+        "x": 3249.886864668805,
+        "y": 1477.779467503625
+      },
+      "data": {
+        "label": "音频生成 · 1.20×",
+        "outputs": {
+          "audio": {
+            "dataType": "AUDIO",
+            "value": {
+              "url": "assets/693de310-e17b-4fea-b6a0-578ec3fb216b/audio.m4a",
+              "mimeType": "audio/mp4"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "audio",
+            "type": "source",
+            "dataType": "AUDIO",
+            "label": "音频输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bac1102e-75fc-46d7-8ff2-dd276720c7b4",
+      "type": "remote-audioGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 2711.5926412079784,
+        "y": 1877.5093095776522
+      },
+      "data": {
+        "label": "音频生成",
+        "prompt": "台词：“三千州，天下间，无论哪个道统，若以大欺小，我必登门拜访”\n角色：完美世界动画柳神，神性仙音，中性声线，雌雄难辨，不是普通女声也不是厚重男声。\n音色质感：底色温润通透，带着木质的沉静悠远，轻微空灵混响，像自万古时空传来，有淡淡的沧桑感；声压稳定，不尖不炸，中频饱满柔和，低频暗藏厚重力量。\n节奏与气息：语速舒缓从容，停顿悠长，气息绵长稳定，情绪高度克制，极少大起伏。\n语气分层：常态是悲悯淡然、俯瞰世间的平静；谈及石昊时藏着温柔护持；开战、立威时声线沉下来，威严肃穆，道韵压人，没有嘶吼，是神明自带的压迫感。\n禁忌：不要甜、不要娇、不要沙哑粗粝、不要急促激动、不要厚重烟嗓。",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "台词：“三千州，天下间，无论哪个道统，若以大欺小，我必登门拜访”"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "角色：完美世界动画柳神，神性仙音，中性声线，雌雄难辨，不是普通女声也不是厚重男声。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "音色质感：底色温润通透，带着木质的沉静悠远，轻微空灵混响，像自万古时空传来，有淡淡的沧桑感；声压稳定，不尖不炸，中频饱满柔和，低频暗藏厚重力量。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "节奏与气息：语速舒缓从容，停顿悠长，气息绵长稳定，情绪高度克制，极少大起伏。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "语气分层：常态是悲悯淡然、俯瞰世间的平静；谈及石昊时藏着温柔护持；开战、立威时声线沉下来，威严肃穆，道韵压人，没有嘶吼，是神明自带的压迫感。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "禁忌：不要甜、不要娇、不要沙哑粗粝、不要急促激动、不要厚重烟嗓。"
+            }
+          ]
+        ],
+        "model": "[\"kunrouAudio\",\"grok-voice-latest\"]",
+        "language": "zh-CN",
+        "sampleRate": 24000,
+        "format": "wav",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片或音频限1个，文本不限"
+          },
+          {
+            "id": "audio",
+            "type": "source",
+            "dataType": "AUDIO",
+            "label": "音频输出"
+          }
+        ],
+        "outputs": {
+          "audio": {
+            "dataType": "AUDIO",
+            "value": {
+              "url": "assets/bac1102e-75fc-46d7-8ff2-dd276720c7b4/audio76f3ff71791c42ef91b676996c58919d0.mp3",
+              "mimeType": "audio/mpeg"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "76f3ff71-791c-42ef-91b6-76996c58919d",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "bac1102e-75fc-46d7-8ff2-dd276720c7b4",
+          "mediaType": "audio",
+          "providerId": "kunrouAudio",
+          "modelId": "grok-voice-latest",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "2ca23c75-5ba5-4548-b8a2-ccebb7621f88",
+      "type": "remote-audioGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 3344.420213203394,
+        "y": 1799.8100662705228
+      },
+      "data": {
+        "label": "音频生成",
+        "prompt": "帮我生成一个夹子女生声音",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "帮我生成一个夹子女生声音"
+            }
+          ]
+        ],
+        "model": "[\"kunrouAudio\",\"gemini-3.8-flash-tts\"]",
+        "language": "zh-CN",
+        "sampleRate": 24000,
+        "format": "wav",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片或音频限1个，文本不限"
+          },
+          {
+            "id": "audio",
+            "type": "source",
+            "dataType": "AUDIO",
+            "label": "音频输出"
+          }
+        ],
+        "outputs": {
+          "audio": {
+            "dataType": "AUDIO",
+            "value": {
+              "url": "assets/2ca23c75-5ba5-4548-b8a2-ccebb7621f88/audiobb0df14d4229495d8669d9a1653164770.wav",
+              "mimeType": "audio/wav"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "bb0df14d-4229-495d-8669-d9a165316477",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "2ca23c75-5ba5-4548-b8a2-ccebb7621f88",
+          "mediaType": "audio",
+          "providerId": "kunrouAudio",
+          "modelId": "gemini-3.8-flash-tts",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "7fc28f9a-4887-49e8-b93c-c10bb8b7d726",
+      "type": "remote-audioGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 3610.1898542810363,
+        "y": 959.2424182677015
+      },
+      "data": {
+        "label": "音频生成",
+        "prompt": "台词：“三千州，天下间，无论哪个道统，若以大欺小，我必登门拜访”\n角色：完美世界动画柳神，神性仙音，中性声线，雌雄难辨，不是普通女声也不是厚重男声。\n音色质感：底色温润通透，带着木质的沉静悠远，轻微空灵混响，像自万古时空传来，有淡淡的沧桑感；声压稳定，不尖不炸，中频饱满柔和，低频暗藏厚重力量。\n节奏与气息：语速舒缓从容，停顿悠长，气息绵长稳定，情绪高度克制，极少大起伏。\n语气分层：常态是悲悯淡然、俯瞰世间的平静；谈及石昊时藏着温柔护持；开战、立威时声线沉下来，威严肃穆，道韵压人，没有嘶吼，是神明自带的压迫感。\n禁忌：不要甜、不要娇、不要沙哑粗粝、不要急促激动、不要厚重烟嗓。",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "台词：“三千州，天下间，无论哪个道统，若以大欺小，我必登门拜访”"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "角色：完美世界动画柳神，神性仙音，中性声线，雌雄难辨，不是普通女声也不是厚重男声。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "音色质感：底色温润通透，带着木质的沉静悠远，轻微空灵混响，像自万古时空传来，有淡淡的沧桑感；声压稳定，不尖不炸，中频饱满柔和，低频暗藏厚重力量。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "节奏与气息：语速舒缓从容，停顿悠长，气息绵长稳定，情绪高度克制，极少大起伏。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "语气分层：常态是悲悯淡然、俯瞰世间的平静；谈及石昊时藏着温柔护持；开战、立威时声线沉下来，威严肃穆，道韵压人，没有嘶吼，是神明自带的压迫感。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "禁忌：不要甜、不要娇、不要沙哑粗粝、不要急促激动、不要厚重烟嗓。"
+            }
+          ]
+        ],
+        "model": "[\"localVoice\",\"cosyvoice2\"]",
+        "language": "zh-CN",
+        "sampleRate": 24000,
+        "format": "wav",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片或音频限1个，文本不限"
+          },
+          {
+            "id": "audio",
+            "type": "source",
+            "dataType": "AUDIO",
+            "label": "音频输出"
+          }
+        ],
+        "outputs": {},
+        "mediaTask": {
+          "taskId": "132c86d3-91e5-4542-afc1-847b5995727f",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "7fc28f9a-4887-49e8-b93c-c10bb8b7d726",
+          "mediaType": "audio",
+          "providerId": "localVoice",
+          "modelId": "cosyvoice2",
+          "state": "interrupted",
+          "resumable": false
+        }
+      }
+    },
+    {
+      "id": "66608ec7-2585-4d0e-a4b9-e57c66746110",
+      "type": "remote-audioGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 4101.439854281036,
+        "y": 869.2424182677015
+      },
+      "data": {
+        "label": "音频生成",
+        "prompt": "",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": ""
+            }
+          ]
+        ],
+        "model": "[\"kunrouAudio\",\"gemini-3.8-flash-tts\"]",
+        "language": "zh-CN",
+        "sampleRate": 24000,
+        "format": "wav",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片或音频限1个，文本不限"
+          },
+          {
+            "id": "audio",
+            "type": "source",
+            "dataType": "AUDIO",
+            "label": "音频输出"
+          }
+        ],
+        "outputs": {}
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "vueflow__edge-4c2f9a1d-e272-4467-b9a8-7c7851fb593cimage-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
+      "type": "simplebezier",
+      "source": "4c2f9a1d-e272-4467-b9a8-7c7851fb593c",
+      "target": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 2945.482576604823,
+      "sourceY": -253.3603587653476,
+      "targetX": 3352.5152141080607,
+      "targetY": -20.859274078870897
+    },
+    {
+      "id": "vueflow__edge-153083e9-0598-4139-9ff0-155393d5db22image-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
+      "type": "simplebezier",
+      "source": "153083e9-0598-4139-9ff0-155393d5db22",
+      "target": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 2860.738524826843,
+      "sourceY": 134.68234250893488,
+      "targetX": 3352.5152141080607,
+      "targetY": -20.859274078870897
+    },
+    {
+      "id": "vueflow__edge-acfbcc32-617a-4a50-9ae4-529a68c048dfimage-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
+      "type": "simplebezier",
+      "source": "acfbcc32-617a-4a50-9ae4-529a68c048df",
+      "target": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 2822.4111519030607,
+      "sourceY": 527.6459634601749,
+      "targetX": 3352.5152141080607,
+      "targetY": -20.859274078870897
+    },
+    {
+      "id": "vueflow__edge-36480646-ca24-4439-8e3a-d0a2fd4d2fd4image-6eb64690-0f3e-4629-8bec-12d7ab6489f2in",
+      "type": "simplebezier",
+      "source": "36480646-ca24-4439-8e3a-d0a2fd4d2fd4",
+      "target": "6eb64690-0f3e-4629-8bec-12d7ab6489f2",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1414.6877671750071,
+      "sourceY": 1230.357701429274,
+      "targetX": 1735.92427372116,
+      "targetY": 1258.1176721986517
+    },
+    {
+      "id": "vueflow__edge-a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3image-6eb64690-0f3e-4629-8bec-12d7ab6489f2in",
+      "type": "simplebezier",
+      "source": "a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3",
+      "target": "6eb64690-0f3e-4629-8bec-12d7ab6489f2",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1357.7194163271806,
+      "sourceY": 1569.0315935290168,
+      "targetX": 1735.92427372116,
+      "targetY": 1258.1176721986517
+    },
+    {
+      "id": "vueflow__edge-a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3image-d12657ba-408a-44fc-8576-8d1651a21eaain",
+      "type": "simplebezier",
+      "source": "a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3",
+      "target": "d12657ba-408a-44fc-8576-8d1651a21eaa",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1357.7194163271806,
+      "sourceY": 1569.0315935290168,
+      "targetX": 1576.750827626608,
+      "targetY": 1921.6634957957463
+    },
+    {
+      "id": "vueflow__edge-36480646-ca24-4439-8e3a-d0a2fd4d2fd4image-d12657ba-408a-44fc-8576-8d1651a21eaain",
+      "type": "simplebezier",
+      "source": "36480646-ca24-4439-8e3a-d0a2fd4d2fd4",
+      "target": "d12657ba-408a-44fc-8576-8d1651a21eaa",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1414.6877671750071,
+      "sourceY": 1230.357701429274,
+      "targetX": 1576.750827626608,
+      "targetY": 1921.6634957957463
+    }
+  ],
+  "viewport": {
+    "x": -409.9149042994295,
+    "y": 299.3319304985016,
+    "zoom": 0.4000000000000007
+  }
+}

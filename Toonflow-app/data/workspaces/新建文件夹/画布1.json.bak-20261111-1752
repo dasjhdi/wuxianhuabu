@@ -1,0 +1,367 @@
+{
+  "toonflowCanvas": true,
+  "nodes": [
+    {
+      "id": "27cbdb2a-784f-468b-abd2-98e2097bbcc4",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 601,
+        "y": 647
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": ""
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gpt-image-2\"]",
+        "size": "1024x1024",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/27cbdb2a-784f-468b-abd2-98e2097bbcc4/imagee4470f35a30d4a44a569a3ec3a75145d0.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "e4470f35-a30d-4a44-a569-a3ec3a75145d",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "27cbdb2a-784f-468b-abd2-98e2097bbcc4",
+          "mediaType": "image",
+          "providerId": "toonflow",
+          "modelId": "gpt-image-2",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "9dacf059-28f9-4eaa-a0ce-93e1e44d1e3f",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 971,
+        "y": 709
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "生成一张古代茶楼场景图，要求符合现实，写实感，电影感",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "生成一张古代茶楼场景图，要求符合现实，写实感，电影感"
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gemini-3.1-flash-image\"]",
+        "size": "1K",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/9dacf059-28f9-4eaa-a0ce-93e1e44d1e3f/image5edbedd98fb64750ade32c2ce77025e60.jpg",
+              "mimeType": "image/jpeg"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "5edbedd9-8fb6-4750-ade3-2c2ce77025e6",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "9dacf059-28f9-4eaa-a0ce-93e1e44d1e3f",
+          "mediaType": "image",
+          "providerId": "toonflow",
+          "modelId": "gemini-3.1-flash-image",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "4f8b33e3-65f0-40c5-a1e0-156ca7c89c80",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1572,
+        "y": 638
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": ""
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gpt-image-2\"]",
+        "size": "1024x1024",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {}
+      }
+    },
+    {
+      "id": "4b3254ba-7f0b-4a62-8252-1c78f19474a8",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 776,
+        "y": 86
+      },
+      "data": {
+        "label": "图片",
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/4b3254ba-7f0b-4a62-8252-1c78f19474a8/a6afc9a5-b7b5-4882-9fde-57b0a44414fd.png",
+              "mimeType": "image/png"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1748,
+        "y": 80
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "{{ref 1}}只修改一下地面和桌子凳子质感，不要出现淡淡的纹理以及贴图感cg感，画面中所有的桌子凳子请严格参照我给你的桌子凳子细节参考图{{ref 2}}，其他的都参照整体场景参考图和整体场景参考图保持不变",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": ""
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%224b3254ba-7f0b-4a62-8252-1c78f19474a8%22%2C%22image%22%5D\" data-value=\"{{ref 1}}\">图片</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "只修改一下地面和桌子凳子质感，不要出现淡淡的纹理以及贴图感cg感，画面中所有的桌子凳子请严格参照我给你的桌子凳子细节参考图"
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%2212ed3365-e6ca-44e9-be2a-16656c17f867%22%2C%22image%22%5D\" data-value=\"{{ref 2}}\">图片</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "，其他的都参照整体场景参考图和整体场景参考图保持不变"
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"toonflow\",\"gpt-image-2\"]",
+        "size": "1024x1024",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {},
+        "mediaTask": {
+          "taskId": "fb162c19-6dfd-4c95-9b69-e8eb4a25acad",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+          "mediaType": "image",
+          "providerId": "toonflow",
+          "modelId": "gpt-image-2",
+          "state": "interrupted",
+          "resumable": false
+        }
+      }
+    },
+    {
+      "id": "12ed3365-e6ca-44e9-be2a-16656c17f867",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 908,
+        "y": -290
+      },
+      "data": {
+        "label": "图片",
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/12ed3365-e6ca-44e9-be2a-16656c17f867/3910b512-ba40-4399-acc0-749345b54ad2.png",
+              "mimeType": "image/png"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "vueflow__edge-4b3254ba-7f0b-4a62-8252-1c78f19474a8image-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
+      "type": "simplebezier",
+      "source": "4b3254ba-7f0b-4a62-8252-1c78f19474a8",
+      "target": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1371.0156555175781,
+      "sourceY": 270.9844055175781,
+      "targetX": 1727,
+      "targetY": 217
+    },
+    {
+      "id": "vueflow__edge-12ed3365-e6ca-44e9-be2a-16656c17f867image-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
+      "type": "simplebezier",
+      "source": "12ed3365-e6ca-44e9-be2a-16656c17f867",
+      "target": "67bdd716-13cd-4254-aaa3-5202769ce8fc",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1710.515625,
+      "sourceY": -105.015625,
+      "targetX": 1727,
+      "targetY": 217
+    }
+  ],
+  "viewport": {
+    "x": -338.2479559016874,
+    "y": 379.53963436462095,
+    "zoom": 1.0000000000000002
+  }
+}

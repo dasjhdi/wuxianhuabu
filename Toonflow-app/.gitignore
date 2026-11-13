@@ -1,7 +1,12 @@
 node_modules/
 dist/
 /build/
-/data/
+/data/*
+# 自研供应商与节点包需要随仓库分发（密钥文件仍被根 .gitignore 排除）
+!/data/providers/
+!/data/nodes/
+# 画布项目数据（用户创作内容）随仓库备份
+!/data/workspaces/
 /work/
 /backup/
 .playwright-mcp/
