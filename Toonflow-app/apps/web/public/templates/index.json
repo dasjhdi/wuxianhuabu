@@ -1,0 +1,47 @@
+{
+  "templates": [
+    {
+      "id": "short-drama",
+      "name": "短剧 · 剧本到成片",
+      "description": "脚本节点拆分镜 → 批量创建生成器组 → 配音 + 三镜头 → 合成成片",
+      "file": "short-drama.json",
+      "tags": [
+        "短剧",
+        "剧本",
+        "成片"
+      ]
+    },
+    {
+      "id": "product-ad",
+      "name": "产品广告 · 图生视频",
+      "description": "产品图与场景图生成 → 环绕运镜与场景演示视频",
+      "file": "product-ad.json",
+      "tags": [
+        "广告",
+        "图生视频"
+      ]
+    },
+    {
+      "id": "knowledge",
+      "name": "知识科普 · 解说视频",
+      "description": "解说配音 + 科普画面 ×2 → 拼接合成并导出字幕",
+      "file": "knowledge.json",
+      "tags": [
+        "科普",
+        "解说",
+        "成片"
+      ]
+    },
+    {
+      "id": "asset-pool",
+      "name": "角色与场景资产池",
+      "description": "两角色两场景设定图生成器，作为系列创作的资产底座",
+      "file": "asset-pool.json",
+      "tags": [
+        "资产",
+        "角色",
+        "场景"
+      ]
+    }
+  ]
+}

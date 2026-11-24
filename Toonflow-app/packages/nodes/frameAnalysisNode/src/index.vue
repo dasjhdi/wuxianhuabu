@@ -26,6 +26,16 @@
         <span>{{ formatDuration(metadata.duration) }}</span>
         <span>{{ metadata.width }} × {{ metadata.height }}</span>
       </div>
+      <div v-if="previewUrl && player?.ready" class="frameStepBar nodrag nopan nowheel" @pointerdown.stop @dblclick.stop>
+        <el-button-group size="small">
+          <el-button :icon="IconChevronLeft" aria-label="上一帧" title="上一帧" @click="stepFrames(-1)" />
+          <el-button aria-label="下一帧" title="下一帧" @click="stepFrames(1)">下一帧<icon-chevron-right :size="14" /></el-button>
+        </el-button-group>
+        <span class="frameReadout" aria-live="off">帧 {{ currentFrame }} / {{ totalFrames }} · {{ formatFrameCode(playbackTime) }}</span>
+        <el-select v-model="frameRate" size="small" class="fpsSelect" aria-label="帧率">
+          <el-option v-for="rate in [24, 25, 30, 50, 60]" :key="rate" :value="rate" :label="`${rate} fps`" />
+        </el-select>
+      </div>
       <p v-if="previewFailed" class="statusText">当前格式无法预览，仍可尝试本地处理</p>
       <div v-if="processing" class="progressArea" role="status" aria-live="polite">
         <el-progress :percentage="progress" :strokeWidth="4" :showText="false" />
@@ -85,12 +95,12 @@
       </el-card>
     </template>
   </nodeSkeleton>
-  <analysisReport v-if="lastResultMatches && lastResult" v-model="reportVisible" :result="lastResult" />
+  <analysisReport v-if="lastResultMatches && lastResult" v-model="reportVisible" :result="lastResult" :createFrame="createFrameFromReport" />
 </template>
 
 <script setup lang="ts">
 import { computed, inject, nextTick, onScopeDispose, reactive, ref, shallowRef, watch } from "vue";
-import { IconMovie, IconPhoto, IconUpload, IconWaveSine, IconScissors, IconAdjustmentsHorizontal, IconSparkles, IconTransfer, IconMaximize, IconFileText, IconArrowUp, IconPlayerStop } from "@tabler/icons-vue";
+import { IconMovie, IconPhoto, IconUpload, IconWaveSine, IconScissors, IconAdjustmentsHorizontal, IconSparkles, IconTransfer, IconMaximize, IconFileText, IconArrowUp, IconPlayerStop, IconChevronLeft, IconChevronRight } from "@tabler/icons-vue";
 import { ElMessage, ElSelect, ElOption, ElOptionGroup, ElButton, ElCard, ElCheckbox, ElPopover, ElInputNumber, ElSwitch, ElProgress } from "element-plus";
 import {
   getTargetValues, isNodeOutput, nodeSkeleton, useNode, useNodeInputs, uploadNodeFile,
@@ -172,6 +182,34 @@ const busy = computed(() => processing.value || uploading.value || !!player.valu
 const hasDimensions = computed(() => settings.frames || settings.clips || settings.audio);
 const lastResultMatches = computed(() => !!lastResult.value && resultSource.value === source.value?.url);
 const nodeWidth = computed(() => metadata.width && metadata.height ? Math.max(180, 240 * metadata.width / metadata.height) + 18 : 240);
+// ACT: 帧级步进 —— 拉片核心操作，帧号/帧率可切换，步进时自动暂停。
+const frameRate = ref(30);
+const playbackTime = ref(0);
+const totalFrames = computed(() => Math.max(0, Math.floor((metadata.duration || 0) * frameRate.value)));
+const currentFrame = computed(() => Math.min(Math.floor(playbackTime.value * frameRate.value) + 1, Math.max(totalFrames.value, 1)));
+function formatFrameCode(seconds: number) {
+  const total = Math.max(0, Math.floor(seconds * frameRate.value));
+  const whole = Math.floor(total / frameRate.value);
+  return `${String(Math.floor(whole / 60)).padStart(2, "0")}:${String(whole % 60).padStart(2, "0")}.${String(total % frameRate.value).padStart(2, "0")}`;
+}
+function stepFrames(delta: number) {
+  const video = (player.value as unknown as { videoEl?: HTMLVideoElement } | undefined)?.videoEl;
+  if (!video || !video.duration) return;
+  video.pause();
+  const frame = Math.round(video.currentTime * frameRate.value) + delta;
+  video.currentTime = Math.min(Math.max(0, video.duration - 0.001), Math.max(0, frame / frameRate.value));
+  playbackTime.value = video.currentTime;
+}
+function onFrameTimeUpdate(event: Event) {
+  playbackTime.value = (event.currentTarget as HTMLVideoElement).currentTime;
+}
+const frameVideo = computed(() => (player.value as unknown as { videoEl?: HTMLVideoElement } | undefined)?.videoEl);
+watch(frameVideo, (el, prev) => {
+  prev?.removeEventListener("timeupdate", onFrameTimeUpdate);
+  el?.addEventListener("timeupdate", onFrameTimeUpdate);
+  if (el) playbackTime.value = el.currentTime;
+});
+onScopeDispose(() => frameVideo.value?.removeEventListener("timeupdate", onFrameTimeUpdate));
 const reportVisible = ref(false);
 const models = ref<NodeAiModel[]>([]);
 const modelsLoading = ref(false);
@@ -235,6 +273,15 @@ function readDirectory() {
 function readError(error: unknown, fallback: string) {
   const message = (error as { response?: { data?: { message?: string } } })?.response?.data?.message;
   return message || (error instanceof Error ? error.message : fallback);
+}
+
+function createFrameFromReport(scene: { image?: string; index: number; start: number; end: number; annotation?: { shotSize: string; cameraAngle: string; movement: string; description: string } }) {
+  try {
+    resultNodes.createFrameNode(scene as AnalysisScene);
+    ElMessage.success("关键帧已生成图片节点");
+  } catch (error) {
+    ElMessage.error(readError(error, "关键帧生成失败"));
+  }
 }
 
 async function loadModels() {
@@ -564,4 +611,18 @@ async function processVideo() {
   .settingHint { margin: 0; color: var(--el-text-color-secondary); font-size: 12px; line-height: 1.6; }
 }
 .errorMessage { margin: 8px 0 2px; color: var(--el-color-danger); overflow-wrap: anywhere; font-size: 12px; line-height: 1.6; }
+
+.frameStepBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 8px;
+  background: var(--el-fill-color-light);
+
+  .frameReadout { color: var(--el-text-color-secondary); font-size: 12px; font-variant-numeric: tabular-nums; user-select: text; }
+  .fpsSelect { width: 92px; }
+}
 </style>

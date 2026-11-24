@@ -1,0 +1,106 @@
+{
+  "toonflowCanvas": true,
+  "nodes": [
+    {
+      "id": "tpl-audio",
+      "type": "remote-audioGenerationNode",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "解说配音",
+        "prompt": "解说：你知道吗？水的沸点与气压息息相关。",
+        "promptModel": [],
+        "model": "",
+        "language": "zh-CN",
+        "sampleRate": 24000,
+        "format": "wav",
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-v1",
+      "type": "remote-videoGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 0
+      },
+      "data": {
+        "label": "科普画面 A",
+        "prompt": "科普演示画面：水壶加热冒出蒸汽，特写气泡上升，干净明亮背景。",
+        "promptModel": [],
+        "model": "",
+        "duration": 8,
+        "resolution": "720p",
+        "ratio": "16:9",
+        "mode": "",
+        "generateAudio": false,
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-v2",
+      "type": "remote-videoGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 460
+      },
+      "data": {
+        "label": "科普画面 B",
+        "prompt": "科普演示画面：高原环境下的沸腾实验，广角构图，严谨实验室风格。",
+        "promptModel": [],
+        "model": "",
+        "duration": 8,
+        "resolution": "720p",
+        "ratio": "16:9",
+        "mode": "",
+        "generateAudio": false,
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-synth",
+      "type": "remote-synthesisNode",
+      "position": {
+        "x": 1040,
+        "y": 230
+      },
+      "data": {
+        "label": "合成 · 成片",
+        "ratio": "16:9",
+        "resolution": "720p",
+        "bgmVolume": 40,
+        "subtitlesEnabled": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "tpl-e1",
+      "source": "tpl-v1",
+      "sourceHandle": "video",
+      "target": "tpl-synth",
+      "targetHandle": "in"
+    },
+    {
+      "id": "tpl-e2",
+      "source": "tpl-v2",
+      "sourceHandle": "video",
+      "target": "tpl-synth",
+      "targetHandle": "in"
+    },
+    {
+      "id": "tpl-e3",
+      "source": "tpl-audio",
+      "sourceHandle": "audio",
+      "target": "tpl-synth",
+      "targetHandle": "in"
+    }
+  ],
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

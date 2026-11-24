@@ -513,7 +513,28 @@ async function startGeneration() {
     const reference = refList.value[Number(match[1]) - 1];
     if (reference?.dataType === "STRING" && !reference.value?.trim()) throw new Error(`参考 ${match[1]} 的文本为空，请补充内容或移除提示词中的引用`);
   }
-  if (choice.mode?.length && !matchingModes.value.length) throw new Error("当前模型没有适合这些参考素材的生成模式，请更换模型或调整引用");
+  if (choice.mode?.length && !matchingModes.value.length) {
+    // ACT: 报错带上下文 —— 明确告知差多少，而不是笼统要求“调整引用”。
+    const limits: number[] = [];
+    for (const mode of choice.mode) {
+      if (Array.isArray(mode)) {
+        const n = Number(mode.find((item) => item.startsWith("imageReference:"))?.split(":")[1] ?? 0);
+        if (Number.isFinite(n) && n > 0) limits.push(n);
+      } else if (mode === "singleImage" || mode === "startFrameOptional" || mode === "endFrameOptional" || mode === "startEndRequired") limits.push(2);
+    }
+    const counts = mediaCounts.value;
+    const label = choice.label || "当前模型";
+    const maxImages = limits.length ? Math.max(...limits) : undefined;
+    let detail = "请更换模型或调整引用";
+    if (maxImages !== undefined && counts.image > maxImages) {
+      detail = `已挂 ${counts.image} 张参考图，${label} 最多支持 ${maxImages} 张，请删除 ${counts.image - maxImages} 张后重试`;
+    } else if (counts.video || counts.audio) {
+      detail = "该模型不支持视频/音频参考素材，请移除后重试";
+    } else if (!counts.image && !counts.video && !counts.audio) {
+      detail = "该模型仅支持纯文本生成，请移除参考素材后重试";
+    }
+    throw new Error(`参考素材超出「${label}」的生成模式：${detail}`);
+  }
   const workspace = files.getWorkspaceFiles();
   const controller = new AbortController();
   generationController = controller;
@@ -529,13 +550,29 @@ async function startGeneration() {
       if (!result) throw new Error("供应商未返回视频");
       outputs.value.video = { dataType: "VIDEO", value: { url: result.path, mimeType: result.mimeType } };
     }))
-    .catch((error) => showNodeError(error, "视频生成失败"))
+    .catch((error) => {
+      showNodeError(error, "视频生成失败");
+      window.dispatchEvent(new CustomEvent("toonflow:batch-progress", { detail: { nodeId: node.id, ok: false, error: error instanceof Error ? error.message : String(error) } }));
+    })
     .finally(() => {
       generationController = undefined;
+      window.dispatchEvent(new CustomEvent("toonflow:batch-progress", { detail: { nodeId: node.id, ok: !!outputs.value.video } }));
     });
   return { status: "generating" };
 }
 
+// ACT: 批量执行 —— 脚本节点/生成器组通过 window 事件触发本节点后台生成。
+function onBatchGenerate(event: Event) {
+  const detail = (event as CustomEvent<{ nodeIds?: string[] }>).detail;
+  if (!Array.isArray(detail?.nodeIds) || !detail.nodeIds.includes(node.id)) return;
+  if (generating.value || pendingRecovery.value || uploading.value || deleting.value) {
+    window.dispatchEvent(new CustomEvent("toonflow:batch-progress", { detail: { nodeId: node.id, ok: false, error: "节点忙，已跳过" } }));
+    return;
+  }
+  void startGeneration().catch(() => {});
+}
+window.addEventListener("toonflow:batch-generate", onBatchGenerate);
+onScopeDispose(() => window.removeEventListener("toonflow:batch-generate", onBatchGenerate));
 nodeEvent.on("save", (reason) => {
   if (reason === "reload" && (generating.value || uploading.value || deleting.value)) throw new Error("视频处理中，请完成后再刷新节点");
 });

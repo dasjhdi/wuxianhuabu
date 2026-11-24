@@ -117,6 +117,17 @@
           <el-button :icon="IconMovie" :disabled="!ready || !result || exportingVideo" :loading="exportingVideo" aria-label="导出视频节点" @click="emit('exportVideo', sceneAspect)">
             {{ exportingVideo ? `导出视频 ${exportProgress ?? 0}%` : '导出视频节点' }}
           </el-button>
+          <el-dropdown trigger="click" placement="top-end" @command="command => exportStoryboard(command)">
+            <el-button :icon="IconFileText" :disabled="!ready || !plans.length || exportingBoard" :loading="exportingBoard" aria-label="导出分镜板">
+              {{ exportingBoard ? '生成中…' : '分镜板' }}
+            </el-button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item command="print" :icon="IconPrinter">打印 / 另存为 PDF</el-dropdown-item>
+                <el-dropdown-item command="html" :icon="IconFileText">下载 HTML 文件</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </div>
         <div class="controlHint">WASD 移动 · 空格上升 · Shift 下降 · 滚轮调焦 · 右键记录 · 左键 / Esc 退出取景</div>
         <div class="referenceHeader">
@@ -148,6 +159,7 @@
         :tasks="tasks"
         :initializing="addingMannequin || !scene.objectList.length && tasks.some((task) => !task.error)"
         @selectPlan="selectPlan"
+        @duplicatePlan="duplicatePlan"
         :models="models"
         :modelsLoading="modelsLoading"
         @loadModels="emit('loadModels')"
@@ -162,8 +174,8 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import { ElButton, ElDialog, ElMessage, ElSlider, ElSelect, ElOption, ElPopover, ElSwitch, ElColorPicker, ElInputNumber } from "element-plus";
-import { IconCube3dSphere, IconCamera, IconLoader2, IconPlayerPause, IconPlayerPlay, IconPlus, IconTrash, IconMovie, IconPhotoPlus, IconSun, IconSettings, IconUserPlus } from "@tabler/icons-vue";
+import { ElButton, ElDialog, ElDropdown, ElDropdownItem, ElDropdownMenu, ElMessage, ElSlider, ElSelect, ElOption, ElPopover, ElSwitch, ElColorPicker, ElInputNumber } from "element-plus";
+import { IconCube3dSphere, IconCamera, IconLoader2, IconPlayerPause, IconPlayerPlay, IconPlus, IconTrash, IconMovie, IconPhotoPlus, IconSun, IconSettings, IconUserPlus, IconFileText, IconPrinter } from "@tabler/icons-vue";
 import directorPanel from "./directorPanel.vue";
 import directorTour from "./directorTour.vue";
 import lightDirection from "./lightDirection.vue";
@@ -228,6 +240,103 @@ let previousFrame = 0;
 let loadVersion = 0;
 let disposed = false;
 let previewPlanId = "";
+
+// ACT: 方案复制 —— 以选中方案为模板创建变体，保留全部轨道与运镜。
+function duplicatePlan(id: string) {
+  let doc: { plans?: { id: string; name: string }[] & Record<string, unknown>[] };
+  try {
+    doc = JSON.parse(model.value || "{}");
+  } catch { return; }
+  const list = Array.isArray(doc.plans) ? doc.plans : [];
+  const index = list.findIndex(plan => plan.id === id);
+  if (index < 0) return;
+  const copy = JSON.parse(JSON.stringify(list[index])) as { id: string; name: string };
+  copy.id = crypto.randomUUID();
+  copy.name = `${String(list[index].name).slice(0, 72)} 副本`;
+  list.splice(index + 1, 0, copy);
+  model.value = JSON.stringify(doc);
+  ElMessage.success("已创建方案副本");
+}
+
+// ACT: 分镜板导出 —— 逐方案采样渲染缩略图，输出可打印的 HTML 分镜板（浏览器打印即可转 PDF）。
+const exportingBoard = ref(false);
+async function exportStoryboard(target: "print" | "html" = "html") {
+  if (!ready.value || !runtime || !canvas.value || !plans.length) return;
+  pausePlayback();
+  exportingBoard.value = true;
+  try {
+    const cards: string[] = [];
+    for (const plan of plans) {
+      const player = prepareSceneAnimation(runtime, plan);
+      const frames = prepareMotion(plan.cameraFrames);
+      const time = Math.max(0, Math.min(plan.duration, plan.duration * 0.85));
+      player.setTime(time);
+      sampleMotion(runtime.camera, frames, time);
+      runtime.renderer.render(runtime.scene, runtime.camera);
+      const thumb = canvas.value.toDataURL("image/jpeg", 0.82);
+      player.dispose();
+      cards.push({ name: plan.name, duration: plan.duration, time, thumb, instruction: (plan as { instruction?: string }).instruction ?? "", times: plan.cameraFrames.map(frame => frame.time.toFixed(2)).join(" → "), easings: plan.cameraFrames.map(frame => frame.easing).join("→") });
+    }
+    restorePreviewFrame();
+    const stamp = new Date().toISOString().slice(0, 10);
+    const body = cards.map((card, index) => `
+      <section class="boardCard">
+        <div class="boardHead"><span class="boardIndex">#${String(index + 1).padStart(2, "0")}</span><h2>${escapeHtml(card.name)}</h2><span class="boardDuration">${card.duration.toFixed(2)} 秒</span></div>
+        <img src="${card.thumb}" alt="${escapeHtml(card.name)} 画面" />
+        <p class="boardCamera"><b>相机关键帧</b> ${escapeHtml(card.times)} 秒 <b>转场</b> ${escapeHtml(card.easings)}</p>
+        ${card.instruction ? `<p class="boardInstruction"><b>创作指令</b> ${escapeHtml(card.instruction)}</p>` : ""}
+      </section>`).join("\n");
+    const html = `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>导演台分镜板 ${stamp}</title><style>
+      body { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; margin: 24px auto; max-width: 960px; color: #1f2329; }
+      h1 { font-size: 20px; } small { color: #86909c; }
+      .boardCard { page-break-inside: avoid; border: 1px solid #dcdfe6; border-radius: 12px; padding: 16px; margin: 16px 0; }
+      .boardHead { display: flex; align-items: baseline; gap: 10px; } .boardIndex { color: #86909c; }
+      h2 { font-size: 16px; margin: 0; } .boardDuration { margin-left: auto; font-variant-numeric: tabular-nums; }
+      img { width: 100%; border-radius: 8px; }
+      p { font-size: 13px; line-height: 1.7; } b { color: #4e5969; font-weight: 500; }
+      @media print { body { margin: 0; } .boardCard { border-color: #e5e6eb; } }
+    </style></head><body><h1>导演台分镜板</h1><small>生成于 ${new Date().toLocaleString("zh-CN")} · 共 ${cards.length} 个方案 · 浏览器打印（Ctrl+P）可另存为 PDF</small>${body}</body></html>`;
+    if (target === "print") {
+      // ACT: 打印窗口直出 PDF —— 同文档 iframe 打印不受弹窗拦截，dataURL 缩略图随文档加载。
+      const frame = document.createElement("iframe");
+      frame.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden;";
+      document.body.append(frame);
+      frame.contentDocument!.open();
+      frame.contentDocument!.write(html + "<script>window.onload=()=>{setTimeout(()=>{window.focus();window.print();},300);};<\/script>");
+      frame.contentDocument!.close();
+      frame.contentWindow!.onafterprint = () => window.setTimeout(() => frame.remove(), 800);
+      window.setTimeout(() => frame.remove(), 120000);
+    } else {
+      const url = URL.createObjectURL(new Blob([html], { type: "text/html;charset=utf-8" }));
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = `导演台分镜板-${stamp}.html`;
+      anchor.rel = "noopener";
+      document.body.append(anchor);
+      anchor.click();
+      anchor.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+    }
+    ElMessage.success(target === "print" ? "分镜板已就绪，请在打印对话框选择「另存为 PDF」" : "分镜板 HTML 已下载");
+  } catch (error) {
+    ElMessage.error(error instanceof Error ? error.message : "分镜板导出失败");
+  } finally {
+    exportingBoard.value = false;
+  }
+}
+
+function restorePreviewFrame() {
+  if (!runtime || !props.result) return;
+  scenePlayer?.dispose();
+  scenePlayer = prepareSceneAnimation(runtime, props.result);
+  scenePlayer.setTime(Math.min(currentTime.value, props.result.duration));
+  if (cameraFrames) sampleMotion(runtime.camera, cameraFrames, Math.min(currentTime.value, props.result.duration));
+  runtime.renderer.render(runtime.scene, runtime.camera);
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch] ?? ch);
+}
 
 async function selectPlan(id: string) {
   previewPlanId = id;

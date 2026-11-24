@@ -7,7 +7,7 @@
       "initialized": false,
       "position": {
         "x": 601,
-        "y": 647
+        "y": -5644.891137426933
       },
       "data": {
         "label": "图片生成",
@@ -71,8 +71,8 @@
       "type": "remote-imageGenerationNode",
       "initialized": false,
       "position": {
-        "x": 971,
-        "y": 709
+        "x": 1061,
+        "y": -5644.891137426933
       },
       "data": {
         "label": "图片生成",
@@ -136,8 +136,8 @@
       "type": "remote-imageGenerationNode",
       "initialized": false,
       "position": {
-        "x": 1572,
-        "y": 638
+        "x": 1521,
+        "y": -5644.891137426933
       },
       "data": {
         "label": "图片生成",
@@ -181,8 +181,8 @@
       "type": "remote-imageNode",
       "initialized": false,
       "position": {
-        "x": 776,
-        "y": 86
+        "x": 1981,
+        "y": -5644.891137426933
       },
       "data": {
         "label": "图片",
@@ -216,8 +216,8 @@
       "type": "remote-imageGenerationNode",
       "initialized": false,
       "position": {
-        "x": 3373.5152127906895,
-        "y": -270.2343632822045
+        "x": 2821,
+        "y": -5512.391137426933
       },
       "data": {
         "label": "图片生成",
@@ -326,8 +326,8 @@
       "type": "remote-imageNode",
       "initialized": false,
       "position": {
-        "x": 908,
-        "y": -290
+        "x": 3866,
+        "y": -5644.891137426933
       },
       "data": {
         "label": "图片",
@@ -361,8 +361,8 @@
       "type": "remote-imageGenerationNode",
       "initialized": false,
       "position": {
-        "x": 1861.247955901687,
-        "y": -665.5396343646208
+        "x": 4326,
+        "y": -5644.891137426933
       },
       "data": {
         "label": "图片生成",
@@ -426,8 +426,8 @@
       "type": "remote-imageNode",
       "initialized": false,
       "position": {
-        "x": 2353.482332464198,
-        "y": -438.36036258004486
+        "x": 2441,
+        "y": -5092.891137426933
       },
       "data": {
         "label": "1111111111111.png",
@@ -461,8 +461,8 @@
       "type": "remote-imageNode",
       "initialized": false,
       "position": {
-        "x": 2395.0820809216357,
-        "y": -50.30210697666048
+        "x": 2441,
+        "y": -5368.891137426933
       },
       "data": {
         "label": "333333333.png",
@@ -496,8 +496,8 @@
       "type": "remote-imageNode",
       "initialized": false,
       "position": {
-        "x": 2356.7566355718636,
-        "y": 342.6621880560988
+        "x": 2441,
+        "y": -5644.891137426933
       },
       "data": {
         "label": "222222222222222.png",
@@ -531,8 +531,8 @@
       "type": "remote-videoGenerationNode",
       "initialized": false,
       "position": {
-        "x": 1756.9241928289507,
-        "y": 1121.1181707625744
+        "x": 981,
+        "y": -4392.891137426933
       },
       "data": {
         "label": "视频生成",
@@ -662,8 +662,8 @@
       "type": "remote-imageNode",
       "initialized": false,
       "position": {
-        "x": 950.3127976925854,
-        "y": 1045.373356946852
+        "x": 601,
+        "y": -4672.891137426933
       },
       "data": {
         "label": "pasted-media-1.png",
@@ -697,8 +697,8 @@
       "type": "remote-imageNode",
       "initialized": false,
       "position": {
-        "x": 893.3443705508134,
-        "y": 1384.047249046595
+        "x": 601,
+        "y": -4388.891137426933
       },
       "data": {
         "label": "pasted-media-1.png",
@@ -732,8 +732,8 @@
       "type": "remote-videoGenerationNode",
       "initialized": false,
       "position": {
-        "x": 1597.7507805114756,
-        "y": 1784.6635426048258
+        "x": 981,
+        "y": -4644.891137426933
       },
       "data": {
         "label": "视频生成",
@@ -847,8 +847,8 @@
       "type": "remote-audioGenerationNode",
       "initialized": false,
       "position": {
-        "x": 2809.886864668805,
-        "y": 1477.779467503625
+        "x": 1441,
+        "y": -4672.891137426933
       },
       "data": {
         "label": "音频生成",
@@ -942,8 +942,8 @@
       "type": "remote-audioNode",
       "initialized": false,
       "position": {
-        "x": 3249.886864668805,
-        "y": 1477.779467503625
+        "x": 2041,
+        "y": -4672.891137426933
       },
       "data": {
         "label": "音频生成 · 1.20×",
@@ -971,8 +971,8 @@
       "type": "remote-audioGenerationNode",
       "initialized": false,
       "position": {
-        "x": 2711.5926412079784,
-        "y": 1877.5093095776522
+        "x": 2641,
+        "y": -4672.891137426933
       },
       "data": {
         "label": "音频生成",
@@ -1066,8 +1066,8 @@
       "type": "remote-audioGenerationNode",
       "initialized": false,
       "position": {
-        "x": 3344.420213203394,
-        "y": 1799.8100662705228
+        "x": 3241,
+        "y": -4672.891137426933
       },
       "data": {
         "label": "音频生成",
@@ -1131,8 +1131,8 @@
       "type": "remote-audioGenerationNode",
       "initialized": false,
       "position": {
-        "x": 3610.1898542810363,
-        "y": 959.2424182677015
+        "x": 3841,
+        "y": -4672.891137426933
       },
       "data": {
         "label": "音频生成",
@@ -1217,17 +1217,17 @@
       "type": "remote-audioGenerationNode",
       "initialized": false,
       "position": {
-        "x": 4101.439854281036,
-        "y": 869.2424182677015
+        "x": 601,
+        "y": -3968.891137426933
       },
       "data": {
         "label": "音频生成",
-        "prompt": "",
+        "prompt": "极老的男性声音，低音区，声带松弛，音色干枯、发颤，喉音重，气多声少。说话像每一句都要用尽力气，句中必须换气，换气声清晰可闻。前半句几乎是气声，尾句突然多出一点实音，像枯木里透出火星。不要仙风道骨，不要播音腔。台词：万载不出的天衡道君，竟亲自降临落仙坊 —— 就为找一个人",
         "promptModel": [
           [
             {
               "type": "Write",
-              "text": ""
+              "text": "极老的男性声音，低音区，声带松弛，音色干枯、发颤，喉音重，气多声少。说话像每一句都要用尽力气，句中必须换气，换气声清晰可闻。前半句几乎是气声，尾句突然多出一点实音，像枯木里透出火星。不要仙风道骨，不要播音腔。台词：万载不出的天衡道君，竟亲自降临落仙坊 —— 就为找一个人"
             }
           ]
         ],
@@ -1254,7 +1254,945 @@
             "label": "音频输出"
           }
         ],
-        "outputs": {}
+        "outputs": {
+          "audio": {
+            "dataType": "AUDIO",
+            "value": {
+              "url": "assets/66608ec7-2585-4d0e-a4b9-e57c66746110/audio770c5c29555a4439832eba2224f9fc9c0.wav",
+              "mimeType": "audio/wav"
+            }
+          }
+        },
+        "mediaTask": {
+          "taskId": "770c5c29-555a-4439-832e-ba2224f9fc9c",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "66608ec7-2585-4d0e-a4b9-e57c66746110",
+          "mediaType": "audio",
+          "providerId": "kunrouAudio",
+          "modelId": "gemini-3.8-flash-tts",
+          "state": "succeeded",
+          "resumable": false,
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "af8a4526-c846-43b2-9347-0c0a9127d71d",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 1201,
+        "y": -3405.891137426933
+      },
+      "data": {
+        "label": "图片1(1).png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/af8a4526-c846-43b2-9347-0c0a9127d71d/f3c00f29-5d5a-4918-b076-64c79a4faca2.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c9c61e71-a37f-483d-b561-b569f445fc7c",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 2396,
+        "y": -3968.891137426933
+      },
+      "data": {
+        "label": "图片1.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/c9c61e71-a37f-483d-b561-b569f445fc7c/f2826521-6d93-4744-a61a-8c687fc07473.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "654882f3-f0d1-4ff3-ab79-65d419d1d136",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 3081,
+        "y": -3968.891137426933
+      },
+      "data": {
+        "label": "2b10cb8162501b168f77d962d20fbc70.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/654882f3-f0d1-4ff3-ab79-65d419d1d136/8f674729-6c58-475b-b6f7-4adef2bc5d19.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "29a5169c-4e74-4272-911c-010e8c2f8caf",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 1201,
+        "y": -2103.891137426933
+      },
+      "data": {
+        "label": "图片6.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/29a5169c-4e74-4272-911c-010e8c2f8caf/20bead51-c605-4727-96d7-1426ccaf60fb.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "d6ae3c53-3950-4a4a-bd59-e15af5ac89c5",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 1201,
+        "y": -3968.891137426933
+      },
+      "data": {
+        "label": "图片7.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/d6ae3c53-3950-4a4a-bd59-e15af5ac89c5/218dba7a-07ad-4aa5-80b3-a87e92a52a61.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "5a5e9c74-b542-4489-ac59-5ec3515c4b01",
+      "type": "remote-videoGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1936,
+        "y": -3296.891137426933
+      },
+      "data": {
+        "label": "视频生成",
+        "prompt": "\n0.0–1s：陈玄眼皮睁开一条缝（先右眼后左眼），瞳孔失焦、眼珠缓慢转动半圈。\n1–3s：眉心皱一下再松开，嘴唇动两下（气声），头未离臂。\n3–5s：脸颊在左臂袖面上蹭一下（头转 10°、袖子压出褶），眼睛重新闭上，呼吸恢复均匀；右嘴角白色汁水仍在嘴角，柜台桌面上不出现水渍，只有人物嘴角有。\n【镜头】85mm F2.0，镜头缓慢拉近，最后怼脸拍摄，特写镜头，镜头在柜台前俯15°拍，面部占画面 2/3。\n【光影】窗外暖光斜切面部，左臂在阴影中。\n【对白】陈玄（梦话气声、含糊）：「…… 别吵……」2 字｜4s\n【声音】先出梦话气声对白（见上），再出音效：窗外蝉鸣 + 远处闷雷。\n【禁止】完全睁眼、起身、白色汁水",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": ""
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "0.0–1s：陈玄眼皮睁开一条缝（先右眼后左眼），瞳孔失焦、眼珠缓慢转动半圈。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "1–3s：眉心皱一下再松开，嘴唇动两下（气声），头未离臂。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "3–5s：脸颊在左臂袖面上蹭一下（头转 10°、袖子压出褶），眼睛重新闭上，呼吸恢复均匀；右嘴角白色汁水仍在嘴角，柜台桌面上不出现水渍，只有人物嘴角有。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【镜头】85mm F2.0，镜头缓慢拉近，最后怼脸拍摄，特写镜头，镜头在柜台前俯15°拍，面部占画面 2/3。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【光影】窗外暖光斜切面部，左臂在阴影中。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【对白】陈玄（梦话气声、含糊）：「…… 别吵……」2 字｜4s"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【声音】先出梦话气声对白（见上），再出音效：窗外蝉鸣 + 远处闷雷。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【禁止】完全睁眼、起身、白色汁水"
+            }
+          ]
+        ],
+        "model": "[\"kunrou\",\"gemini-veo-3.1-fast\"]",
+        "resolution": "720p",
+        "mode": "[\"imageReference:4\"]",
+        "generateAudio": false,
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "VIDEO",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片、视频、音频、文本输入"
+          },
+          {
+            "id": "video",
+            "type": "source",
+            "dataType": "VIDEO",
+            "label": "视频输出"
+          }
+        ],
+        "outputs": {
+          "video": {
+            "dataType": "VIDEO",
+            "value": {
+              "url": "assets/5a5e9c74-b542-4489-ac59-5ec3515c4b01/videoefd8ffcd522a46f28e3a00df1c3bc9490.mp4",
+              "mimeType": "video/mp4"
+            }
+          }
+        },
+        "duration": 8,
+        "mediaTask": {
+          "taskId": "efd8ffcd-522a-46f2-8e3a-00df1c3bc949",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "5a5e9c74-b542-4489-ac59-5ec3515c4b01",
+          "mediaType": "video",
+          "providerId": "kunrou",
+          "modelId": "gemini-veo-3.1-fast",
+          "state": "succeeded",
+          "resumable": false,
+          "providerData": {
+            "kind": "video",
+            "taskId": "task_vBCKJgfKgKHNzSfcxZLz64hvgRTtau1b",
+            "model": "gemini-veo-3.1-fast"
+          },
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "70fc5012-7d5c-4e6e-84d6-a977c4300171",
+      "type": "remote-videoGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1936,
+        "y": -3610.891137426933
+      },
+      "data": {
+        "label": "视频生成",
+        "prompt": "中景，固定视角。主体与造型： 陈玄，保持参考图中的年轻男性外貌、黑色头巾、灰色长袍、红色腰带与古装质感\n场景： 参考图中的木质酒肆 / 客店柜台空间，平视中景，固定机位，人物上半身趴在柜台上坐起后充满画面\n动作要求： 先睁眼并以双臂撑直上身；随后用右手背整片抹过右嘴角白色透明汁水，右手落回柜沿外沿；最后头转正画面右侧侧耳听\n连续性： 起幅承接镜 7 尾帧睡姿；全片坐姿稳定；右手保持同一手位；白色透明汁水只在嘴角，不落到柜面\n声音： 保留指定台词、衣料摩擦、竹椅吱呀、两次指节声及屋外脚步吵嚷；轻快拨弦作为后期音乐\n画面文字： 不显示字幕、花字或其他文字。时间 | 画面动作 | 台词 / 声音 | 重点\n0.0–1.1s | 陈玄上半身趴在柜台上缓缓睁眼，背景是摆着罐子的柜子，瞳孔短暂失焦后收拢；双臂上撑，腰离柜台 | <衣料摩擦>< 竹椅吱呀 >< 指节咔两声 > | 从睡姿进入坐姿\n1.1–1.9s | 右手背从右嘴角整片抹过一次，白色透明汁水只留在手背，手顺势回落 | 屋外吵嚷脚步由远及近 | 抹嘴动作清楚，柜面干净\n2.0–5.0s | 右手落回柜沿外沿，四指扣前侧；头由正转向画面右侧侧耳听 | 压低嘀咕：“至于吗，就躲几天清净。” | 手回落途中开口，保持坐姿\n4.0–5.0s | 坐直不动，头朝画面右侧，右手保持 A 位，侧耳听屋外动静 | 环境脚步声持续，轻快拨弦后期进入 | 稳定尾帧，准备硬切镜 9\n5.0–6.0s | 保持尾帧姿态，不再新增主导动作 | 音乐与环境声延续 | 为硬切镜 9 留出稳定落点，6s，720p",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "中景，固定视角。主体与造型： 陈玄，保持参考图中的年轻男性外貌、黑色头巾、灰色长袍、红色腰带与古装质感"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "场景： 参考图中的木质酒肆 / 客店柜台空间，平视中景，固定机位，人物上半身趴在柜台上坐起后充满画面"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "动作要求： 先睁眼并以双臂撑直上身；随后用右手背整片抹过右嘴角白色透明汁水，右手落回柜沿外沿；最后头转正画面右侧侧耳听"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "连续性： 起幅承接镜 7 尾帧睡姿；全片坐姿稳定；右手保持同一手位；白色透明汁水只在嘴角，不落到柜面"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "声音： 保留指定台词、衣料摩擦、竹椅吱呀、两次指节声及屋外脚步吵嚷；轻快拨弦作为后期音乐"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "画面文字： 不显示字幕、花字或其他文字。时间 | 画面动作 | 台词 / 声音 | 重点"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "0.0–1.1s | 陈玄上半身趴在柜台上缓缓睁眼，背景是摆着罐子的柜子，瞳孔短暂失焦后收拢；双臂上撑，腰离柜台 | <衣料摩擦>< 竹椅吱呀 >< 指节咔两声 > | 从睡姿进入坐姿"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "1.1–1.9s | 右手背从右嘴角整片抹过一次，白色透明汁水只留在手背，手顺势回落 | 屋外吵嚷脚步由远及近 | 抹嘴动作清楚，柜面干净"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "2.0–5.0s | 右手落回柜沿外沿，四指扣前侧；头由正转向画面右侧侧耳听 | 压低嘀咕：“至于吗，就躲几天清净。” | 手回落途中开口，保持坐姿"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "4.0–5.0s | 坐直不动，头朝画面右侧，右手保持 A 位，侧耳听屋外动静 | 环境脚步声持续，轻快拨弦后期进入 | 稳定尾帧，准备硬切镜 9"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "5.0–6.0s | 保持尾帧姿态，不再新增主导动作 | 音乐与环境声延续 | 为硬切镜 9 留出稳定落点，6s，720p"
+            }
+          ]
+        ],
+        "model": "[\"kunrou\",\"gemini-omni-1.1-flash\"]",
+        "resolution": "720p",
+        "mode": "[\"imageReference:2\",\"videoReference:1\",\"audioReference:1\"]",
+        "generateAudio": false,
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "VIDEO",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片、视频、音频、文本输入"
+          },
+          {
+            "id": "video",
+            "type": "source",
+            "dataType": "VIDEO",
+            "label": "视频输出"
+          }
+        ],
+        "outputs": {
+          "video": {
+            "dataType": "VIDEO",
+            "value": {
+              "url": "assets/70fc5012-7d5c-4e6e-84d6-a977c4300171/video71d41d167db44246b037805cd72990d10.mp4",
+              "mimeType": "video/mp4"
+            }
+          }
+        },
+        "duration": 6,
+        "mediaTask": {
+          "taskId": "71d41d16-7db4-4246-b037-805cd72990d1",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "70fc5012-7d5c-4e6e-84d6-a977c4300171",
+          "mediaType": "video",
+          "providerId": "kunrou",
+          "modelId": "gemini-omni-1.1-flash",
+          "state": "succeeded",
+          "resumable": false,
+          "providerData": {
+            "kind": "video",
+            "taskId": "task_rnegogW6rUhhoqxi2YQOSpvtDrw2BjqV",
+            "model": "gemini-omni-1.1-flash"
+          },
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "256ffecf-b1b8-498a-9939-c11dcbaeb0ad",
+      "type": "remote-videoGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1936,
+        "y": -3924.891137426933
+      },
+      "data": {
+        "label": "视频生成",
+        "prompt": "- **时长：** 6.0 秒\n- **比例：** 16:9 横屏\n- **主体与造型：** 陈玄，保持参考图中的年轻男性外貌、黑色头巾、灰色长袍、红色腰带与古装质感\n- **场景：** 参考图中的木质酒肆 / 客店柜台空间，平视中景，固定机位，人物坐起后充满画面\n- **动作要求：** 先睁眼并以双臂撑直上身；随后用右手背整片抹过右嘴角白色透明汁水，右手落回柜沿外沿；最后头转正画面右侧侧耳听\n- **连续性：** 起幅承接镜 7 尾帧睡姿；全片坐姿稳定；右手保持同一手位；白色透明汁水只在手背，不落到柜面\n- **声音：** 保留指定台词、衣料摩擦、竹椅吱呀、两次指节声及屋外脚步吵嚷；轻快拨弦作为后期音乐\n- **画面文字：** 不显示字幕、花字或其他文字。时间\t画面动作\t台词 / 声音\t重点\n0.0–1.1s\t陈玄趴在柜台缓缓睁眼，瞳孔短暂失焦后收拢；双臂上撑，腰离柜台\t<衣料摩擦>< 竹椅吱呀 >< 指节咔两声 >\t从睡姿进入坐姿\n1.1–1.9s\t右手背从右嘴角整片抹过一次，白色透明汁水只留在手背，手顺势回落\t屋外吵嚷脚步由远及近\t抹嘴动作清楚，柜面干净\n2.0–5.0s\t右手落回柜沿外沿，四指扣前侧；头由正转向画面右侧侧耳听\t压低嘀咕：“至于吗，就躲几天清净。”\t手回落途中开口，保持坐姿\n4.0–5.0s\t坐直不动，头朝画面右侧，右手保持 A 位，侧耳听屋外动静\t环境脚步声持续，轻快拨弦后期进入\t稳定尾帧，准备硬切镜 9\n5.0–6.0s\t保持尾帧姿态，不再新增主导动作\t音乐与环境声延续\t为硬切镜 9 留出稳定落点",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "- **时长：** 6.0 秒"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- **比例：** 16:9 横屏"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- **主体与造型：** 陈玄，保持参考图中的年轻男性外貌、黑色头巾、灰色长袍、红色腰带与古装质感"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- **场景：** 参考图中的木质酒肆 / 客店柜台空间，平视中景，固定机位，人物坐起后充满画面"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- **动作要求：** 先睁眼并以双臂撑直上身；随后用右手背整片抹过右嘴角白色透明汁水，右手落回柜沿外沿；最后头转正画面右侧侧耳听"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- **连续性：** 起幅承接镜 7 尾帧睡姿；全片坐姿稳定；右手保持同一手位；白色透明汁水只在手背，不落到柜面"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- **声音：** 保留指定台词、衣料摩擦、竹椅吱呀、两次指节声及屋外脚步吵嚷；轻快拨弦作为后期音乐"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "- **画面文字：** 不显示字幕、花字或其他文字。时间\t画面动作\t台词 / 声音\t重点"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "0.0–1.1s\t陈玄趴在柜台缓缓睁眼，瞳孔短暂失焦后收拢；双臂上撑，腰离柜台\t<衣料摩擦>< 竹椅吱呀 >< 指节咔两声 >\t从睡姿进入坐姿"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "1.1–1.9s\t右手背从右嘴角整片抹过一次，白色透明汁水只留在手背，手顺势回落\t屋外吵嚷脚步由远及近\t抹嘴动作清楚，柜面干净"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "2.0–5.0s\t右手落回柜沿外沿，四指扣前侧；头由正转向画面右侧侧耳听\t压低嘀咕：“至于吗，就躲几天清净。”\t手回落途中开口，保持坐姿"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "4.0–5.0s\t坐直不动，头朝画面右侧，右手保持 A 位，侧耳听屋外动静\t环境脚步声持续，轻快拨弦后期进入\t稳定尾帧，准备硬切镜 9"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "5.0–6.0s\t保持尾帧姿态，不再新增主导动作\t音乐与环境声延续\t为硬切镜 9 留出稳定落点"
+            }
+          ]
+        ],
+        "model": "[\"kunrou\",\"gemini-veo-3.1-fast\"]",
+        "resolution": "720p",
+        "mode": "[\"imageReference:4\"]",
+        "generateAudio": false,
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "VIDEO",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片、视频、音频、文本输入"
+          },
+          {
+            "id": "video",
+            "type": "source",
+            "dataType": "VIDEO",
+            "label": "视频输出"
+          }
+        ],
+        "outputs": {
+          "video": {
+            "dataType": "VIDEO",
+            "value": {
+              "url": "assets/256ffecf-b1b8-498a-9939-c11dcbaeb0ad/video145c1d4a23c942e99a38b2a443bfc8b00.mp4",
+              "mimeType": "video/mp4"
+            }
+          }
+        },
+        "duration": 8,
+        "mediaTask": {
+          "taskId": "145c1d4a-23c9-42e9-9a38-b2a443bfc8b0",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "256ffecf-b1b8-498a-9939-c11dcbaeb0ad",
+          "mediaType": "video",
+          "providerId": "kunrou",
+          "modelId": "gemini-veo-3.1-fast",
+          "state": "succeeded",
+          "resumable": false,
+          "providerData": {
+            "kind": "video",
+            "taskId": "task_7t5tyNjWZYs11F93nJ9QK1cBNmwraz55",
+            "model": "gemini-veo-3.1-fast"
+          },
+          "applied": true
+        }
+      }
+    },
+    {
+      "id": "d0f87c37-f8f9-4fe0-ad39-bceccbf4785f",
+      "type": "remote-videoGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 1936,
+        "y": -2906.891137426933
+      },
+      "data": {
+        "label": "视频生成",
+        "prompt": "【镜头】固定机位，零运镜（不推不拉不摇不移不变焦）。摄影机架在掌柜台内侧、陈玄{{ref 1}} 的右肩斜后方约半臂处，镜头朝大门，机位高度 1.55 米——陈玄坐下后的眼高，不是站立视平线，视线水平。远景，35mm，f/2.8：前景陈玄肩背彻底虚焦，中景柜台实，远处大门与门外街道轻微虚化。柜台距大门约三米，中间是空旷石板地。门内场景严格参考@图片6.png ，请和这个参考图保持一致\n【画面层次】前景右下角（约占画面 1/6，虚焦成一团暗灰）：陈玄{{ref 1}}坐在木椅上的右侧肩背、右上臂、后脑与黑幞头一角，肩线压住画面右下边缘，看不见脸；椅背弧线在他肩后露出一小截。中景下缘（占画面下 1/3）：深褐色木质长柜台横贯画面，柜台把他{{ref 1}}的下半身完全挡掉。后景：双扇木格门敞开，位于画面纵深尽头，门洞约占画面高度六成；门外是虚化的唐代街道。\n【动作时序 · 5 秒】0.0–0.7{{ref 5}} 正面朝店内，右脚先跨过门槛落地，重心前压。0.7–1.1 左脚跟上时鞋尖磕在门槛木棱上，闷响，身形一顿，肩先往前抢。1.1–1.6 上身前扑，右手回手扶住门框内侧木柱一下，指尖扣住木棱即松开收回。1.6–2.7 两步踉跄向前冲，衣摆荡起，蓝袍翻动。2.7–3.4 第三步右脚前掌重重顶地刹住，鞋底在石板上蹭出短响，停在柜台前一步，肩背一沉。3.4–4.3 胸口急促起伏两下，肩膀一上一下，喉结吞咽，嘴唇张开又合上。4.3–5.0 头微低，眼睛先抬、头后抬，目光越过柜台找柜台后的人；眉头紧锁、眼神急切发慌，身体前倾半寸定格，胸前破损玉佩{{ref 4}}随呼吸轻晃。\n【光影质感】门外日光比室内高约 1.5 档：进门瞬间他是逆光，头顶与双肩被勾出一道细窄冷白轮廓光，脸在暗部。跨过门槛后，光从右前上方来。左肩血渍浸透发暗、边缘干硬，中央湿润处有镜面反光。右颊血痕半干结薄痂，中间一线仍湿润，暖光下有细高光。玉佩：青白玉镂空龙纹，右上角缺一块，红绳轻晃。石板磨损有浅坑积尘，木柜台有包浆刀痕，土黄墙面、青砖墙裙，门内光带里有浮尘。\n【门外场景 · 唐代街道，本镜独立生成不参考室内图】门外是唐代长安坊市的一条街，斜阳偏后。青石板街道从门槛向外延伸。两侧木构店铺：朱漆立柱、可拆卸排门板、深挑檐、檐下酒旗布幌与成串红灯笼；远处坊墙坊门，屋脊层叠、檐角起翘。整条街空无一人：无行人、无摊贩、无车马、无追兵，只有幌子在风里轻晃。浅景深，整条街虚化成模糊色块与光影轮廓，亮度高于室内、略过曝；水膜反光是唯一的镜像细节，不得出现人影倒影。\n【音频】无台词。0.7s 左脚磕门槛：低频闷响（80–120Hz），短钝无尾音，正卡鼓点。1.1s 手掌拍木门框：中频木质闷响。1.6–2.7s 急促脚步与鞋底摩擦石板、衣料抖动。2.7s 刹步：短促摩擦声。3.4–5.0s 粗重喘息（吸气带轻微哨音），心跳低频渐入。音乐：鼓点自 0.7s 起急推，与脚步、心跳同步，最后半秒收住只留喘息。\n【锁定】只林砚一人可见；门外空街，无追兵、无第二个人影。陈玄全程坐姿：坐在柜台后的木椅上，不起身、不站起、不转身、不回头、不露正脸，只有右肩与后脑一团虚焦暗影。大门双扇敞开，门槛完好无损。林砚始终正面朝店内，右脚先跨，不回头、不看镜头。玉佩完整可辨：圆形镂空青白玉、右上角缺口、红绳。室内按参考图：木构大堂、二层回廊栏杆、土黄墙＋青砖墙裙、石板地、两侧长条桌凳；柜台为本镜新增，置于大堂近端。人物与场景同一光源、同一色温，脚底压地有接触阴影，真实照片质感。\n【负向】站立、起身、回头、正脸、全身、两个人并排、第三个人、门外行人、追兵、士兵、马、门槛破损、门关闭、运镜、推拉摇移、变焦、慢动作、动作拖沓、跳帧、多手多脚、穿模、卡通、CG 塑料感、磨皮、五官失真、手指畸形、玉佩缺失、字幕、水印、文字。\n",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "【镜头】固定机位，零运镜（不推不拉不摇不移不变焦）。摄影机架在掌柜台内侧、陈玄"
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%22af8a4526-c846-43b2-9347-0c0a9127d71d%22%2C%22image%22%5D\" data-value=\"{{ref 1}}\">图片1(1).png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": " 的右肩斜后方约半臂处，镜头朝大门，机位高度 1.55 米——陈玄坐下后的眼高，不是站立视平线，视线水平。远景，35mm，f/2.8：前景陈玄肩背彻底虚焦，中景柜台实，远处大门与门外街道轻微虚化。柜台距大门约三米，中间是空旷石板地。门内场景严格参考@图片6.png ，请和这个参考图保持一致"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【画面层次】前景右下角（约占画面 1/6，虚焦成一团暗灰）：陈玄"
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%22af8a4526-c846-43b2-9347-0c0a9127d71d%22%2C%22image%22%5D\" data-value=\"{{ref 1}}\">图片1(1).png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "坐在木椅上的右侧肩背、右上臂、后脑与黑幞头一角，肩线压住画面右下边缘，看不见脸；椅背弧线在他肩后露出一小截。中景下缘（占画面下 1/3）：深褐色木质长柜台横贯画面，柜台把他"
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%22af8a4526-c846-43b2-9347-0c0a9127d71d%22%2C%22image%22%5D\" data-value=\"{{ref 1}}\">图片1(1).png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "的下半身完全挡掉。后景：双扇木格门敞开，位于画面纵深尽头，门洞约占画面高度六成；门外是虚化的唐代街道。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【动作时序 · 5 秒】0.0–0.7"
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%220605d998-5a90-44c5-bef7-2da6bb1d10f9%22%2C%22image%22%5D\" data-value=\"{{ref 5}}\">d44b10801b4418ddf8883fe506809e3e.png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": " 正面朝店内，右脚先跨过门槛落地，重心前压。0.7–1.1 左脚跟上时鞋尖磕在门槛木棱上，闷响，身形一顿，肩先往前抢。1.1–1.6 上身前扑，右手回手扶住门框内侧木柱一下，指尖扣住木棱即松开收回。1.6–2.7 两步踉跄向前冲，衣摆荡起，蓝袍翻动。2.7–3.4 第三步右脚前掌重重顶地刹住，鞋底在石板上蹭出短响，停在柜台前一步，肩背一沉。3.4–4.3 胸口急促起伏两下，肩膀一上一下，喉结吞咽，嘴唇张开又合上。4.3–5.0 头微低，眼睛先抬、头后抬，目光越过柜台找柜台后的人；眉头紧锁、眼神急切发慌，身体前倾半寸定格，胸前破损玉佩"
+            },
+            {
+              "type": "Custom",
+              "html": "<span style=\"display: inline-block;\"><span class=\"imageReference previewable\" data-reference-id=\"%5B%22964ec2e5-6791-4c8f-a0b2-b439bf312c40%22%2C%22image%22%5D\" data-value=\"{{ref 4}}\">玉佩.png</span></span>"
+            },
+            {
+              "type": "Write",
+              "text": "随呼吸轻晃。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【光影质感】门外日光比室内高约 1.5 档：进门瞬间他是逆光，头顶与双肩被勾出一道细窄冷白轮廓光，脸在暗部。跨过门槛后，光从右前上方来。左肩血渍浸透发暗、边缘干硬，中央湿润处有镜面反光。右颊血痕半干结薄痂，中间一线仍湿润，暖光下有细高光。玉佩：青白玉镂空龙纹，右上角缺一块，红绳轻晃。石板磨损有浅坑积尘，木柜台有包浆刀痕，土黄墙面、青砖墙裙，门内光带里有浮尘。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【门外场景 · 唐代街道，本镜独立生成不参考室内图】门外是唐代长安坊市的一条街，斜阳偏后。青石板街道从门槛向外延伸。两侧木构店铺：朱漆立柱、可拆卸排门板、深挑檐、檐下酒旗布幌与成串红灯笼；远处坊墙坊门，屋脊层叠、檐角起翘。整条街空无一人：无行人、无摊贩、无车马、无追兵，只有幌子在风里轻晃。浅景深，整条街虚化成模糊色块与光影轮廓，亮度高于室内、略过曝；水膜反光是唯一的镜像细节，不得出现人影倒影。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【音频】无台词。0.7s 左脚磕门槛：低频闷响（80–120Hz），短钝无尾音，正卡鼓点。1.1s 手掌拍木门框：中频木质闷响。1.6–2.7s 急促脚步与鞋底摩擦石板、衣料抖动。2.7s 刹步：短促摩擦声。3.4–5.0s 粗重喘息（吸气带轻微哨音），心跳低频渐入。音乐：鼓点自 0.7s 起急推，与脚步、心跳同步，最后半秒收住只留喘息。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【锁定】只林砚一人可见；门外空街，无追兵、无第二个人影。陈玄全程坐姿：坐在柜台后的木椅上，不起身、不站起、不转身、不回头、不露正脸，只有右肩与后脑一团虚焦暗影。大门双扇敞开，门槛完好无损。林砚始终正面朝店内，右脚先跨，不回头、不看镜头。玉佩完整可辨：圆形镂空青白玉、右上角缺口、红绳。室内按参考图：木构大堂、二层回廊栏杆、土黄墙＋青砖墙裙、石板地、两侧长条桌凳；柜台为本镜新增，置于大堂近端。人物与场景同一光源、同一色温，脚底压地有接触阴影，真实照片质感。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "【负向】站立、起身、回头、正脸、全身、两个人并排、第三个人、门外行人、追兵、士兵、马、门槛破损、门关闭、运镜、推拉摇移、变焦、慢动作、动作拖沓、跳帧、多手多脚、穿模、卡通、CG 塑料感、磨皮、五官失真、手指畸形、玉佩缺失、字幕、水印、文字。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": ""
+            }
+          ]
+        ],
+        "model": "[\"kunrou\",\"gemini-veo-3.1-fast\"]",
+        "resolution": "720p",
+        "mode": "[\"imageReference:4\"]",
+        "generateAudio": false,
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "VIDEO",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片、视频、音频、文本输入"
+          },
+          {
+            "id": "video",
+            "type": "source",
+            "dataType": "VIDEO",
+            "label": "视频输出"
+          }
+        ],
+        "outputs": {},
+        "duration": 8
+      }
+    },
+    {
+      "id": "964ec2e5-6791-4c8f-a0b2-b439bf312c40",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 1201,
+        "y": -2537.891137426933
+      },
+      "data": {
+        "label": "玉佩.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/964ec2e5-6791-4c8f-a0b2-b439bf312c40/24dff523-3917-44d0-8c04-14d52f547c96.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "0605d998-5a90-44c5-bef7-2da6bb1d10f9",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 1201,
+        "y": -2971.891137426933
+      },
+      "data": {
+        "label": "d44b10801b4418ddf8883fe506809e3e.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/0605d998-5a90-44c5-bef7-2da6bb1d10f9/dbfcdaf4-cb7e-4fae-8af3-dfe0f42418e0.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "21397b65-d010-4443-a5bb-0ca79f1b45e5",
+      "type": "remote-imageNode",
+      "initialized": false,
+      "position": {
+        "x": 3579,
+        "y": -3968.891137426933
+      },
+      "data": {
+        "label": "2222.png",
+        "outputs": {
+          "image": {
+            "dataType": "IMAGE",
+            "value": {
+              "url": "assets/21397b65-d010-4443-a5bb-0ca79f1b45e5/be403143-dd43-48f3-bd73-efa1febde14d.png",
+              "mimeType": "image/png"
+            }
+          }
+        },
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": "IMAGE",
+            "label": "来源图片"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ]
+      }
+    },
+    {
+      "id": "5b8fa6e6-0a07-4319-9716-567341f392df",
+      "type": "remote-videoGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 4184,
+        "y": -3908.891137426933
+      },
+      "data": {
+        "label": "视频生成",
+        "prompt": "首帧画面人物在大门处跑进房间，在柜台前停下，人物慌张的表情\n人物从门外跑进来，急迫慌张镜头在陈玄@图片1(1).png 的肩斜后方朝大门拍摄，远景，固定视角\n画面：林砚@2b10cb8162501b168f77d962d20fbc70.png （左肩血、右颊血痕）胸前戴着一块破损的玉佩@玉佩.png ，自大门处冲入，陈玄@图片1(1).png 坐在掌柜台后方看向大门处，林砚@2b10cb8162501b168f77d962d20fbc70.png 冲进来慌慌张张的，脚步踉跄，从大门内冲进来到掌柜台前，和陈玄@图片1(1).png 中间隔掌柜台相望，镜头拍摄大门@图片6.png 处，大门是打开的状态，大门外是古代唐朝街道场景，大门外的场景不参考场景图由你单独生成出古代唐朝街道场景，室内场景请参考我给你的参考图@图片6.png ，街道上没人，街道镜像虚化，只能看见模糊的街道景色；林砚@2b10cb8162501b168f77d962d20fbc70.png 正面朝店内、右脚先跨左脚跟上；左脚磕门槛木棱（闷响）→上身向前抢→踉跄两步右脚顶地刹住； 右手扶门框内侧一下即收→喘（胸口起伏）→站定画右前距柜台一步、头微低、眼睛先抬起来找柜台，表情慌张急切。\n物理与光影：进店后暖黄光从正面补上；左肩湿处反光、右颊血痕半干，物理状态真实，光影真实，写实感，电影感。\n音频与对白：无台词。SFX 脚绊门槛闷响（低频卡鼓点）＋喘息。环境。鼓点急推。\n锁（正向）：本镜只林砚@2b10cb8162501b168f77d962d20fbc70.png 一人可见，摄像头在陈玄@图片1(1).png 的肩头处，只能看到一点点陈玄模糊的样子；门槛完好；门外无追兵身影。人物和场景融为一体自然真实，人物肢体动作，表情真实，符合现实物理符合现实世界真人",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "首帧画面人物在大门处跑进房间，在柜台前停下，人物慌张的表情"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "人物从门外跑进来，急迫慌张镜头在陈玄@图片1(1).png 的肩斜后方朝大门拍摄，远景，固定视角"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "画面：林砚@2b10cb8162501b168f77d962d20fbc70.png （左肩血、右颊血痕）胸前戴着一块破损的玉佩@玉佩.png ，自大门处冲入，陈玄@图片1(1).png 坐在掌柜台后方看向大门处，林砚@2b10cb8162501b168f77d962d20fbc70.png 冲进来慌慌张张的，脚步踉跄，从大门内冲进来到掌柜台前，和陈玄@图片1(1).png 中间隔掌柜台相望，镜头拍摄大门@图片6.png 处，大门是打开的状态，大门外是古代唐朝街道场景，大门外的场景不参考场景图由你单独生成出古代唐朝街道场景，室内场景请参考我给你的参考图@图片6.png ，街道上没人，街道镜像虚化，只能看见模糊的街道景色；林砚@2b10cb8162501b168f77d962d20fbc70.png 正面朝店内、右脚先跨左脚跟上；左脚磕门槛木棱（闷响）→上身向前抢→踉跄两步右脚顶地刹住； 右手扶门框内侧一下即收→喘（胸口起伏）→站定画右前距柜台一步、头微低、眼睛先抬起来找柜台，表情慌张急切。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "物理与光影：进店后暖黄光从正面补上；左肩湿处反光、右颊血痕半干，物理状态真实，光影真实，写实感，电影感。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "音频与对白：无台词。SFX 脚绊门槛闷响（低频卡鼓点）＋喘息。环境。鼓点急推。"
+            }
+          ],
+          [
+            {
+              "type": "Write",
+              "text": "锁（正向）：本镜只林砚@2b10cb8162501b168f77d962d20fbc70.png 一人可见，摄像头在陈玄@图片1(1).png 的肩头处，只能看到一点点陈玄模糊的样子；门槛完好；门外无追兵身影。人物和场景融为一体自然真实，人物肢体动作，表情真实，符合现实物理符合现实世界真人"
+            }
+          ]
+        ],
+        "model": "[\"kunrou\",\"gemini-veo-3.1-fast\"]",
+        "resolution": "720p",
+        "mode": "[\"imageReference:4\"]",
+        "generateAudio": false,
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "VIDEO",
+              "AUDIO",
+              "STRING"
+            ],
+            "label": "图片、视频、音频、文本输入"
+          },
+          {
+            "id": "video",
+            "type": "source",
+            "dataType": "VIDEO",
+            "label": "视频输出"
+          }
+        ],
+        "outputs": {
+          "video": {
+            "dataType": "VIDEO",
+            "value": {
+              "url": "assets/5b8fa6e6-0a07-4319-9716-567341f392df/video1e401ddd67e8486ba247290fac1b2b680.mp4",
+              "mimeType": "video/mp4"
+            }
+          }
+        },
+        "duration": 8,
+        "mediaTask": {
+          "taskId": "1e401ddd-67e8-486b-a247-290fac1b2b68",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "5b8fa6e6-0a07-4319-9716-567341f392df",
+          "mediaType": "video",
+          "providerId": "kunrou",
+          "modelId": "gemini-veo-3.1-fast",
+          "state": "succeeded",
+          "resumable": false,
+          "providerData": {
+            "kind": "video",
+            "taskId": "task_nJoaJ2kgAkJvUdNhIWz0rA11H01sZQ7y",
+            "model": "gemini-veo-3.1-fast"
+          },
+          "applied": true
+        }
       }
     }
   ],
@@ -1273,10 +2211,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 2945.482576604823,
-      "sourceY": -253.3603587653476,
-      "targetX": 3352.5152141080607,
-      "targetY": -20.859274078870897
+      "sourceX": 3033.0006282874338,
+      "sourceY": -4907.890796055452,
+      "targetX": 2800.000119425898,
+      "targetY": -5263.0159943684175
     },
     {
       "id": "vueflow__edge-153083e9-0598-4139-9ff0-155393d5db22image-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
@@ -1292,10 +2230,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 2860.738524826843,
-      "sourceY": 134.68234250893488,
-      "targetX": 3352.5152141080607,
-      "targetY": -20.859274078870897
+      "sourceX": 2906.656648816524,
+      "sourceY": -5183.906500664126,
+      "targetX": 2800.000119425898,
+      "targetY": -5263.0159943684175
     },
     {
       "id": "vueflow__edge-acfbcc32-617a-4a50-9ae4-529a68c048dfimage-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
@@ -1311,10 +2249,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 2822.4111519030607,
-      "sourceY": 527.6459634601749,
-      "targetX": 3352.5152141080607,
-      "targetY": -20.859274078870897
+      "sourceX": 2906.656648816524,
+      "sourceY": -5459.906500664126,
+      "targetX": 2800.000119425898,
+      "targetY": -5263.0159943684175
     },
     {
       "id": "vueflow__edge-36480646-ca24-4439-8e3a-d0a2fd4d2fd4image-6eb64690-0f3e-4629-8bec-12d7ab6489f2in",
@@ -1330,10 +2268,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1414.6877671750071,
-      "sourceY": 1230.357701429274,
-      "targetX": 1735.92427372116,
-      "targetY": 1258.1176721986517
+      "sourceX": 1065.3755151627079,
+      "sourceY": -4487.906500664126,
+      "targetX": 959.9997167436243,
+      "targetY": -4255.890925764244
     },
     {
       "id": "vueflow__edge-a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3image-6eb64690-0f3e-4629-8bec-12d7ab6489f2in",
@@ -1349,10 +2287,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1357.7194163271806,
-      "sourceY": 1569.0315935290168,
-      "targetX": 1735.92427372116,
-      "targetY": 1258.1176721986517
+      "sourceX": 1065.3755151627079,
+      "sourceY": -4203.906500664126,
+      "targetX": 959.9997167436243,
+      "targetY": -4255.890925764244
     },
     {
       "id": "vueflow__edge-a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3image-d12657ba-408a-44fc-8576-8d1651a21eaain",
@@ -1368,10 +2306,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1357.7194163271806,
-      "sourceY": 1569.0315935290168,
-      "targetX": 1576.750827626608,
-      "targetY": 1921.6634957957463
+      "sourceX": 1065.3755151627079,
+      "sourceY": -4203.906500664126,
+      "targetX": 959.9997167436243,
+      "targetY": -4507.890925764244
     },
     {
       "id": "vueflow__edge-36480646-ca24-4439-8e3a-d0a2fd4d2fd4image-d12657ba-408a-44fc-8576-8d1651a21eaain",
@@ -1387,15 +2325,243 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1414.6877671750071,
-      "sourceY": 1230.357701429274,
-      "targetX": 1576.750827626608,
-      "targetY": 1921.6634957957463
+      "sourceX": 1065.3755151627079,
+      "sourceY": -4487.906500664126,
+      "targetX": 959.9997167436243,
+      "targetY": -4507.890925764244
+    },
+    {
+      "id": "vueflow__edge-d6ae3c53-3950-4a4a-bd59-e15af5ac89c5image-5a5e9c74-b542-4489-ac59-5ec3515c4b01in",
+      "type": "simplebezier",
+      "source": "d6ae3c53-3950-4a4a-bd59-e15af5ac89c5",
+      "target": "5a5e9c74-b542-4489-ac59-5ec3515c4b01",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1796.516044536943,
+      "sourceY": -3783.9065006641263,
+      "targetX": 1915.000119425898,
+      "targetY": -3159.890925764244
+    },
+    {
+      "id": "vueflow__edge-af8a4526-c846-43b2-9347-0c0a9127d71dimage-5a5e9c74-b542-4489-ac59-5ec3515c4b01in",
+      "type": "simplebezier",
+      "source": "af8a4526-c846-43b2-9347-0c0a9127d71d",
+      "target": "5a5e9c74-b542-4489-ac59-5ec3515c4b01",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1669.8440803540943,
+      "sourceY": -3220.9065006641263,
+      "targetX": 1915.000119425898,
+      "targetY": -3159.890925764244
+    },
+    {
+      "id": "vueflow__edge-d6ae3c53-3950-4a4a-bd59-e15af5ac89c5image-70fc5012-7d5c-4e6e-84d6-a977c4300171in",
+      "type": "simplebezier",
+      "source": "d6ae3c53-3950-4a4a-bd59-e15af5ac89c5",
+      "target": "70fc5012-7d5c-4e6e-84d6-a977c4300171",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1796.516044536943,
+      "sourceY": -3783.9065006641263,
+      "targetX": 1915.000119425898,
+      "targetY": -3473.890925764244
+    },
+    {
+      "id": "vueflow__edge-af8a4526-c846-43b2-9347-0c0a9127d71dimage-70fc5012-7d5c-4e6e-84d6-a977c4300171in",
+      "type": "simplebezier",
+      "source": "af8a4526-c846-43b2-9347-0c0a9127d71d",
+      "target": "70fc5012-7d5c-4e6e-84d6-a977c4300171",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1669.8440803540943,
+      "sourceY": -3220.9065006641263,
+      "targetX": 1915.000119425898,
+      "targetY": -3473.890925764244
+    },
+    {
+      "id": "vueflow__edge-af8a4526-c846-43b2-9347-0c0a9127d71dimage-256ffecf-b1b8-498a-9939-c11dcbaeb0adin",
+      "type": "simplebezier",
+      "source": "af8a4526-c846-43b2-9347-0c0a9127d71d",
+      "target": "256ffecf-b1b8-498a-9939-c11dcbaeb0ad",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1669.8440803540943,
+      "sourceY": -3220.9065006641263,
+      "targetX": 1915.000119425898,
+      "targetY": -3787.890925764244
+    },
+    {
+      "id": "vueflow__edge-d6ae3c53-3950-4a4a-bd59-e15af5ac89c5image-256ffecf-b1b8-498a-9939-c11dcbaeb0adin",
+      "type": "simplebezier",
+      "source": "d6ae3c53-3950-4a4a-bd59-e15af5ac89c5",
+      "target": "256ffecf-b1b8-498a-9939-c11dcbaeb0ad",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1796.516044536943,
+      "sourceY": -3783.9065006641263,
+      "targetX": 1915.000119425898,
+      "targetY": -3787.890925764244
+    },
+    {
+      "id": "vueflow__edge-af8a4526-c846-43b2-9347-0c0a9127d71dimage-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
+      "type": "simplebezier",
+      "source": "af8a4526-c846-43b2-9347-0c0a9127d71d",
+      "target": "d0f87c37-f8f9-4fe0-ad39-bceccbf4785f",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1669.8440803540943,
+      "sourceY": -3220.9065006641263,
+      "targetX": 1915.0000763806029,
+      "targetY": -2769.8912266219413
+    },
+    {
+      "id": "vueflow__edge-29a5169c-4e74-4272-911c-010e8c2f8cafimage-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
+      "type": "simplebezier",
+      "source": "29a5169c-4e74-4272-911c-010e8c2f8caf",
+      "target": "d0f87c37-f8f9-4fe0-ad39-bceccbf4785f",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1666.6555525377205,
+      "sourceY": -1918.9065700046317,
+      "targetX": 1915.0000763806029,
+      "targetY": -2769.8912266219413
+    },
+    {
+      "id": "vueflow__edge-d6ae3c53-3950-4a4a-bd59-e15af5ac89c5image-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
+      "type": "simplebezier",
+      "source": "d6ae3c53-3950-4a4a-bd59-e15af5ac89c5",
+      "target": "d0f87c37-f8f9-4fe0-ad39-bceccbf4785f",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1796.516044536943,
+      "sourceY": -3783.9065006641263,
+      "targetX": 1915.0000763806029,
+      "targetY": -2769.8912266219413
+    },
+    {
+      "id": "vueflow__edge-964ec2e5-6791-4c8f-a0b2-b439bf312c40image-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
+      "type": "simplebezier",
+      "source": "964ec2e5-6791-4c8f-a0b2-b439bf312c40",
+      "target": "d0f87c37-f8f9-4fe0-ad39-bceccbf4785f",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1666.656070496292,
+      "sourceY": -2352.906995258201,
+      "targetX": 1915.0000763806029,
+      "targetY": -2769.8912266219413
+    },
+    {
+      "id": "vueflow__edge-0605d998-5a90-44c5-bef7-2da6bb1d10f9image-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
+      "type": "simplebezier",
+      "source": "0605d998-5a90-44c5-bef7-2da6bb1d10f9",
+      "target": "d0f87c37-f8f9-4fe0-ad39-bceccbf4785f",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 1480.0002398143579,
+      "sourceY": -2786.8909697558984,
+      "targetX": 1915.0000763806029,
+      "targetY": -2769.8912266219413
+    },
+    {
+      "id": "vueflow__edge-21397b65-d010-4443-a5bb-0ca79f1b45e5image-5b8fa6e6-0a07-4319-9716-567341f392dfin",
+      "type": "simplebezier",
+      "source": "21397b65-d010-4443-a5bb-0ca79f1b45e5",
+      "target": "5b8fa6e6-0a07-4319-9716-567341f392df",
+      "sourceHandle": "image",
+      "targetHandle": "in",
+      "updatable": false,
+      "selectable": false,
+      "focusable": false,
+      "data": {},
+      "label": "",
+      "interactionWidth": 40,
+      "animated": false,
+      "sourceX": 4044.656648816524,
+      "sourceY": -3783.9065006641263,
+      "targetX": 4162.999716743624,
+      "targetY": -3771.890925764244
     }
   ],
   "viewport": {
-    "x": -409.9149042994295,
-    "y": 299.3319304985016,
-    "zoom": 0.4000000000000007
+    "x": -25.842254874929722,
+    "y": 2301.0462138984476,
+    "zoom": 0.4594793419988144
   }
 }

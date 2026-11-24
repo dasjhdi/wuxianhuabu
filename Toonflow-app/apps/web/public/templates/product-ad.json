@@ -1,0 +1,111 @@
+{
+  "toonflowCanvas": true,
+  "nodes": [
+    {
+      "id": "tpl-i1",
+      "type": "remote-imageGenerationNode",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "产品图",
+        "prompt": "产品海报：透明瓶装护肤精华置于大理石台面，柔光，水珠飞溅，商业摄影质感。",
+        "promptModel": [],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "",
+        "size": "",
+        "ratio": "16:9",
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-i2",
+      "type": "remote-imageGenerationNode",
+      "position": {
+        "x": 0,
+        "y": 460
+      },
+      "data": {
+        "label": "场景图",
+        "prompt": "广告场景：极简浴室空间，晨光透过百叶窗，暖色调，留白构图。",
+        "promptModel": [],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "",
+        "size": "",
+        "ratio": "16:9",
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-v1",
+      "type": "remote-videoGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 0
+      },
+      "data": {
+        "label": "产品环绕运镜",
+        "prompt": "产品悬浮于画面中央，镜头 360 度缓慢环绕，聚光灯照亮瓶身，背景虚化。",
+        "promptModel": [],
+        "model": "",
+        "duration": 8,
+        "resolution": "720p",
+        "ratio": "16:9",
+        "mode": "",
+        "generateAudio": false,
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-v2",
+      "type": "remote-videoGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 460
+      },
+      "data": {
+        "label": "场景演示运镜",
+        "prompt": "镜头从窗外缓缓推进室内，晨光洒落，氛围宁静高级。",
+        "promptModel": [],
+        "model": "",
+        "duration": 8,
+        "resolution": "720p",
+        "ratio": "16:9",
+        "mode": "",
+        "generateAudio": false,
+        "other": {}
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "tpl-e1",
+      "source": "tpl-i1",
+      "sourceHandle": "image",
+      "target": "tpl-v1",
+      "targetHandle": "in"
+    },
+    {
+      "id": "tpl-e2",
+      "source": "tpl-i2",
+      "sourceHandle": "image",
+      "target": "tpl-v1",
+      "targetHandle": "in"
+    },
+    {
+      "id": "tpl-e3",
+      "source": "tpl-i2",
+      "sourceHandle": "image",
+      "target": "tpl-v2",
+      "targetHandle": "in"
+    }
+  ],
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

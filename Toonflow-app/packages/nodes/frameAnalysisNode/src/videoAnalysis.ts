@@ -14,10 +14,12 @@ export type AnalysisScene = {
     movement: string;
     description: string;
   };
+  userNote?: string;
 };
 
 export type AnalysisResult = {
   scenes: AnalysisScene[];
+  userOrder?: number[];
   audio?: string;
   duration: number;
   width: number;

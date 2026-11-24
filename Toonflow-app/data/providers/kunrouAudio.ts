@@ -30,6 +30,14 @@ const TIMEOUT = 15 * 60_000;
 // 上游音色参数未公开，先按"文本直接朗读"处理；音乐类模型额外支持纯音乐/时长/BPM/歌词。
 const MUSIC_MODELS = new Set(["lyria-3.5", "lyria-3-pro", "suno-v6-mini"]);
 
+// ACT: 高频上游错误翻译为可执行指引。
+function translateFailure(message: string): string {
+  if (/insufficient_user_quota/i.test(message)) return "坤柔账户余额不足，请到坤柔后台充值后重试";
+  if (/生成服务暂时不可用|service_unavailable/i.test(message)) return "上游服务偶发不可用，请等 1 分钟后用相同参数直接重试";
+  if (/服务内部错误|internal_error/i.test(message)) return "上游服务内部错误，请等 1 分钟后重试";
+  return message;
+}
+
 function readFailure(context: Context, text: string, status: number) {
   try {
     const parsed = JSON.parse(text) as { error?: { message?: unknown } | string; message?: unknown };
@@ -69,6 +77,7 @@ export default {
 
   models: [
     { id: "gemini-3.8-flash-tts", label: "Gemini 3.8 Flash TTS（语音合成）", type: "audio", mode: ["text"] },
+    { id: "gemini-3.1-flash-tts-preview", label: "Gemini 3.1 Flash TTS Preview（语音合成）", type: "audio", mode: ["text"] },
     { id: "grok-voice-latest", label: "Grok Voice（语音合成）", type: "audio", mode: ["text"] },
     { id: "lyria-3.5", label: "Lyria 3.5（音乐）", type: "audio", mode: ["text"], rules: [
         { type: "switch", field: "instrumental", title: "纯音乐（无人声）", value: false },
@@ -127,7 +136,7 @@ export default {
     }
 
     const text = await response.text();
-    if (!response.ok) throw new Error(readFailure(this, text, response.status));
+    if (!response.ok) throw new Error(translateFailure(readFailure(this, text, response.status)));
 
     let payload: {
       choices?: { message?: { content?: unknown } }[];

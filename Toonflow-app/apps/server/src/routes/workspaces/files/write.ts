@@ -39,7 +39,8 @@ export default router.put("/", validateFields({ directory: z.string().min(1).max
     // ACT: 覆盖已有 JSON 文档前先轮转备份，误改/误覆盖可从 data/canvasBackups 找回。
     await u.workspaceFile.backupDocumentFile(path, directory);
     await u.workspaceFile.writeWorkspaceFile(path, bytes, req.query.exclusive === "true");
-    if (req.query.expectedRevision) revision = createHash("sha256").update(bytes).digest("hex");
+    // ACT: 始终返回新版本号 —— 客户端据此启用多人/多窗口的写入冲突校验。
+    revision = createHash("sha256").update(bytes).digest("hex");
   }
   finally { release(); }
   res.json(success(revision ? { revision } : undefined));

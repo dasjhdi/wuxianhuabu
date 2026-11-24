@@ -107,7 +107,7 @@ async function enterFullscreen() {
   }
 }
 
-defineExpose({ enterFullscreen, ready, capturing, captureFrame, previewSrc: playbackSrc });
+defineExpose({ enterFullscreen, ready, capturing, captureFrame, previewSrc: playbackSrc, videoEl: video });
 
 function formatTime(value: number) {
   const seconds = Math.floor(Number.isFinite(value) ? Math.max(0, value) : 0);

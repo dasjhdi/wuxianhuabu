@@ -126,14 +126,21 @@ export default function useWorkspaceFiles(directory?: MaybeRefOrGetter<string | 
     return data.data.revision;
   }
 
-  async function write(path: string, content: string | Blob | ArrayBuffer, exclusive = false, signal?: AbortSignal) {
+  // ACT: expectedRevision 乐观锁 —— 多人/多窗口同时编辑时，写入前校验版本，避免静默覆盖。
+  async function write(path: string, content: string | Blob | ArrayBuffer, exclusive = false, signal?: AbortSignal, expectedRevision?: string): Promise<{ revision?: string } | undefined> {
     const directory = getDirectory();
-    await client.put("/write", content, { params: { directory, path, exclusive }, signal, headers: { "Content-Type": "application/octet-stream" } });
+    const response = await client.put("/write", content, { params: { directory, path, exclusive, ...(expectedRevision ? { expectedRevision } : {}) }, signal, headers: { "Content-Type": "application/octet-stream" } });
     invalidateUrls(directory, path);
+    const revision = response?.data?.data?.revision;
+    return typeof revision === "string" ? { revision } : undefined;
   }
 
-  function writeJson(path: string, data: unknown, exclusive = false) {
-    return write(path, `${JSON.stringify(data, null, 2)}\n`, exclusive);
+  function writeJson(path: string, data: unknown, exclusive = false, expectedRevision?: string) {
+    return writeJsonInner(path, data, exclusive, undefined, expectedRevision);
+  }
+
+  async function writeJsonInner(path: string, data: unknown, exclusive: boolean, signal: AbortSignal | undefined, expectedRevision?: string) {
+    return write(path, `${JSON.stringify(data, null, 2)}\n`, exclusive, signal, expectedRevision);
   }
 
   async function rename(path: string, target: string) {

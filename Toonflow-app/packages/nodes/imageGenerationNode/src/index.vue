@@ -398,13 +398,29 @@ async function startGeneration() {
       if (!result) throw new Error("供应商未返回图片");
       outputs.value.image = { dataType: "IMAGE", value: { url: result.path, mimeType: result.mimeType } };
     }))
-    .catch((error) => showNodeError(error, "图片生成失败"))
+    .catch((error) => {
+      showNodeError(error, "图片生成失败");
+      window.dispatchEvent(new CustomEvent("toonflow:batch-progress", { detail: { nodeId: node.id, ok: false, error: error instanceof Error ? error.message : String(error) } }));
+    })
     .finally(() => {
       generationController = undefined;
+      window.dispatchEvent(new CustomEvent("toonflow:batch-progress", { detail: { nodeId: node.id, ok: !!outputs.value.image } }));
     });
   return { status: "generating" };
 }
 
+// ACT: 批量执行 —— 脚本节点/生成器组通过 window 事件触发本节点后台生成。
+function onBatchGenerate(event: Event) {
+  const detail = (event as CustomEvent<{ nodeIds?: string[] }>).detail;
+  if (!Array.isArray(detail?.nodeIds) || !detail.nodeIds.includes(node.id)) return;
+  if (generating.value || pendingRecovery.value || uploading.value || deleting.value) {
+    window.dispatchEvent(new CustomEvent("toonflow:batch-progress", { detail: { nodeId: node.id, ok: false, error: "节点忙，已跳过" } }));
+    return;
+  }
+  void startGeneration().catch(() => {});
+}
+window.addEventListener("toonflow:batch-generate", onBatchGenerate);
+onScopeDispose(() => window.removeEventListener("toonflow:batch-generate", onBatchGenerate));
 nodeEvent.on("save", (reason) => {
   if (reason === "reload" && (generating.value || uploading.value || deleting.value || editor.value?.busy || lighting.value?.generating || multiAngle.value?.generating || panorama.value?.busy)) throw new Error("图片处理中，请完成后再刷新节点");
 });

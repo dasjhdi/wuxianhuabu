@@ -1,0 +1,87 @@
+{
+  "toonflowCanvas": true,
+  "nodes": [
+    {
+      "id": "tpl-c1",
+      "type": "remote-imageGenerationNode",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "角色 A · 立绘",
+        "prompt": "角色设定图：女主角全身立绘，古风长裙，发饰精致，纯色背景，影视级细节。",
+        "promptModel": [],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "",
+        "size": "",
+        "ratio": "16:9",
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-c2",
+      "type": "remote-imageGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 0
+      },
+      "data": {
+        "label": "角色 B · 立绘",
+        "prompt": "角色设定图：男主角全身立绘，黑色劲装，佩剑，纯色背景，影视级细节。",
+        "promptModel": [],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "",
+        "size": "",
+        "ratio": "16:9",
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-s1",
+      "type": "remote-imageGenerationNode",
+      "position": {
+        "x": 0,
+        "y": 460
+      },
+      "data": {
+        "label": "场景 A · 室内",
+        "prompt": "场景概念图：古风客栈大堂，灯笼暖光，木质结构，无人物，宽幅构图。",
+        "promptModel": [],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "",
+        "size": "",
+        "ratio": "16:9",
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-s2",
+      "type": "remote-imageGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 460
+      },
+      "data": {
+        "label": "场景 B · 屋顶",
+        "prompt": "场景概念图：古代城镇屋顶夜景，月光，瓦片细节，无人物，宽幅构图。",
+        "promptModel": [],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "",
+        "size": "",
+        "ratio": "16:9",
+        "other": {}
+      }
+    }
+  ],
+  "edges": [],
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

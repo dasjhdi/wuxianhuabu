@@ -1,0 +1,148 @@
+{
+  "toonflowCanvas": true,
+  "nodes": [
+    {
+      "id": "tpl-script",
+      "type": "remote-scriptNode",
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "data": {
+        "label": "脚本 · 剧本",
+        "script": "（在此粘贴完整剧本，或填入下方灵感由 AI 撰写）",
+        "oneLiner": "示例：深夜面馆里，老板与老友重逢",
+        "aiModel": "",
+        "shots": []
+      }
+    },
+    {
+      "id": "tpl-audio",
+      "type": "remote-audioGenerationNode",
+      "position": {
+        "x": 0,
+        "y": 460
+      },
+      "data": {
+        "label": "配音 · 解说",
+        "prompt": "旁白：在这个快节奏的时代，护肤也可以很简单。",
+        "promptModel": [],
+        "model": "",
+        "language": "zh-CN",
+        "sampleRate": 24000,
+        "format": "wav",
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-v1",
+      "type": "remote-videoGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 0
+      },
+      "data": {
+        "label": "镜头一 · 特写",
+        "prompt": "女主角侧脸特写，睫毛与眼神光清晰，室内暖光，浅景深。",
+        "promptModel": [],
+        "model": "",
+        "duration": 8,
+        "resolution": "720p",
+        "ratio": "16:9",
+        "mode": "",
+        "generateAudio": false,
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-v2",
+      "type": "remote-videoGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 460
+      },
+      "data": {
+        "label": "镜头二 · 中景",
+        "prompt": "女主角转身走向窗边，中景跟拍，光线柔和，画面稳定。",
+        "promptModel": [],
+        "model": "",
+        "duration": 8,
+        "resolution": "720p",
+        "ratio": "16:9",
+        "mode": "",
+        "generateAudio": false,
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-v3",
+      "type": "remote-videoGenerationNode",
+      "position": {
+        "x": 520,
+        "y": 920
+      },
+      "data": {
+        "label": "镜头三 · 全景",
+        "prompt": "面馆全景，暖色灯光，客人来来往往，缓慢横移镜头。",
+        "promptModel": [],
+        "model": "",
+        "duration": 8,
+        "resolution": "720p",
+        "ratio": "16:9",
+        "mode": "",
+        "generateAudio": false,
+        "other": {}
+      }
+    },
+    {
+      "id": "tpl-synth",
+      "type": "remote-synthesisNode",
+      "position": {
+        "x": 1040,
+        "y": 230
+      },
+      "data": {
+        "label": "合成 · 成片",
+        "ratio": "16:9",
+        "resolution": "720p",
+        "bgmVolume": 40,
+        "subtitlesEnabled": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "tpl-e1",
+      "source": "tpl-v1",
+      "sourceHandle": "video",
+      "target": "tpl-synth",
+      "targetHandle": "in"
+    },
+    {
+      "id": "tpl-e2",
+      "source": "tpl-v2",
+      "sourceHandle": "video",
+      "target": "tpl-synth",
+      "targetHandle": "in"
+    },
+    {
+      "id": "tpl-e3",
+      "source": "tpl-v3",
+      "sourceHandle": "video",
+      "target": "tpl-synth",
+      "targetHandle": "in"
+    },
+    {
+      "id": "tpl-e4",
+      "source": "tpl-audio",
+      "sourceHandle": "audio",
+      "target": "tpl-synth",
+      "targetHandle": "in"
+    }
+  ],
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "zoom": 1
+  }
+}

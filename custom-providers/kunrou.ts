@@ -52,7 +52,7 @@ type Context = {
 const API_BASE = "https://api.kunrouai.com/v1";
 const POLL_INTERVAL = 5000;
 const POLL_TIMEOUT = 15 * 60_000;
-const SUPPORTED_MODELS = new Set(["gemini-omni-1.1-flash", "gemini-veo-3.1-fast"]);
+const SUPPORTED_MODELS = new Set(["gemini-omni-1.1-flash", "gemini-omni-1.1-flash-f", "gemini-omni-1.2-flash-v", "gemini-omni-1.2-flash-a", "gemini-omni-1.2-flash-f", "gemini-veo-3.1-fast", "gemini-veo-3.1-lite", "grok-imagine-video-1.5"]);
 // 实测：多张原始大图（合计约 6 MB）提交时连接会被重置，压到 1280px 后稳定通过。
 const MAX_EDGE = 1280;
 
@@ -103,7 +103,17 @@ async function readFailure(context: Context, response: Response): Promise<string
   return statusMessage(response.status);
 }
 
-async function pollTask(context: Context, apiKey: string, taskId: string, signal: AbortSignal, referenceHint = false): Promise<MediaAsset[]> {
+// ACT: 高频上游错误翻译为可执行指引，减少用户排查成本。
+function translateUpstreamError(message: string, imageCount = 0, model = ""): string {
+  if (/insufficient_user_quota/i.test(message)) return "坤柔账户余额不足，请到坤柔后台充值后重试";
+  if (/生成服务暂时不可用|service_unavailable/i.test(message)) return "上游服务偶发不可用，请等 1 分钟后用相同参数直接重试";
+  if (/请求参数不合法/.test(message) && imageCount > 2 && model.startsWith("gemini-omni")) {
+    return `${message}（提示：已提交 ${imageCount} 张参考图，Omni 系模型最多 2 张，请减少参考图后重试）`;
+  }
+  return message;
+}
+
+async function pollTask(context: Context, apiKey: string, taskId: string, signal: AbortSignal, referenceHint = false, imageCount = 0, model = ""): Promise<MediaAsset[]> {
   const deadline = Date.now() + POLL_TIMEOUT;
   while (true) {
     signal.throwIfAborted();
@@ -125,7 +135,7 @@ async function pollTask(context: Context, apiKey: string, taskId: string, signal
         await new Promise(resolve => setTimeout(resolve, POLL_INTERVAL));
         continue;
       }
-      throw new Error(await readFailure(context, response));
+      throw new Error(translateUpstreamError(await readFailure(context, response), imageCount, model));
     }
     const payload = await response.json() as {
       status?: unknown; progress?: unknown; url?: unknown; output?: unknown; error?: unknown;
@@ -136,6 +146,7 @@ async function pollTask(context: Context, apiKey: string, taskId: string, signal
       const detail = typeof error === "string" ? error : error?.message;
       const errorCode = typeof error === "object" && error ? error.code : undefined;
       let message = typeof detail === "string" && detail.trim() ? context.tool.errorMessage(detail) : "视频生成失败";
+      message = translateUpstreamError(message, imageCount, model);
       // 实测：该平台会拦截「图片参考」方式携带的人物素材，而同样的图片按首帧提交可以正常生成。
       if (errorCode === "content_policy_violation" && referenceHint) {
         message += "（该平台拦截了图片参考素材。可把节点模式改为「尾帧可选」，让图片以首帧方式提交；或去掉人物参考图后重试。）";
@@ -149,7 +160,7 @@ async function pollTask(context: Context, apiKey: string, taskId: string, signal
         ...output.map(item => (item && typeof item === "object" && typeof (item as { url?: unknown }).url === "string" ? (item as { url: string }).url : "")),
       ].filter(value => !!value);
       const url = candidates.find(value => URL.canParse(value) && ["https:", "http:"].includes(new URL(value).protocol));
-      if (!url) throw new Error("任务已完成，但未返回有效的视频地址");
+      if (!url) throw new Error(model.startsWith("grok-imagine") ? "任务已完成，但未返回视频地址（Grok 偶发问题，请直接重试一次）" : "任务已完成，但未返回有效的视频地址");
       return [{ mediaType: "video", type: "url", url }];
     }
     if (Date.now() > deadline) throw new Error("视频生成等待超时，任务可能仍在平台执行，请稍后重试");
@@ -160,7 +171,7 @@ async function pollTask(context: Context, apiKey: string, taskId: string, signal
 export default {
   id: "kunrou",
   label: "坤柔 AI",
-  version: "2.2.0",
+  version: "2.4.0",
   readme: `通过坤柔 AI 的 OpenAI 兼容视频接口生成视频。
 
 - 提交：\`POST /v1/videos\`，返回任务编号
@@ -183,19 +194,187 @@ export default {
   ],
   models: [
     {
-      id: "gemini-omni-1.1-flash",
-      label: "Gemini Omni 1.1 Flash",
-      type: "video",
-      mode: ["text", "singleImage", "startFrameOptional", "endFrameOptional", "startEndRequired", ["imageReference:4", "videoReference:1", "audioReference:1"]],
-      durationResolutionMap: [{ duration: [4, 6, 8], resolution: ["720p"] }],
+      "id": "gemini-omni-1.1-flash",
+      "label": "Gemini Omni 1.1 Flash",
+      "type": "video",
+      "durationResolutionMap": [
+        {
+          "duration": [
+            4,
+            5,
+            6,
+            8
+          ],
+          "resolution": [
+            "720p"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        "singleImage",
+        "startFrameOptional",
+        "endFrameOptional",
+        "startEndRequired",
+        [
+          "imageReference:2",
+          "videoReference:1",
+          "audioReference:1"
+        ]
+      ]
     },
     {
-      id: "gemini-veo-3.1-fast",
-      label: "Gemini Veo 3.1 Fast",
-      type: "video",
-      mode: ["text", ["imageReference:4"]],
-      durationResolutionMap: [{ duration: [8], resolution: ["720p"] }],
+      "id": "gemini-omni-1.2-flash-v",
+      "label": "Gemini Omni 1.2 Flash（4/5/8/10 秒）",
+      "type": "video",
+      "durationResolutionMap": [
+        {
+          "duration": [
+            4,
+            5,
+            8,
+            10
+          ],
+          "resolution": [
+            "720p"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        "singleImage"
+      ]
     },
+    {
+      "id": "gemini-veo-3.1-fast",
+      "label": "Gemini Veo 3.1 Fast",
+      "type": "video",
+      "durationResolutionMap": [
+        {
+          "duration": [
+            8
+          ],
+          "resolution": [
+            "720p"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        [
+          "imageReference:4"
+        ]
+      ]
+    },
+    {
+      "id": "gemini-veo-3.1-lite",
+      "label": "Gemini Veo 3.1 Lite（8 秒，低成本）",
+      "type": "video",
+      "durationResolutionMap": [
+        {
+          "duration": [
+            8
+          ],
+          "resolution": [
+            "720p"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        [
+          "imageReference:4"
+        ]
+      ]
+    },
+    {
+      "id": "gemini-omni-1.2-flash-a",
+      "label": "Gemini Omni 1.2 Flash A（4/5/8/10 秒，带音频）",
+      "type": "video",
+      "durationResolutionMap": [
+        {
+          "duration": [
+            4,
+            5,
+            8,
+            10
+          ],
+          "resolution": [
+            "720p"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        "singleImage"
+      ]
+    },
+    {
+      "id": "gemini-omni-1.2-flash-f",
+      "label": "Gemini Omni 1.2 Flash F（4/5/8/10 秒）",
+      "type": "video",
+      "durationResolutionMap": [
+        {
+          "duration": [
+            4,
+            5,
+            8,
+            10
+          ],
+          "resolution": [
+            "720p"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        "singleImage"
+      ]
+    },
+    {
+      "id": "gemini-omni-1.1-flash-f",
+      "label": "Gemini Omni 1.1 Flash F（4/6/8/10 秒）",
+      "type": "video",
+      "durationResolutionMap": [
+        {
+          "duration": [
+            4,
+            6,
+            8,
+            10
+          ],
+          "resolution": [
+            "720p"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        "singleImage",
+        [
+          "imageReference:2"
+        ]
+      ]
+    },
+    {
+      "id": "grok-imagine-video-1.5",
+      "label": "Grok Imagine Video 1.5（5/10 秒）",
+      "type": "video",
+      "durationResolutionMap": [
+        {
+          "duration": [
+            5,
+            10
+          ],
+          "resolution": [
+            "720p"
+          ]
+        }
+      ],
+      "mode": [
+        "text"
+      ]
+    }
   ],
   async generateVideo(this: Context, request: VideoRequest): Promise<MediaAsset[]> {
     this.signal?.throwIfAborted();
@@ -239,7 +418,7 @@ export default {
       const detail = error instanceof Error ? error.message : String(error);
       throw new Error(`提交任务失败：${detail}`);
     }
-    if (!response.ok) throw new Error(await readFailure(this, response));
+    if (!response.ok) throw new Error(translateUpstreamError(await readFailure(this, response), images.length, request.model));
 
     const submitted = await response.json() as { id?: unknown; status?: unknown; url?: unknown; output?: unknown; error?: unknown };
     // ACT: 个别模型可能同步返回成片，先尝试直接取地址，避免多余轮询。
@@ -250,7 +429,7 @@ export default {
     const taskId = typeof submitted?.id === "string" ? submitted.id.trim() : "";
     if (!taskId) throw new Error("提交任务未返回任务编号");
     await this.saveTaskData?.({ kind: "video", taskId, model: request.model });
-    return pollTask(this, apiKey, taskId, signal, references.length > 0);
+    return pollTask(this, apiKey, taskId, signal, references.length > 0, images.length, request.model);
   },
   async resumeTask(this: Context, data: ProviderTaskData): Promise<MediaAsset[]> {
     const apiKey = typeof this.config.apiKey === "string" ? this.config.apiKey.trim() : "";

@@ -16,6 +16,10 @@
               <el-input v-model="searchQuery" :prefixIcon="IconSearch" placeholder="搜索画布" aria-label="搜索画布" clearable @keydown.esc.stop="searchQuery = ''" />
               <el-button class="iconButton" text :icon="IconFolderPlus" :disabled="pickerBusy || editingId !== null || folderDraft !== null" title="新建文件夹" aria-label="新建画布文件夹" @click="startFolder" />
               <el-button class="iconButton" text :icon="IconPlus" :disabled="pickerBusy || editingId !== null || folderDraft !== null" title="新增画布" aria-label="新增画布" @click="handleAddCanvas" />
+              <el-button class="iconButton" text :icon="IconFiles" :disabled="pickerBusy || !directory" title="模板库" aria-label="模板库" @click="openTemplates" />
+              <el-button class="iconButton" text :icon="IconDownload" :disabled="pickerBusy || !canvasId" title="导出当前画布" aria-label="导出当前画布" @click="exportCanvas" />
+              <el-button class="iconButton" text :icon="IconUpload" :disabled="pickerBusy || !directory" title="导入画布" aria-label="导入画布" @click="startImport" />
+              <input ref="importInput" type="file" accept=".json,application/json" hidden aria-label="导入画布文件" @change="onImportFile" />
             </div>
             <el-scrollbar v-loading="loadingTree" maxHeight="min(440px, calc(100dvh - 198px))">
               <el-tree v-if="canvasListVisible" ref="canvasTree" class="canvasTree" :data="treeEntries" nodeKey="path" :props="{ label: 'name', isLeaf: entry => entry.type === 'file' || entry.draft || entry.empty === true }" lazy :load="loadTreeNode" :defaultExpandedKeys="expandedFolders" :autoExpandParent="false" :icon="IconChevronRight" :currentNodeKey="activeCanvasId" :filterNodeMethod="filterEntry" highlightCurrent emptyText="" @nodeClick="selectEntry" @nodeExpand="expandFolder" @nodeCollapse="collapseFolder">
@@ -68,6 +72,17 @@
       </el-dropdown-menu>
     </template>
   </el-dropdown>
+  <el-dialog v-model="templatesVisible" title="画布模板库" width="min(780px, calc(100vw - 40px))" alignCenter appendToBody :closeOnClickModal="false">
+    <div v-loading="templatesLoading" class="templatesGrid" @pointerdown.stop @dblclick.stop @keydown.stop>
+      <button v-for="tpl in templates" :key="tpl.id" class="templateCard" type="button" :disabled="busy" @click="useTemplate(tpl)">
+        <b>{{ tpl.name }}</b>
+        <p>{{ tpl.description }}</p>
+        <span class="templateTags">{{ (tpl.tags ?? []).join(" · ") }}</span>
+        <span class="templateUse">点击使用模板 →</span>
+      </button>
+      <p v-if="!templates.length && !templatesLoading" class="templatesEmpty">暂无模板</p>
+    </div>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
@@ -76,7 +91,7 @@ import { locale, translate } from "@toonflow/i18n/vue";
 import { computed, inject, nextTick, onBeforeUnmount, ref, shallowRef, watch, type ShallowRef } from "vue";
 import { Panel, useVueFlow, type FlowExportObject } from "@vue-flow/core";
 import { ElMessage, ElMessageBox, type DropdownInstance, type FilterNodeMethodFunction, type InputInstance, type LoadFunction, type TreeInstance } from "element-plus";
-import { IconVector, IconCheck, IconChevronDown, IconChevronUp, IconChevronRight, IconDots, IconFolder, IconFolderOpen, IconFolderPlus, IconPlus, IconSearch } from "@tabler/icons-vue";
+import { IconVector, IconCheck, IconChevronDown, IconChevronUp, IconChevronRight, IconDots, IconFileText, IconDownload, IconFiles, IconFolder, IconFolderOpen, IconFolderPlus, IconPlus, IconSearch, IconTrash, IconUpload } from "@tabler/icons-vue";
 import { useWorkspaceStore } from "@/stores/workspace";
 import useWorkspaceFiles from "@/lib/workspaceFiles";
 import { getCanvasAssetDirectories, isCanvasFile } from "@/pages/workspace/canvasFile";
@@ -536,6 +551,103 @@ async function listCanvases(directory: string, path = "", recursive = false, sig
   };
 }
 
+// ACT: 模板市场（本地版）—— 内置工作流模板一键创建画布；配合导出/导入实现分享与分发。
+const templatesVisible = ref(false);
+const templatesLoading = ref(false);
+const templates = ref<Array<{ id: string; name: string; description: string; file: string; tags?: string[] }>>([]);
+const importInput = ref<HTMLInputElement>();
+
+async function openTemplates() {
+  templatesVisible.value = true;
+  if (templates.value.length || !props.directory) return;
+  templatesLoading.value = true;
+  try {
+    const response = await fetch("/templates/index.json");
+    if (!response.ok) throw new Error(String(response.status));
+    const payload = await response.json();
+    templates.value = Array.isArray(payload?.templates) ? payload.templates : [];
+  } catch (error) {
+    ElMessage.error(`模板清单读取失败：${error instanceof Error ? error.message : String(error)}`);
+  } finally {
+    templatesLoading.value = false;
+  }
+}
+
+async function createCanvasFromFlow(directory: string, baseName: string, flow: { nodes: unknown[]; edges: unknown[]; viewport?: unknown }, signal?: AbortSignal) {
+  const files = useWorkspaceFiles(directory);
+  for (let number = 1; ; number++) {
+    const canvasName = number === 1 ? baseName : `${baseName}${number}`;
+    const canvasId = `${canvasName}.json`;
+    try {
+      await files.writeJson(canvasId, { toonflowCanvas: true, ...flow }, true);
+      return { id: canvasId, name: canvasName };
+    } catch (err) {
+      if (!axios.isAxiosError(err) || err.response?.status !== 409 || err.response.data.data?.code !== "EEXIST") throw err;
+    }
+  }
+}
+
+async function useTemplate(tpl: { id: string; name: string; file: string }) {
+  if (!props.directory) return;
+  busy.value = true;
+  try {
+    const response = await fetch(`/templates/${tpl.file}`);
+    if (!response.ok) throw new Error(`模板文件读取失败（${response.status}）`);
+    const payload = await response.json();
+    if (payload?.toonflowCanvas !== true || !Array.isArray(payload.nodes)) throw new Error("模板文件无效");
+    const canvas = await createCanvasFromFlow(props.directory, tpl.name, payload);
+    canvases.value = [...canvases.value, canvas];
+    templatesVisible.value = false;
+    await applyCanvas(canvas.id, props.directory);
+    ElMessage.success(`已从模板创建「${canvas.name}」，生成器内选择模型即可开始`);
+  } catch (error) {
+    ElMessage.error(error instanceof Error ? error.message : "模板创建失败");
+  } finally {
+    busy.value = false;
+  }
+}
+
+async function exportCanvas() {
+  if (!props.directory || !canvasId.value) return;
+  const files = useWorkspaceFiles(props.directory);
+  const content = await files.readText(canvasId.value);
+  const url = URL.createObjectURL(new Blob([content], { type: "application/json;charset=utf-8" }));
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = `${activeCanvasName.value || "画布"}.canvas.json`;
+  anchor.rel = "noopener";
+  document.body.append(anchor);
+  anchor.click();
+  anchor.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  ElMessage.success("画布已导出（提示词与结构完整，媒体文件保留在项目内）");
+}
+
+function startImport() {
+  importInput.value?.click();
+}
+
+async function onImportFile(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
+  input.value = "";
+  if (!file || !props.directory) return;
+  busy.value = true;
+  try {
+    const payload = JSON.parse(await file.text());
+    if (payload?.toonflowCanvas !== true || !Array.isArray(payload.nodes)) throw new Error("不是有效的画布文件");
+    const baseName = (file.name.replace(/\.canvas\.json$|\.json$/i, "") || "导入画布").slice(0, 60);
+    const canvas = await createCanvasFromFlow(props.directory, baseName, payload);
+    canvases.value = [...canvases.value, canvas];
+    await applyCanvas(canvas.id, props.directory);
+    ElMessage.success(`已导入「${canvas.name}」`);
+  } catch (error) {
+    ElMessage.error(error instanceof Error ? error.message : "画布导入失败");
+  } finally {
+    busy.value = false;
+  }
+}
+
 async function addCanvas(name?: string, signal?: AbortSignal): Promise<string> {
   const directory = getCanvasDirectory(signal);
   busy.value = true;
@@ -972,4 +1084,17 @@ defineExpose({ getCanvases, peekCanvases, initialized, addCanvas, switchCanvas, 
   }
 }
 
+
+.templatesGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; min-height: 200px;
+  .templateCard { display: flex; flex-direction: column; gap: 8px; padding: 16px; border: 1px solid var(--el-border-color-lighter); border-radius: 12px; background: var(--el-fill-color-light); color: var(--el-text-color-regular); text-align: left; font: inherit; cursor: pointer;
+    &:hover:not(:disabled) { border-color: var(--el-color-primary-light-5); background: var(--el-fill-color); }
+    &:focus-visible { outline: 2px solid var(--el-color-primary); outline-offset: 2px; }
+    &:disabled { opacity: 0.6; cursor: not-allowed; }
+    b { font-size: 14px; }
+    p { margin: 0; color: var(--el-text-color-secondary); font-size: 12px; line-height: 1.6; }
+    .templateTags { color: var(--el-text-color-placeholder); font-size: 11px; }
+    .templateUse { color: var(--el-color-primary); font-size: 12px; margin-top: auto; }
+  }
+  .templatesEmpty { color: var(--el-text-color-secondary); font-size: 13px; }
+}
 </style>

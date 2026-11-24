@@ -119,6 +119,22 @@ export function useResultNodes() {
     return ids;
   }
 
+  function createFrameNode(scene: AnalysisScene) {
+    if (!scene.image) throw new Error("该镜头没有关键帧");
+    verify({ frames: true, clips: false, audio: false });
+    const id = crypto.randomUUID();
+    addNodes([{
+      id,
+      type: "remote-imageNode",
+      position: { x: node.computedPosition.x + (node.dimensions.width || 320) + 96, y: node.computedPosition.y },
+      data: {
+        label: sceneLabel(scene, "S"),
+        outputs: { image: { dataType: "IMAGE", value: { url: scene.image, mimeType: "image/jpeg" } } },
+      },
+    }]);
+    return id;
+  }
+
   function remove(ids: string[]) {
     removeNodes(ids, true, false);
   }
@@ -136,5 +152,5 @@ export function useResultNodes() {
     }
   }
 
-  return { verify, create, remove, annotate, removeOutputEdges };
+  return { verify, create, remove, annotate, removeOutputEdges, createFrameNode };
 }

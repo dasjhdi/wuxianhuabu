@@ -679,6 +679,7 @@ async function changeHistory(direction: "undo" | "redo") {
   }
 }
 
+const canvasRevisions = new Map<string, string>();
 let saving = Promise.resolve();
 let flushing = Promise.resolve();
 let saveError: unknown;
@@ -692,7 +693,9 @@ const saveCanvas = debounce((directory: string, fileName: string) => {
   // ACT: 同页保存按顺序完成，防止慢请求覆盖后续修改；不处理多个客户端的并发编辑。
   saving = saving.then(async () => {
     try {
-      await useWorkspaceFiles(directory).writeJson(fileName, { toonflowCanvas: true, nodes: flow.nodes, edges: flow.edges, viewport: flow.viewport });
+      // ACT: 带版本号写入 —— 其他窗口/协作者修改过画布时服务端返回 409，提示而非静默覆盖。
+      const result = await useWorkspaceFiles(directory).writeJson(fileName, { toonflowCanvas: true, nodes: flow.nodes, edges: flow.edges, viewport: flow.viewport }, false, undefined, canvasRevisions.get(fileName));
+      if (result?.revision) canvasRevisions.set(fileName, result.revision);
       saveError = undefined;
       canvasSaveError.value = "";
       if (revision === saveRevision) canvasDirty.value = false;
