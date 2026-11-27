@@ -31,7 +31,23 @@ type VideoRequest = {
 type MediaAsset =
   | { mediaType: "video"; type: "url"; url: string }
   | { mediaType: "video"; type: "base64"; data: string; mimeType: string }
-  | { mediaType: "video"; type: "binary"; data: Uint8Array; mimeType: string };
+  | { mediaType: "video"; type: "binary"; data: Uint8Array; mimeType: string }
+  | { mediaType: "image"; type: "url"; url: string }
+  | { mediaType: "image"; type: "base64"; data: string; mimeType: string }
+  | { mediaType: "image"; type: "binary"; data: Uint8Array; mimeType: string };
+
+type ImageRequest = {
+  model: string;
+  prompt: string;
+  images?: MediaInput[];
+  mask?: MediaInput;
+  n?: number;
+  ratio?: string;
+  size?: string;
+  quality?: string;
+  outputFormat?: string;
+  other?: Record<string, unknown>;
+};
 
 type ProviderTaskData = { [key: string]: unknown };
 
@@ -53,8 +69,116 @@ const API_BASE = "https://api.kunrouai.com/v1";
 const POLL_INTERVAL = 5000;
 const POLL_TIMEOUT = 15 * 60_000;
 const SUPPORTED_MODELS = new Set(["gemini-omni-1.1-flash", "gemini-omni-1.1-flash-f", "gemini-omni-1.2-flash-v", "gemini-omni-1.2-flash-a", "gemini-omni-1.2-flash-f", "gemini-veo-3.1-fast", "gemini-veo-3.1-lite", "grok-imagine-video-1.5"]);
+const IMAGE_MODELS = new Set(["gpt-image-2", "gpt-image-2.5", "gpt-image-2.5-sunburst", "gpt-image-2.5-flare", "gpt-image-2.6", "gpt-image-2.6-sunburst", "gpt-image-2.6-flare"]);
 // 实测：多张原始大图（合计约 6 MB）提交时连接会被重置，压到 1280px 后稳定通过。
 const MAX_EDGE = 1280;
+const IMAGE_TIMEOUT = 5 * 60_000;
+
+// 实测（2026-11-26）：/v1/images/generations 同步返回 {data:[{b64_json}], output_format:"png"}，约 22s；
+// /v1/images/edits 支持 image[] 多张参考图（multipart），约 37s。接口契约与 OpenAI Images API 一致。
+// 官方文档：size 支持宽×高像素（如 1024x1536）或档位（1K / 2K / 4K）。
+const IMAGE_SIZES = new Set(["auto", "1024x1024", "1536x1024", "1024x1536", "1k", "2k", "4k"]);
+
+function sniffImageMime(data: Uint8Array): string {
+  if (data.length >= 8 && data[0] === 0x89 && data[1] === 0x50 && data[2] === 0x4e && data[3] === 0x47) return "image/png";
+  if (data.length >= 3 && data[0] === 0xff && data[1] === 0xd8 && data[2] === 0xff) return "image/jpeg";
+  if (data.length >= 12 && data[0] === 0x52 && data[1] === 0x49 && data[2] === 0x46 && data[3] === 0x46
+    && data[8] === 0x57 && data[9] === 0x45 && data[10] === 0x42 && data[11] === 0x50) return "image/webp";
+  if (data.length >= 4 && data[0] === 0x47 && data[1] === 0x49 && data[2] === 0x46) return "image/gif";
+  return "image/png";
+}
+
+function extensionFor(mimeType: string): string {
+  if (mimeType === "image/jpeg") return "jpg";
+  if (mimeType === "image/webp") return "webp";
+  if (mimeType === "image/gif") return "gif";
+  return "png";
+}
+
+// ACT: VM 沙箱没有 FormData，参考图编辑的 multipart 请求体手动拼装（Blob 之外仅有 Uint8Array 可用）。
+class MultipartBody {
+  readonly boundary: string;
+  private chunks: Uint8Array[] = [];
+
+  constructor(boundary: string) {
+    this.boundary = boundary;
+  }
+
+  private pushText(value: string): void {
+    this.chunks.push(new TextEncoder().encode(value));
+  }
+
+  appendField(name: string, value: string): void {
+    this.pushText("--" + this.boundary + "\r\n");
+    this.pushText(`Content-Disposition: form-data; name="${name}"\r\n\r\n`);
+    this.pushText(value + "\r\n");
+  }
+
+  appendFile(name: string, filename: string, mimeType: string, data: Uint8Array): void {
+    this.pushText("--" + this.boundary + "\r\n");
+    this.pushText(`Content-Disposition: form-data; name="${name}"; filename="${filename}"\r\n`);
+    this.pushText("Content-Type: " + mimeType + "\r\n\r\n");
+    this.chunks.push(data);
+    this.pushText("\r\n");
+  }
+
+  finish(): Uint8Array {
+    this.pushText("--" + this.boundary + "--\r\n");
+    const total = this.chunks.reduce((sum, chunk) => sum + chunk.length, 0);
+    const body = new Uint8Array(total);
+    let offset = 0;
+    for (const chunk of this.chunks) {
+      body.set(chunk, offset);
+      offset += chunk.length;
+    }
+    return body;
+  }
+}
+
+async function bytesFromInput(context: Context, input: MediaInput): Promise<{ data: Uint8Array; mimeType: string }> {
+  if (input.type === "binary") return { data: input.data, mimeType: input.mimeType || sniffImageMime(input.data) };
+  if (input.type === "base64") {
+    const data = new Uint8Array(Buffer.from(input.data.replace(/^data:[^;]+;base64,/, ""), "base64"));
+    return { data, mimeType: input.mimeType || sniffImageMime(data) };
+  }
+  const response = await context.tool.fetch(input.url, { signal: AbortSignal.timeout(30_000) }).catch(() => undefined);
+  if (!response || !response.ok) throw new Error("参考图下载失败，请重新提供参考图");
+  const data = new Uint8Array(await response.arrayBuffer());
+  const header = response.headers.get("content-type") ?? "";
+  return { data, mimeType: header.startsWith("image/") ? header.split(";")[0]!.trim() : sniffImageMime(data) };
+}
+
+function resolveImageSize(rawSize?: string): string | undefined {
+  const size = (rawSize ?? "").trim().toLowerCase();
+  if (!size || size === "auto") return undefined;
+  return IMAGE_SIZES.has(size) ? size : undefined;
+}
+
+async function collectImageAssets(payload: { data?: unknown; output_format?: unknown }): Promise<MediaAsset[]> {
+  const items = Array.isArray(payload.data) ? payload.data : [];
+  const fallbackMime = typeof payload.output_format === "string" && payload.output_format.trim()
+    ? `image/${payload.output_format.trim().toLowerCase().replace("jpg", "jpeg")}` : "image/png";
+  const assets: MediaAsset[] = [];
+  for (const item of items) {
+    if (!item || typeof item !== "object") continue;
+    const entry = item as Record<string, unknown>;
+    const url = typeof entry.url === "string" && entry.url.trim() && URL.canParse(entry.url.trim()) ? entry.url.trim() : "";
+    if (url && /^https?:/i.test(new URL(url).protocol)) {
+      assets.push({ mediaType: "image", type: "url", url });
+      continue;
+    }
+    const base64 = typeof entry.b64_json === "string" ? entry.b64_json
+      : typeof entry.b64 === "string" ? entry.b64
+      : typeof entry.base64 === "string" ? entry.base64 : "";
+    const payloadPart = base64.replace(/^data:[^;]+;base64,/, "").trim();
+    if (payloadPart) {
+      const data = new Uint8Array(Buffer.from(payloadPart, "base64"));
+      assets.push({ mediaType: "image", type: "base64", data: Buffer.from(data).toString("base64"), mimeType: sniffImageMime(data) || fallbackMime });
+    }
+  }
+  if (!assets.length) throw new Error("接口未返回有效的图片结果，请重试");
+  return assets;
+}
 
 async function shrink(context: Context, input: MediaInput): Promise<MediaInput> {
   if (input.type === "url") return input;
@@ -171,16 +295,16 @@ async function pollTask(context: Context, apiKey: string, taskId: string, signal
 export default {
   id: "kunrou",
   label: "坤柔 AI",
-  version: "2.4.0",
-  readme: `通过坤柔 AI 的 OpenAI 兼容视频接口生成视频。
+  version: "2.5.0",
+  readme: `通过坤柔 AI（花火市场）的 OpenAI 兼容接口生成视频与图片。
 
-- 提交：\`POST /v1/videos\`，返回任务编号
-- 查询：\`GET /v1/videos/{id}\`，每 5 秒轮询，\`completed\` 取 \`url\` 或 \`output[].url\`
+- 视频：\`POST /v1/videos\`，返回任务编号；\`GET /v1/videos/{id}\` 每 5 秒轮询，\`completed\` 取 \`url\` 或 \`output[].url\`
+- 图片：\`POST /v1/images/generations\`（文生图，同步返回 \`b64_json\`）；带参考图时走 \`POST /v1/images/edits\`（multipart，\`image\`/\`image[]\` 字段，支持多张参考图）
 
-模型说明：
+注意事项：
 
-- **Gemini Veo 3.1 Fast**：支持最多 4 张图片参考，已验证 8 秒 / 720p。
-- **Gemini Omni 1.1 Flash**：同样的图片按「图片参考」提交会被平台内容策略拦截；改用首帧方式或去掉人物参考图即可正常生成。
+- 图片模型（GPT Image 2/2.5/2.6 系列）与视频模型可能分属不同 API Key 分组；若提示无可用渠道或模型不存在，请确认所用 Key 的分组包含对应模型。
+- 视频：**Gemini Veo 3.1 Fast** 支持最多 4 张图片参考；**Gemini Omni 1.1 Flash** 的图片按「图片参考」提交会被平台内容策略拦截，改用首帧方式或去掉人物参考图即可正常生成。
 
 时长与分辨率以所选模型支持的档位为准，未指定时使用平台默认值。`,
   rules: [
@@ -374,8 +498,115 @@ export default {
       "mode": [
         "text"
       ]
+    },
+    {
+      "id": "gpt-image-2",
+      "label": "GPT Image 2（文生图 / 图片编辑）",
+      "type": "image",
+      "imageSizes": ["1024x1024", "1536x1024", "1024x1536", "2K"],
+      "imageRatios": ["21:9", "16:9", "3:2", "1:1", "3:4", "9:16"]
+    },
+    {
+      "id": "gpt-image-2.5",
+      "label": "GPT Image 2.5（文生图 / 图片编辑）",
+      "type": "image",
+      "imageSizes": ["1024x1024", "1536x1024", "1024x1536", "2K"],
+      "imageRatios": ["21:9", "16:9", "3:2", "1:1", "3:4", "9:16"]
+    },
+    {
+      "id": "gpt-image-2.5-sunburst",
+      "label": "GPT Image 2.5 Sunburst（文生图 / 图片编辑）",
+      "type": "image",
+      "imageSizes": ["1024x1024", "1536x1024", "1024x1536", "2K"],
+      "imageRatios": ["21:9", "16:9", "3:2", "1:1", "3:4", "9:16"]
+    },
+    {
+      "id": "gpt-image-2.5-flare",
+      "label": "GPT Image 2.5 Flare（文生图 / 图片编辑）",
+      "type": "image",
+      "imageSizes": ["1024x1024", "1536x1024", "1024x1536", "2K"],
+      "imageRatios": ["21:9", "16:9", "3:2", "1:1", "3:4", "9:16"]
+    },
+    {
+      "id": "gpt-image-2.6",
+      "label": "GPT Image 2.6（文生图 / 图片编辑）",
+      "type": "image",
+      "imageSizes": ["1024x1024", "1536x1024", "1024x1536", "2K"],
+      "imageRatios": ["21:9", "16:9", "3:2", "1:1", "3:4", "9:16"]
+    },
+    {
+      "id": "gpt-image-2.6-sunburst",
+      "label": "GPT Image 2.6 Sunburst（文生图 / 图片编辑）",
+      "type": "image",
+      "imageSizes": ["1024x1024", "1536x1024", "1024x1536", "2K"],
+      "imageRatios": ["21:9", "16:9", "3:2", "1:1", "3:4", "9:16"]
+    },
+    {
+      "id": "gpt-image-2.6-flare",
+      "label": "GPT Image 2.6 Flare（文生图 / 图片编辑）",
+      "type": "image",
+      "imageSizes": ["1024x1024", "1536x1024", "1024x1536", "2K"],
+      "imageRatios": ["21:9", "16:9", "3:2", "1:1", "3:4", "9:16"]
     }
   ],
+  async generateImage(this: Context, request: ImageRequest): Promise<MediaAsset[]> {
+    this.signal?.throwIfAborted();
+    const apiKey = typeof this.config.apiKey === "string" ? this.config.apiKey.trim() : "";
+    if (!apiKey) throw new Error("请填写 API Key");
+    if (!IMAGE_MODELS.has(request.model)) throw new Error("不支持的图片模型");
+    const prompt = typeof request.prompt === "string" ? request.prompt.trim() : "";
+    if (!prompt) throw new Error("请填写提示词");
+    if (request.other && Object.keys(request.other).length) throw new Error("该接口暂无可用的模型专属参数");
+    const size = resolveImageSize(request.size);
+    // 画面比例（如 16:9）。官方文档：ratio 优先于 aspect_ratio 和 size，与 size 同时设置时以 ratio 为准。
+    const ratio = /^\d{1,4}:\d{1,4}$/.test((request.ratio ?? "").trim()) ? request.ratio!.trim() : undefined;
+    if (request.n !== undefined && (!Number.isInteger(request.n) || request.n < 1 || request.n > 10)) {
+      throw new Error("单次生成数量必须是 1 到 10 之间的整数");
+    }
+
+    const fields: Array<[string, string]> = [["model", request.model], ["prompt", prompt]];
+    if (request.n !== undefined) fields.push(["n", String(request.n)]);
+    if (size) fields.push(["size", size]);
+    if (ratio) fields.push(["ratio", ratio]);
+
+    const signal = AbortSignal.any([AbortSignal.timeout(IMAGE_TIMEOUT), ...(this.signal ? [this.signal] : [])]);
+    const references: { data: Uint8Array; mimeType: string }[] = [];
+    for (const item of request.images ?? []) references.push(await bytesFromInput(this, await shrink(this, item)));
+    if (references.length > 10) throw new Error("参考图最多 10 张");
+    const mask = request.mask ? await bytesFromInput(this, request.mask) : undefined;
+    if (mask && !references.length) throw new Error("遮罩需要配合至少一张参考图一起使用");
+
+    let response: Response;
+    if (references.length) {
+      // 带参考图：OpenAI Images 编辑接口（multipart）。单图用 image 字段，多图用 image[] 重复字段。
+      const body = new MultipartBody("----kunrou" + Date.now().toString(16) + Math.random().toString(16).slice(2, 10));
+      if (references.length === 1) {
+        const only = references[0]!;
+        body.appendFile("image", "reference." + extensionFor(only.mimeType), only.mimeType, only.data);
+      } else {
+        for (const [index, item] of references.entries()) {
+          body.appendFile("image[]", `reference-${index + 1}.` + extensionFor(item.mimeType), item.mimeType, item.data);
+        }
+      }
+      if (mask) body.appendFile("mask", "mask." + extensionFor(mask.mimeType), mask.mimeType, mask.data);
+      for (const field of fields) body.appendField(field[0], field[1]);
+      response = await this.tool.fetch(`${API_BASE}/images/edits`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": `multipart/form-data; boundary=${body.boundary}` },
+        body: body.finish(),
+        signal,
+      });
+    } else {
+      response = await this.tool.fetch(`${API_BASE}/images/generations`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(fields)),
+        signal,
+      });
+    }
+    if (!response.ok) throw new Error(translateUpstreamError(await readFailure(this, response)));
+    return collectImageAssets(await response.json() as { data?: unknown; output_format?: unknown });
+  },
   async generateVideo(this: Context, request: VideoRequest): Promise<MediaAsset[]> {
     this.signal?.throwIfAborted();
     const apiKey = typeof this.config.apiKey === "string" ? this.config.apiKey.trim() : "";

@@ -19,6 +19,9 @@ type ObjectExpression = Extract<Expression, { type: "ObjectExpression" }>;
 
 const providerTranspiler = new Bun.Transpiler({ loader: "ts", target: "bun", define: { require: "undefined" } });
 const accountSourcePrefix = "// Dreammuse account provider\n";
+// ACT: Windows 检出（core.autocrlf）会把文件换行转成 CRLF，前缀判断必须容忍两种换行，否则把账号供应商误判为自定义文件。
+const hasAccountSourcePrefix = (source: string) =>
+  source.startsWith(accountSourcePrefix) || source.startsWith(accountSourcePrefix.replace("\n", "\r\n"));
 
 const providerIdSchema = z.string().max(96).regex(/^[a-z][a-zA-Z0-9]*$/)
   .refine(value => !/^(con|prn|aux|nul|com[1-9]|lpt[1-9])$/i.test(value), "供应商 ID 不能是系统保留文件名");
@@ -422,7 +425,7 @@ export async function installAccountProvider(sources: ProviderSources, token: st
       if (error.code === "ENOENT") return undefined;
       throw error;
     });
-    if (current && !current.source.startsWith(accountSourcePrefix)) invalid("已存在同名自定义供应商，请先处理文件冲突", 409);
+    if (current && !hasAccountSourcePrefix(current.source)) invalid("已存在同名自定义供应商，请先处理文件冲突", 409);
     requireAccount();
     // ACT: 最多 2 MB；同步原子替换使账号校验与提交之间不插入其他设置写入。
     writeAtomicSync(path, accountSourcePrefix + source, { exclusive: !current });
@@ -513,7 +516,7 @@ export async function loadMediaProviderSource(source: string, config: Record<str
   const { id, value } = parseProvider(source);
   if (id === "toonflow") {
     const installed = await getMediaProvider(id);
-    if (source !== installed.source || !source.startsWith(accountSourcePrefix)) invalid("只能运行已安装的创梦账号供应商", 403);
+    if (source !== installed.source || !hasAccountSourcePrefix(source)) invalid("只能运行已安装的创梦账号供应商", 403);
     const account = getAccountProvider();
     if (!account) invalid("请先登录创梦账号并刷新供应商", 401);
     const accountToken = getAccountToken();

@@ -118,6 +118,10 @@ export async function createApp({
   app.use(express.urlencoded({ extended: true, limit: "100mb" }));
   app.use("/api/desktop", desktopRequest);
 
+  // ACT: 登录态与用量记录集中挂载，避免逐个路由改造；公开路径由 authGate 内部放行。
+  const { authGate, usageRecorder } = await import("@/utils/auth");
+  app.use("/api", authGate, usageRecorder);
+
   const router = await import("@/router");
   router.default(app);
   const [{ createMcpRouter }, { getMcpTools }, { authorizeMcp }, { skillResources }] = await Promise.all([

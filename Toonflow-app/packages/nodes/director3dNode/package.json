@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vite build",
-    "dev": "vite build --watch",
+    "build": "vite build && node ../../../scripts/sync-node.mjs director3dNode",
+    "dev": "vite build --watch && node ../../../scripts/sync-node.mjs director3dNode",
     "typecheck": "vue-tsc --noEmit"
   },
   "peerDependencies": {

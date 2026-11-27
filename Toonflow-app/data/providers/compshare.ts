@@ -1745,85 +1745,287 @@ export default {
   ],
   models: [
     {
-      id: "MiniMax-H3",
-      label: "MiniMax H3（文/图/参考素材生视频 · 视频工作台）",
-      type: "video",
-      mode: ["text", "singleImage", "endFrameOptional", ["imageReference:9", "videoReference:3", "audioReference:3"]],
-      audio: "optional",
-      imageRatios: ["adaptive", "21:9", "16:9", "4:3", "1:1", "3:4", "9:16"],
-      durationResolutionMap: [
-        {
-          duration: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
-          resolution: ["480P", "768P", "1080P", "2K", "4K"],
-        },
+      "id": "MiniMax-H3",
+      "label": "MiniMax H3（文/图/参考素材生视频 · 视频工作台）",
+      "type": "video",
+      "imageRatios": [
+        "adaptive",
+        "21:9",
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16"
       ],
+      "durationResolutionMap": [
+        {
+          "duration": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30
+          ],
+          "resolution": [
+            "480P",
+            "768P",
+            "1080P",
+            "2K",
+            "4K"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        "singleImage",
+        "endFrameOptional",
+        [
+          "imageReference:9",
+          "videoReference:3",
+          "audioReference:3"
+        ]
+      ],
+      "audio": "optional"
     },
     {
-      id: "doubao-seedream-5-0-pro-260628",
-      label: "doubao-seedream 5.0 Pro（文生图 / 多参考图）",
-      type: "image",
-      mode: ["text", "multiReference"],
-      imageSizes: ["1K", "1.5K", "2K"],
-      imageRatios: ["1:1", "4:3", "3:4", "16:9", "9:16", "3:2", "2:3", "21:9"],
+      "id": "doubao-seedream-5-0-pro-260628",
+      "label": "doubao-seedream 5.0 Pro（文生图 / 多参考图）",
+      "type": "image",
+      "imageSizes": [
+        "1K",
+        "1.5K",
+        "2K"
+      ],
+      "imageRatios": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16",
+        "3:2",
+        "2:3",
+        "21:9"
+      ],
+      "mode": [
+        "text",
+        "multiReference"
+      ]
     },
     {
-      id: "doubao-seedream-5-0-260128",
-      label: "doubao-seedream 5.0（文生图 / 多参考图）",
-      type: "image",
-      mode: ["text", "multiReference"],
-      imageSizes: ["2K", "3K", "4K"],
-      imageRatios: ["1:1", "4:3", "3:4", "16:9", "9:16", "3:2", "2:3", "21:9"],
+      "id": "doubao-seedream-5-0-260128",
+      "label": "doubao-seedream 5.0（文生图 / 多参考图）",
+      "type": "image",
+      "imageSizes": [
+        "2K",
+        "3K",
+        "4K"
+      ],
+      "imageRatios": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16",
+        "3:2",
+        "2:3",
+        "21:9"
+      ],
+      "mode": [
+        "text",
+        "multiReference"
+      ]
     },
     {
-      id: "qwen-image-3.0",
-      label: "Qwen Image 3.0（文生图 / 参考图编辑）",
-      type: "image",
-      mode: ["text", "multiReference"],
-      imageSizes: ["1024x1024", "1536x1024", "1024x1536", "2048x2048", "1280x720", "720x1280"],
-      imageRatios: ["1:1", "4:3", "3:4", "16:9", "9:16", "3:2", "2:3"],
+      "id": "qwen-image-3.0",
+      "label": "Qwen Image 3.0（文生图 / 参考图编辑）",
+      "type": "image",
+      "imageSizes": [
+        "1024x1024",
+        "1536x1024",
+        "1024x1536",
+        "2048x2048",
+        "1280x720",
+        "720x1280"
+      ],
+      "imageRatios": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16",
+        "3:2",
+        "2:3"
+      ],
+      "mode": [
+        "text",
+        "multiReference"
+      ]
     },
     {
-      id: "qwen-image-3.0-pro",
-      label: "Qwen Image 3.0 Pro（文生图 / 参考图编辑）",
-      type: "image",
-      mode: ["text", "multiReference"],
-      imageSizes: ["1024x1024", "1536x1024", "1024x1536", "2048x2048", "1280x720", "720x1280"],
-      imageRatios: ["1:1", "4:3", "3:4", "16:9", "9:16", "3:2", "2:3"],
+      "id": "qwen-image-3.0-pro",
+      "label": "Qwen Image 3.0 Pro（文生图 / 参考图编辑）",
+      "type": "image",
+      "imageSizes": [
+        "1024x1024",
+        "1536x1024",
+        "1024x1536",
+        "2048x2048",
+        "1280x720",
+        "720x1280"
+      ],
+      "imageRatios": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16",
+        "3:2",
+        "2:3"
+      ],
+      "mode": [
+        "text",
+        "multiReference"
+      ]
     },
     {
-      id: "gpt-image-2",
-      label: "gpt-image-2（文生图 / 单图编辑）",
-      type: "image",
-      mode: ["text", "singleImage"],
-      imageSizes: ["1K", "2K", "4K"],
-      imageRatios: ["1:1", "3:2", "2:3", "4:3", "3:4", "4:5", "5:4", "16:9", "9:16", "21:9"],
+      "id": "gpt-image-2",
+      "label": "gpt-image-2（文生图 / 单图编辑）",
+      "type": "image",
+      "imageSizes": [
+        "1K",
+        "2K",
+        "4K"
+      ],
+      "imageRatios": [
+        "1:1",
+        "3:2",
+        "2:3",
+        "4:3",
+        "3:4",
+        "4:5",
+        "5:4",
+        "16:9",
+        "9:16",
+        "21:9"
+      ],
+      "mode": [
+        "text",
+        "singleImage"
+      ]
     },
     {
-      id: "Qwen/Qwen-Image",
-      label: "Qwen-Image（文生图）",
-      type: "image",
-      mode: ["text"],
-      imageSizes: ["1024x1024", "1280x720", "720x1280", "1536x1536"],
-      imageRatios: ["1:1", "4:3", "3:4", "16:9", "9:16"],
+      "id": "Qwen/Qwen-Image",
+      "label": "Qwen-Image（文生图）",
+      "type": "image",
+      "imageSizes": [
+        "1024x1024",
+        "1280x720",
+        "720x1280",
+        "1536x1536"
+      ],
+      "imageRatios": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16"
+      ],
+      "mode": [
+        "text"
+      ]
     },
     {
-      id: "Qwen/Qwen-Image-Edit",
-      label: "Qwen-Image-Edit（单图编辑）",
-      type: "image",
-      mode: ["singleImage"],
-      imageSizes: ["1024x1024", "1280x720", "720x1280", "1536x1536"],
-      imageRatios: ["1:1", "4:3", "3:4", "16:9", "9:16"],
+      "id": "Qwen/Qwen-Image-Edit",
+      "label": "Qwen-Image-Edit（单图编辑）",
+      "type": "image",
+      "imageSizes": [
+        "1024x1024",
+        "1280x720",
+        "720x1280",
+        "1536x1536"
+      ],
+      "imageRatios": [
+        "1:1",
+        "4:3",
+        "3:4",
+        "16:9",
+        "9:16"
+      ],
+      "mode": [
+        "singleImage"
+      ]
     },
     {
-      id: "doubao-seedance-2-0-260128",
-      label: "doubao-seedance 2.0（文/图生视频 / 参考素材）",
-      type: "video",
-      mode: ["text", "singleImage", "startEndRequired", ["imageReference:9", "videoReference:3", "audioReference:3"]],
-      audio: "optional",
-      imageRatios: ["16:9", "4:3", "1:1", "3:4", "9:16", "21:9", "adaptive"],
-      durationResolutionMap: [{ duration: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], resolution: ["480p", "720p", "1080p"] }],
-    },
-  ] satisfies ProviderModel[],
+      "id": "doubao-seedance-2-0-260128",
+      "label": "doubao-seedance 2.0（文/图生视频 / 参考素材）",
+      "type": "video",
+      "imageRatios": [
+        "16:9",
+        "4:3",
+        "1:1",
+        "3:4",
+        "9:16",
+        "21:9",
+        "adaptive"
+      ],
+      "durationResolutionMap": [
+        {
+          "duration": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "resolution": [
+            "480p",
+            "720p",
+            "1080p"
+          ]
+        }
+      ],
+      "mode": [
+        "text",
+        "singleImage",
+        "startEndRequired",
+        [
+          "imageReference:9",
+          "videoReference:3",
+          "audioReference:3"
+        ]
+      ],
+      "audio": "optional"
+    }
+  ],
   async generateImage(this: Context, request: ImageRequest): Promise<MediaAsset[]> {
     this.signal?.throwIfAborted();
     const model = typeof request.model === "string" ? request.model.trim() : "";

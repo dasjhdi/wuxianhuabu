@@ -27,6 +27,16 @@ const editSchema = z.strictObject({ operations: z.array(operationSchema).min(1).
 type Draft = { scene: SceneDocument; plan: Partial<DirectorPlan> };
 type Path = z.infer<typeof pathSchema>;
 
+// ACT: 没有基准方案时先放一个合法的 5 秒默认方案和 0 秒镜头帧，agent 只需追加动画轨道，避免小模型反复补必填字段。
+function seedPlan(scene: SceneDocument): DirectorPlan {
+  return {
+    name: "方案 1",
+    duration: 5,
+    tracks: [],
+    cameraFrames: [{ time: 0, view: { camera: scene.sceneConfig.camera, controls: scene.sceneConfig.controls }, easing: "smooth" }],
+  };
+}
+
 function checkSize(value: unknown) {
   if (new TextEncoder().encode(JSON.stringify(value)).byteLength > 500000) throw new Error("草稿或工具参数超过 500 KB，请精简场景或关键帧");
 }
@@ -104,10 +114,11 @@ function validateDraft(draft: Draft, complete = false) {
 }
 
 export function createDirectorDraft(scene: SceneDocument, plan?: DirectorPlan, plans: DirectorPlanItem[] = []) {
-  let draft: Draft = structuredClone({ scene, plan: plan ?? { tracks: [], cameraFrames: [] } });
+  let draft: Draft = structuredClone({ scene, plan: plan ?? seedPlan(scene) });
   const history = structuredClone(plans);
   validateDraft(draft);
   const originalScene = JSON.stringify(draft.scene);
+  const originalPlan = JSON.stringify(draft.plan);
   let edited = false;
 
   const tools: NodeAiTool[] = [{
@@ -151,6 +162,7 @@ export function createDirectorDraft(scene: SceneDocument, plan?: DirectorPlan, p
     tools,
     get edited() { return edited; },
     get sceneChanged() { return JSON.stringify(draft.scene) !== originalScene; },
+    get planChanged() { return JSON.stringify(draft.plan) !== originalPlan; },
     summary() {
       return {
         objects: draft.scene.objectList.map(({ threeJsonId, name, objType }) => ({ threeJsonId, name, objType })),

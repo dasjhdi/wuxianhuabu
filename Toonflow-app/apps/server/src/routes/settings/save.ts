@@ -2,7 +2,7 @@ import u from "@/utils";
 import { Router } from "express";
 import { z } from "zod";
 import { validateFields } from "@/lib/middleware";
-import { success } from "@/lib/responseFormat";
+import { success, error } from "@/lib/responseFormat";
 import { maxSystemPromptLength } from "@/agent/runtime/prompt";
 import { t } from "@/lib/i18n";
 import { accountProviderSchema, providerSchema } from "@/utils/ai";
@@ -28,6 +28,7 @@ export default router.put("/", validateFields({ settings: z.record(z.string(), z
   path: ["desktopUpdateCustomUrl"], message: "选择自定义更新源前，请先填写有效地址",
 }) }), async (req, res) => {
   u.mcpControl.assertAppRequest(req);
+  if (u.auth.currentUser(req)?.role === "viewer") return res.status(403).json(error("只读账号不能修改系统配置", null, 403));
   const { settings } = req.body;
   // ACT: 系统代理读取是异步的；串行保存完整快照，避免较早的请求覆盖较晚的配置。
   const saving = saveQueue.then(async () => {

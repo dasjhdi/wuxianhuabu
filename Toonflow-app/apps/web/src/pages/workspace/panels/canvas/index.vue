@@ -132,7 +132,7 @@
 
 <script setup lang="ts">
 import { t, translate } from "@toonflow/i18n/vue";
-import { computed, markRaw, nextTick, onBeforeUnmount, onMounted, onScopeDispose, provide, ref, shallowReactive, shallowRef, watch } from "vue";
+import { computed, markRaw, nextTick, onBeforeUnmount, onMounted, onScopeDispose, provide, ref, shallowReactive, shallowRef, watch, type Component } from "vue";
 import axios from "axios";
 import { debounce } from "lodash-es";
 import { ElMessage } from "element-plus";
@@ -222,6 +222,11 @@ const nodeLoads = shallowReactive(new Map<string, Promise<void>>());
 const nodeReloads = new Set<string>();
 const nodeErrors = ref<Record<string, string>>({});
 const availableNodes = computed(() => nodeOptions.value.filter(node => nodeTypes.value[node.type] && !nodeErrors.value[node.type]));
+// ACT: 工具栏的悬浮「添加节点」菜单需要图标，画布内已经加载了节点模块，直接从同一份 nodeTypes 取，避免重复拉取。
+const nodeCatalog = computed(() => availableNodes.value.map(node => ({
+  ...node,
+  icon: (nodeTypes.value[node.type] as { icon?: Component } | undefined)?.icon,
+})));
 const nodeListLoading = ref(true);
 const remoteNodeTypes = computed(() => [
   ...new Set((flowData.value as { type?: string }[]).map((item) => item.type).filter((type): type is string => !!type?.startsWith("remote-"))),
@@ -418,7 +423,7 @@ provide("nodePersistence", () => {
     },
   };
 });
-defineExpose({ canvasId, canvasReady, getCanvasContext, addNodeAtPointer, readDocumentNode, saveDocumentNode, mountDocumentNode, observeDocumentNode, prepareCanvasDelete, flushSave: flushCanvasSave, cancelSave: cancelCanvasSave,
+defineExpose({ canvasId, canvasReady, getCanvasContext, addNodeAtPointer, addNodeByType, uploadFilesAtPointer, nodeCatalog, readDocumentNode, saveDocumentNode, mountDocumentNode, observeDocumentNode, prepareCanvasDelete, flushSave: flushCanvasSave, cancelSave: cancelCanvasSave,
   openNodeSearch: () => nodeSearchRef.value?.open(),
   getCanvases: (signal?: AbortSignal) => {
     if (!canvasMenuRef.value) throw new Error("画布菜单尚未就绪");
@@ -662,6 +667,28 @@ function addNodeAtPointer() {
   if (!rect) return;
   const position = pointerPosition ?? { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
   void nodeMenuRef.value?.openMenu(new MouseEvent("contextmenu", { clientX: position.x, clientY: position.y }), true);
+}
+
+// ACT: 工具栏悬浮菜单保留原「+ → 上传」的能力，上传位置与添加节点一致（画布内最后位置或视口中心）。
+function uploadFilesAtPointer() {
+  if (!props.active || props.settingsVisible || !project.value?.directory || !canvasReady.value) return;
+  const position = pastePosition();
+  if (position) selectFiles(position);
+}
+
+// ACT: 工具栏悬浮菜单直接落一个指定类型的节点，落点优先跟随画布内最后位置，否则用视口中心。
+function addNodeByType(type: string) {
+  if (!props.active || props.settingsVisible || !project.value?.directory || !canvasReady.value) return;
+  const center = pastePosition();
+  if (!center) return;
+  let x = center.x - 180;
+  let y = center.y - 120;
+  // 连续添加时按 36×30 错开，避免 newNode 完全叠在同一个坐标上。
+  for (let index = 0; index < 12 && flow.getNodes.value.some(node => Math.abs(node.position.x - x) < 40 && Math.abs(node.position.y - y) < 40); index++) {
+    x += 36;
+    y += 30;
+  }
+  void nodeMenuRef.value?.addNode(type, { x, y });
 }
 
 async function changeHistory(direction: "undo" | "redo") {

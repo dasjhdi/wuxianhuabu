@@ -45,14 +45,23 @@ function imageOptions(value: unknown, pattern: RegExp) {
   return Array.isArray(value) ? [...new Set(value.filter((item): item is string => typeof item === "string" && item.length <= 64 && item === item.trim() && pattern.test(item)))] : undefined;
 }
 
-export async function listMediaModels(): Promise<MediaModel[]> {
+export async function listMediaModels(): Promise<(MediaModel & { configured: boolean })[]> {
   const installedProviders = await listMediaProviders();
   installedProviders.sort((left, right) => Number(right.id === "toonflow") - Number(left.id === "toonflow"));
-  return installedProviders.filter(provider => provider.id !== "toonflow" || !!getAccountProvider()).flatMap(provider => provider.models.flatMap(model => {
+  const configurations = record(conf.get("settings", {}).mediaProviderConfigs);
+  const accountReady = !!getAccountProvider();
+  // ACT: 未配置 Key 的供应商模型仍会出现在列表里，必须带上标记，避免用户选中后调用才报错。
+  const providerReady = (id: string) => {
+    if (id === "toonflow") return accountReady;
+    if (id === "localVoice") return true;
+    return !!String(record(configurations[id]).apiKey ?? "").trim();
+  };
+  return installedProviders.filter(provider => provider.id !== "toonflow" || accountReady).flatMap(provider => provider.models.flatMap(model => {
     if (model.type !== "image" && model.type !== "video" && model.type !== "audio") return [];
     const builtIn = (mediaProviders as readonly Provider[]).find(item => item.id === provider.id)?.models.find(item => item.id === model.id);
     return [{
       providerId: provider.id, providerLabel: provider.label, modelId: model.id, label: model.label, type: model.type,
+      configured: providerReady(provider.id),
       supportsPrice: "supportsPrice" in provider && provider.supportsPrice === true,
       rules: model.rules,
       mode: model.mode, durationResolutionMap: model.durationResolutionMap, audio: model.audio,
@@ -61,7 +70,7 @@ export async function listMediaModels(): Promise<MediaModel[]> {
         imageSizes: imageOptions(Array.isArray(model.imageSizes) ? model.imageSizes : builtIn?.imageSizes, /^[^\u0000-\u001f\u007f]+$/),
         imageRatios: imageOptions(Array.isArray(model.imageRatios) ? model.imageRatios : builtIn?.imageRatios, /^[1-9]\d{0,3}:[1-9]\d{0,3}$/),
       } : {}),
-    } as MediaModel];
+    } as MediaModel & { configured: boolean }];
   }));
 }
 

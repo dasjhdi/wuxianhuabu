@@ -37,11 +37,11 @@
         </div>
       </div>
       <template v-else>
-        <p>描述模型动作和运镜要求</p>
+        <p>{{ readonly ? "还没有方案。在「对话」页描述走位或运镜，生成结果会出现在这里。" : "描述模型动作和运镜要求" }}</p>
       </template>
     </div>
-    <p class="instructionHint">{{ referenceCount ? `使用 ${referenceCount} 个关键帧生成运镜` : result ? `参考：${result.name}` : '模型动画与运镜同步生成' }}</p>
-    <footer class="chatFooter">
+    <p class="instructionHint">{{ readonly ? "在「对话」页继续生成新的走位或运镜方案" : referenceCount ? `使用 ${referenceCount} 个关键帧生成运镜` : result ? `参考：${result.name}` : '模型动画与运镜同步生成' }}</p>
+    <footer v-if="!readonly" class="chatFooter">
       <div class="inputContent"><slot name="input" /></div>
       <div class="inputActions">
         <el-tooltip :showArrow="false" :content="voiceState === 'recording' ? '停止录音' : '语音指令（说出运镜与走位要求）'" placement="top" :hideAfter="0" :enterable="false" :triggerKeys="[]">
@@ -65,7 +65,7 @@
 
 <script setup lang="ts">
 import { computed, onScopeDispose, ref } from "vue";
-import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElOption, ElOptionGroup, ElSelect } from "element-plus";
+import { ElButton, ElDropdown, ElDropdownItem, ElDropdownMenu, ElMessage, ElOption, ElOptionGroup, ElSelect } from "element-plus";
 import { IconLoader2, IconSparkles, IconMovie, IconCheck, IconAlertCircle, IconArrowBackUp, IconDownload, IconFileText, IconFileSpreadsheet, IconCopy, IconMicrophone, IconPlayerStop } from "@tabler/icons-vue";
 import type { NodeAiModel } from "@toonflow/nodes-scaffold/runtime";
 import { groupNodeModels } from "@toonflow/node-shared/groupNodeModels";
@@ -73,7 +73,7 @@ import modelLabel from "@toonflow/node-shared/modelLabel";
 
 import type { DirectorPlan, DirectorPlanItem, DirectorGeneration } from "./sceneAnimation";
 
-const props = defineProps<{ result?: DirectorPlan; referenceCount: number; initializing: boolean; plans: DirectorPlanItem[]; selectedPlanId: string; tasks: DirectorGeneration[]; models: NodeAiModel[]; modelsLoading: boolean }>();
+const props = defineProps<{ result?: DirectorPlan; referenceCount: number; initializing: boolean; plans: DirectorPlanItem[]; selectedPlanId: string; tasks: DirectorGeneration[]; models: NodeAiModel[]; modelsLoading: boolean; readonly?: boolean }>();
 const emit = defineEmits<{ editInstruction: [value: string]; selectPlan: [id: string]; send: []; loadModels: []; duplicatePlan: [id: string] }>();
 const prompt = defineModel<string>("prompt", { default: "" });
 const model = defineModel<string>("model", { default: "" });
@@ -122,6 +122,9 @@ function exportPlans(format: "md" | "csv") {
 }
 
 // ACT: 语音指令驱动走位 —— 浏览器原生语音识别（zh-CN），识别完成自动生成方案。
+interface SpeechRecognitionEventLike {
+  results: ArrayLike<{ 0?: { transcript?: string }; isFinal?: boolean }> & { length: number };
+}
 const voiceState = ref<"idle" | "recording">("idle");
 let recognition: { stop: () => void } | undefined;
 onScopeDispose(() => recognition?.stop());

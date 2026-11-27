@@ -111,6 +111,8 @@ async function listen(app: Application, port: number) {
     const device = token.length >= 32 && token.length <= 128 && getMobileLinkConfig().devices.find(item => matchesHash(token, item.tokenHash));
     if (!device) throw Object.assign(new Error("设备未配对或授权已撤销"), { status: 401 });
     Object.defineProperty(res.locals, deviceKey, { value: device.id });
+    // ACT: 设备令牌已在网关校验，登录网关据此放行，避免要求设备再走账号 Cookie。
+    res.locals.toonflowDeviceId = device.id;
     const lastSeen = getRuntime(app).lastSeen;
     const version = req.get("x-toonflow-app-version");
     const appVersion = version && /^[\w.+-]{1,64}$/.test(version) ? version : undefined;

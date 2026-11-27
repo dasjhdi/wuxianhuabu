@@ -4,6 +4,7 @@ import { cameraViewSchema, type CameraView } from "./scene";
 
 export const anchorSchema = cameraViewSchema.extend({
   id: z.string().min(1).default(() => crypto.randomUUID()),
+  name: z.string().trim().max(60).optional(),
   time: z.number().min(0).max(300).optional(),
 }).strip();
 export type CameraAnchor = z.infer<typeof anchorSchema>;
@@ -14,10 +15,13 @@ export const cameraFramesSchema = z.array(z.strictObject({
 })).min(1).max(120).refine(frames => frames.every((frame, index) => !index || frame.time > frames[index - 1]!.time), "镜头时间必须递增");
 
 export function applyCamera(camera: PerspectiveCamera, view: CameraView) {
-  const { position, fov, near, far } = view.camera;
+  const { position, fov, near, far, roll } = view.camera;
   camera.position.set(position.x, position.y, position.z);
   Object.assign(camera, { fov, near, far });
+  // 每次都先把 up 复位，避免上一帧的滚转叠加到这一帧。
+  camera.up.set(0, 1, 0);
   camera.lookAt(view.controls.target.x, view.controls.target.y, view.controls.target.z);
+  if (roll) camera.rotateZ(roll * Math.PI / 180);
   camera.updateProjectionMatrix();
 }
 

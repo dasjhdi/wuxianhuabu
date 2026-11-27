@@ -1,0 +1,14 @@
+import { Router } from "express";
+import u from "@/utils";
+import { success } from "@/lib/responseFormat";
+
+const router = Router();
+
+export default router.get("/", (req, res) => {
+  const user = u.auth.resolveSession(req);
+  res.set("Cache-Control", "no-store").json(success({
+    initialized: u.auth.countUsers() > 0,
+    user,
+    system: u.auth.getSystemSettings(),
+  }));
+});

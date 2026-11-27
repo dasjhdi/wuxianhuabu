@@ -2194,6 +2194,62 @@
           "applied": true
         }
       }
+    },
+    {
+      "id": "7d854cd4-62be-42ff-bb1b-95cdcf9ab16e",
+      "type": "remote-imageGenerationNode",
+      "initialized": false,
+      "position": {
+        "x": 2396.1353914190545,
+        "y": -6946.203041221287
+      },
+      "data": {
+        "label": "图片生成",
+        "prompt": "生成一张年轻的亚洲女性",
+        "promptModel": [
+          [
+            {
+              "type": "Write",
+              "text": "生成一张年轻的亚洲女性"
+            }
+          ]
+        ],
+        "inpaintPrompt": "",
+        "inpaintPromptModel": [],
+        "model": "[\"compshare\",\"gpt-image-2\"]",
+        "size": "1K",
+        "ratio": "16:9",
+        "other": {},
+        "handles": [
+          {
+            "id": "in",
+            "type": "target",
+            "dataType": [
+              "IMAGE",
+              "STRING"
+            ],
+            "label": "图片、文本输入"
+          },
+          {
+            "id": "image",
+            "type": "source",
+            "dataType": "IMAGE",
+            "label": "图片输出"
+          }
+        ],
+        "outputs": {},
+        "mediaTask": {
+          "taskId": "5f5b6802-e27a-482a-bcba-d175f4982f1c",
+          "directory": "D:\\wuxianhuabu\\Toonflow-app\\data\\workspaces\\新建文件夹",
+          "canvasPath": "画布1.json",
+          "nodeId": "7d854cd4-62be-42ff-bb1b-95cdcf9ab16e",
+          "mediaType": "image",
+          "providerId": "compshare",
+          "modelId": "gpt-image-2",
+          "state": "cancelled",
+          "resumable": false
+        }
+      }
     }
   ],
   "edges": [
@@ -2211,10 +2267,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 3033.0006282874338,
-      "sourceY": -4907.890796055452,
-      "targetX": 2800.000119425898,
-      "targetY": -5263.0159943684175
+      "sourceX": 2682.000576126533,
+      "sourceY": -4986.890857932759,
+      "targetX": 2800.0000847889196,
+      "targetY": -5263.015597896226
     },
     {
       "id": "vueflow__edge-153083e9-0598-4139-9ff0-155393d5db22image-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
@@ -2230,10 +2286,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 2906.656648816524,
-      "sourceY": -5183.906500664126,
-      "targetX": 2800.000119425898,
-      "targetY": -5263.0159943684175
+      "sourceX": 2682.000576126533,
+      "sourceY": -5262.890857932759,
+      "targetX": 2800.0000847889196,
+      "targetY": -5263.015597896226
     },
     {
       "id": "vueflow__edge-acfbcc32-617a-4a50-9ae4-529a68c048dfimage-67bdd716-13cd-4254-aaa3-5202769ce8fcin",
@@ -2249,10 +2305,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 2906.656648816524,
-      "sourceY": -5459.906500664126,
-      "targetX": 2800.000119425898,
-      "targetY": -5263.0159943684175
+      "sourceX": 2682.000576126533,
+      "sourceY": -5538.890857932759,
+      "targetX": 2800.0000847889196,
+      "targetY": -5263.015597896226
     },
     {
       "id": "vueflow__edge-36480646-ca24-4439-8e3a-d0a2fd4d2fd4image-6eb64690-0f3e-4629-8bec-12d7ab6489f2in",
@@ -2268,10 +2324,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1065.3755151627079,
-      "sourceY": -4487.906500664126,
-      "targetX": 959.9997167436243,
-      "targetY": -4255.890925764244
+      "sourceX": 842.0006264619001,
+      "sourceY": -4566.890857932759,
+      "targetX": 959.9998834474504,
+      "targetY": -4286.890857932759
     },
     {
       "id": "vueflow__edge-a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3image-6eb64690-0f3e-4629-8bec-12d7ab6489f2in",
@@ -2287,10 +2343,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1065.3755151627079,
-      "sourceY": -4203.906500664126,
-      "targetX": 959.9997167436243,
-      "targetY": -4255.890925764244
+      "sourceX": 842.0006264619001,
+      "sourceY": -4282.890857932759,
+      "targetX": 959.9998834474504,
+      "targetY": -4286.890857932759
     },
     {
       "id": "vueflow__edge-a4ea236d-e0b0-4396-be28-fb9c3a3f9cb3image-d12657ba-408a-44fc-8576-8d1651a21eaain",
@@ -2306,10 +2362,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1065.3755151627079,
-      "sourceY": -4203.906500664126,
-      "targetX": 959.9997167436243,
-      "targetY": -4507.890925764244
+      "sourceX": 842.0006264619001,
+      "sourceY": -4282.890857932759,
+      "targetX": 959.9998834474504,
+      "targetY": -4538.890857932759
     },
     {
       "id": "vueflow__edge-36480646-ca24-4439-8e3a-d0a2fd4d2fd4image-d12657ba-408a-44fc-8576-8d1651a21eaain",
@@ -2325,10 +2381,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1065.3755151627079,
-      "sourceY": -4487.906500664126,
-      "targetX": 959.9997167436243,
-      "targetY": -4507.890925764244
+      "sourceX": 842.0006264619001,
+      "sourceY": -4566.890857932759,
+      "targetX": 959.9998834474504,
+      "targetY": -4538.890857932759
     },
     {
       "id": "vueflow__edge-d6ae3c53-3950-4a4a-bd59-e15af5ac89c5image-5a5e9c74-b542-4489-ac59-5ec3515c4b01in",
@@ -2344,10 +2400,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1796.516044536943,
-      "sourceY": -3783.9065006641263,
-      "targetX": 1915.000119425898,
-      "targetY": -3159.890925764244
+      "sourceX": 1442.000576126533,
+      "sourceY": -3862.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -3190.8908579327594
     },
     {
       "id": "vueflow__edge-af8a4526-c846-43b2-9347-0c0a9127d71dimage-5a5e9c74-b542-4489-ac59-5ec3515c4b01in",
@@ -2363,10 +2419,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1669.8440803540943,
-      "sourceY": -3220.9065006641263,
-      "targetX": 1915.000119425898,
-      "targetY": -3159.890925764244
+      "sourceX": 1442.000576126533,
+      "sourceY": -3299.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -3190.8908579327594
     },
     {
       "id": "vueflow__edge-d6ae3c53-3950-4a4a-bd59-e15af5ac89c5image-70fc5012-7d5c-4e6e-84d6-a977c4300171in",
@@ -2382,10 +2438,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1796.516044536943,
-      "sourceY": -3783.9065006641263,
-      "targetX": 1915.000119425898,
-      "targetY": -3473.890925764244
+      "sourceX": 1442.000576126533,
+      "sourceY": -3862.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -3504.8908579327594
     },
     {
       "id": "vueflow__edge-af8a4526-c846-43b2-9347-0c0a9127d71dimage-70fc5012-7d5c-4e6e-84d6-a977c4300171in",
@@ -2401,10 +2457,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1669.8440803540943,
-      "sourceY": -3220.9065006641263,
-      "targetX": 1915.000119425898,
-      "targetY": -3473.890925764244
+      "sourceX": 1442.000576126533,
+      "sourceY": -3299.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -3504.8908579327594
     },
     {
       "id": "vueflow__edge-af8a4526-c846-43b2-9347-0c0a9127d71dimage-256ffecf-b1b8-498a-9939-c11dcbaeb0adin",
@@ -2420,10 +2476,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1669.8440803540943,
-      "sourceY": -3220.9065006641263,
-      "targetX": 1915.000119425898,
-      "targetY": -3787.890925764244
+      "sourceX": 1442.000576126533,
+      "sourceY": -3299.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -3818.8908579327594
     },
     {
       "id": "vueflow__edge-d6ae3c53-3950-4a4a-bd59-e15af5ac89c5image-256ffecf-b1b8-498a-9939-c11dcbaeb0adin",
@@ -2439,10 +2495,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1796.516044536943,
-      "sourceY": -3783.9065006641263,
-      "targetX": 1915.000119425898,
-      "targetY": -3787.890925764244
+      "sourceX": 1442.000576126533,
+      "sourceY": -3862.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -3818.8908579327594
     },
     {
       "id": "vueflow__edge-af8a4526-c846-43b2-9347-0c0a9127d71dimage-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
@@ -2458,10 +2514,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1669.8440803540943,
-      "sourceY": -3220.9065006641263,
-      "targetX": 1915.0000763806029,
-      "targetY": -2769.8912266219413
+      "sourceX": 1442.000576126533,
+      "sourceY": -3299.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -2800.8912606156973
     },
     {
       "id": "vueflow__edge-29a5169c-4e74-4272-911c-010e8c2f8cafimage-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
@@ -2477,10 +2533,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1666.6555525377205,
-      "sourceY": -1918.9065700046317,
-      "targetX": 1915.0000763806029,
-      "targetY": -2769.8912266219413
+      "sourceX": 1442.000576126533,
+      "sourceY": -1997.8908579327592,
+      "targetX": 1914.9998834474504,
+      "targetY": -2800.8912606156973
     },
     {
       "id": "vueflow__edge-d6ae3c53-3950-4a4a-bd59-e15af5ac89c5image-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
@@ -2496,10 +2552,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1796.516044536943,
-      "sourceY": -3783.9065006641263,
-      "targetX": 1915.0000763806029,
-      "targetY": -2769.8912266219413
+      "sourceX": 1442.000576126533,
+      "sourceY": -3862.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -2800.8912606156973
     },
     {
       "id": "vueflow__edge-964ec2e5-6791-4c8f-a0b2-b439bf312c40image-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
@@ -2515,10 +2571,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1666.656070496292,
-      "sourceY": -2352.906995258201,
-      "targetX": 1915.0000763806029,
-      "targetY": -2769.8912266219413
+      "sourceX": 1442.000576126533,
+      "sourceY": -2431.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -2800.8912606156973
     },
     {
       "id": "vueflow__edge-0605d998-5a90-44c5-bef7-2da6bb1d10f9image-d0f87c37-f8f9-4fe0-ad39-bceccbf4785fin",
@@ -2534,10 +2590,10 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 1480.0002398143579,
-      "sourceY": -2786.8909697558984,
-      "targetX": 1915.0000763806029,
-      "targetY": -2769.8912266219413
+      "sourceX": 1442.000576126533,
+      "sourceY": -2865.8908579327594,
+      "targetX": 1914.9998834474504,
+      "targetY": -2800.8912606156973
     },
     {
       "id": "vueflow__edge-21397b65-d010-4443-a5bb-0ca79f1b45e5image-5b8fa6e6-0a07-4319-9716-567341f392dfin",
@@ -2553,15 +2609,15 @@
       "label": "",
       "interactionWidth": 40,
       "animated": false,
-      "sourceX": 4044.656648816524,
-      "sourceY": -3783.9065006641263,
-      "targetX": 4162.999716743624,
-      "targetY": -3771.890925764244
+      "sourceX": 3820.000576126533,
+      "sourceY": -3862.8908579327594,
+      "targetX": 4162.999682105981,
+      "targetY": -3802.8908579327594
     }
   ],
   "viewport": {
-    "x": -25.842254874929722,
-    "y": 2301.0462138984476,
-    "zoom": 0.4594793419988144
+    "x": -1660.9830551077998,
+    "y": 8571.53193032179,
+    "zoom": 1.2125732532083215
   }
 }

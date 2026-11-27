@@ -404,6 +404,9 @@ const mentionSource: MentionCanvasSource = {
 };
 
 defineExpose({ canvasId, canvasReady, canvasListReady, getCanvasContext, readDocumentNode, readDocumentNodes, focusDocumentNode, saveDocumentNode, mountDocumentNode, observeDocumentNode, resolveDocumentNodeFile, performFileAction, flushSave, cancelSave,
+  nodeCatalog: computed(() => activeInstance.value?.nodeCatalog ?? []),
+  addNodeByType: (type: string) => activeInstance.value?.addNodeByType(type),
+  uploadFilesAtPointer: () => activeInstance.value?.uploadFilesAtPointer(),
   addNodeAtPointer: () => activeInstance.value?.addNodeAtPointer(),
   openNodeSearch: () => activeInstance.value?.openNodeSearch(),
   mentionSource,

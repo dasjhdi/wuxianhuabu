@@ -38,11 +38,15 @@
       <div class="bottomTools">
         <el-card v-if="activePanel === 'canvas'" class="toolMenu" shadow="never" :bodyStyle="{ padding: '2px 4px' }">
           <div class="toolMenuContent" role="toolbar" aria-label="画布工具">
-            <el-tooltip content="添加节点" placement="top" :showArrow="false" :hideAfter="0" :enterable="false" :triggerKeys="[]">
-              <el-button class="toolButton addNodeButton" :disabled="!canvasPanelRef?.canvasReady || settingsVisible" aria-label="添加节点" aria-haspopup="menu" @click="canvasPanelRef?.addNodeAtPointer()">
+            <addNodePicker
+              :nodes="canvasPanelRef?.nodeCatalog ?? []"
+              :disabled="!canvasPanelRef?.canvasReady || settingsVisible"
+              @select="type => canvasPanelRef?.addNodeByType(type)"
+              @upload="canvasPanelRef?.uploadFilesAtPointer()">
+              <el-button class="toolButton addNodeButton" :disabled="!canvasPanelRef?.canvasReady || settingsVisible" aria-label="添加节点" aria-haspopup="menu">
                 <icon-plus :size="18" aria-hidden="true" />
               </el-button>
-            </el-tooltip>
+            </addNodePicker>
             <el-tooltip :content="selectedTool === 'move' ? '移动工具，点击切换为抓手' : '抓手工具，点击切换为移动'" placement="top" :showArrow="false" :hideAfter="0" :enterable="false" :triggerKeys="[]">
               <el-button
                 class="toolButton"
@@ -146,6 +150,7 @@ import canvasPanel from "./panels/canvas/canvasHost.vue";
 import type { DocumentNodeOptions } from "./panels/canvas/canvasFiles";
 import workspaceMenu from "./components/workspaceMenu.vue";
 import floatingAgent from "./components/floatingAgent.vue";
+import addNodePicker from "./components/addNodePicker.vue";
 
 const documentPanel = defineAsyncComponent(() => import("./panels/document/index.vue"));
 

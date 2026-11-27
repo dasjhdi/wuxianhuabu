@@ -35,6 +35,9 @@ import * as personalization from "@/utils/personalization";
 import * as mentionFiles from "@/agent/mentionFiles";
 import * as network from "@/utils/network";
 import * as channel from "@/utils/channel";
+import * as auth from "@/utils/auth";
+import * as admin from "@/utils/admin";
+import * as ecommerce from "@/utils/ecommerce";
 
 export default {
   assets,
@@ -76,4 +79,7 @@ export default {
   mentionFiles,
   network,
   channel,
+  auth,
+  admin,
+  ecommerce,
 };

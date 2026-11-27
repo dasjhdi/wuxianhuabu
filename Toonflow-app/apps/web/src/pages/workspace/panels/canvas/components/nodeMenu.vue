@@ -29,12 +29,18 @@
         ref="menuList"
         class="nodeMenu"
         @focus.self="menuLevel === 'nodes' && nodeMenuItemsRef?.focusFirst()"
-        :aria-label="menuLevel === 'selection' ? '选区操作' : menuLevel === 'arrange' ? '整理选中节点' : menuLevel === 'actions' ? '操作菜单' : '添加节点'">
+        :aria-label="menuLevel === 'selection' ? '选区操作' : menuLevel === 'actions' ? '操作菜单' : '添加节点'">
         <template v-if="menuLevel === 'selection'">
           <el-dropdown-item command="duplicateSelection" :icon="IconCopyPlus" :disabled="selectionBusy || deleting || !selectedNodes.length">
             创建副本
           </el-dropdown-item>
-          <el-dropdown-item command="arrange" :icon="IconLayoutGrid" :disabled="!canArrangeSelection">
+          <el-dropdown-item
+            command="arrange"
+            :icon="IconLayoutGrid"
+            :disabled="!canArrangeSelection"
+            data-flyout="arrange"
+            @mouseenter="hoverExpand('arrange')"
+            @mouseleave="onTriggerLeave">
             <span>整理选中节点</span>
             <icon-chevron-right class="nextIcon" :size="14" />
           </el-dropdown-item>
@@ -45,16 +51,14 @@
             {{ deleting ? "删除中…" : `删除选中节点（${selectedNodes.length}）` }}
           </el-dropdown-item>
         </template>
-        <template v-else-if="menuLevel === 'arrange'">
-          <el-dropdown-item command="selection" :icon="IconChevronLeft">返回选区操作</el-dropdown-item>
-          <el-divider />
-          <el-dropdown-item command="horizontal" :icon="IconLayoutColumns" :disabled="!canArrangeSelection">水平排列</el-dropdown-item>
-          <el-dropdown-item command="vertical" :icon="IconLayoutRows" :disabled="!canArrangeSelection">垂直排列</el-dropdown-item>
-          <el-dropdown-item command="grid" :icon="IconLayoutGrid" :disabled="!canArrangeSelection">宫格排列</el-dropdown-item>
-        </template>
         <template v-else-if="menuLevel === 'actions'">
           <el-dropdown-item command="upload" :icon="IconUpload" :disabled="!uploadFiles">上传</el-dropdown-item>
-          <el-dropdown-item command="nodes" :icon="IconPlus">
+          <el-dropdown-item
+            command="nodes"
+            :icon="IconPlus"
+            data-flyout="nodes"
+            @mouseenter="hoverExpand('nodes')"
+            @mouseleave="onTriggerLeave">
             <span>添加节点</span>
             <icon-chevron-right class="nextIcon" :size="14" />
           </el-dropdown-item>
@@ -67,8 +71,7 @@
           </el-dropdown-item>
         </template>
         <template v-else>
-          <el-dropdown-item v-if="!directNodes" command="actions" :icon="IconChevronLeft">返回操作菜单</el-dropdown-item>
-          <el-dropdown-item v-else disabled>添加节点</el-dropdown-item>
+          <el-dropdown-item disabled>添加节点</el-dropdown-item>
           <el-dropdown-item v-if="!menuItems.length" disabled>{{ pendingHandle || pendingGroup.length ? "没有可连接的节点" : "没有可显示的节点" }}</el-dropdown-item>
           <nodeMenuItems
             v-if="menuVisible"
@@ -82,6 +85,45 @@
             @close="menu?.handleClose()" />
         </template>
       </el-dropdown-menu>
+      <!-- ACT: 子面板挂在 dropdown popper 容器内而非 body——tooltip 的 onClickOutside 会把容器外的点击
+           当成外部点击提前关闭整个菜单；挂进容器后既躲开判定，也脱离 el-scrollbar 的 overflow 裁剪。 -->
+      <Teleport v-if="menuContainer" :to="menuContainer">
+        <div
+          v-if="flyoutVisible"
+          ref="flyoutRef"
+          class="nodeFlyout"
+          :class="flyoutSide === 'left' ? 'is-left' : 'is-right'"
+          :style="flyoutStyle"
+          role="menu"
+          :aria-label="flyoutKind === 'arrange' ? '整理选中节点' : '添加节点'"
+          @mouseenter="cancelFlyoutClose"
+          @mouseleave="scheduleFlyoutClose">
+          <nodeMenuItems
+            v-if="flyoutKind === 'nodes'"
+            ref="nodeMenuItemsRef"
+            :items="menuItems"
+            :nodes="filteredNodes"
+            :appendTo="menuContainer"
+            :uploadDisabled="!uploadFiles"
+            @select="handleCommand"
+            @upload="handleCommand('upload')"
+            @close="menu?.handleClose()" />
+          <template v-else>
+            <button type="button" class="flyoutItem" role="menuitem" :disabled="!canArrangeSelection" @click="handleCommand('horizontal')">
+              <icon-layout-columns :size="14" aria-hidden="true" />
+              <span>水平排列</span>
+            </button>
+            <button type="button" class="flyoutItem" role="menuitem" :disabled="!canArrangeSelection" @click="handleCommand('vertical')">
+              <icon-layout-rows :size="14" aria-hidden="true" />
+              <span>垂直排列</span>
+            </button>
+            <button type="button" class="flyoutItem" role="menuitem" :disabled="!canArrangeSelection" @click="handleCommand('grid')">
+              <icon-layout-grid :size="14" aria-hidden="true" />
+              <span>宫格排列</span>
+            </button>
+          </template>
+        </div>
+      </Teleport>
     </template>
   </el-dropdown>
 </template>
@@ -108,7 +150,6 @@ import {
   IconPlus,
   IconArrowBackUp,
   IconArrowForwardUp,
-  IconChevronLeft,
   IconChevronRight,
   IconLayoutColumns,
   IconLayoutRows,
@@ -135,7 +176,6 @@ const menuLevel = ref<"actions" | "nodes" | "selection" | "arrange">("actions");
 const selectedNodes = shallowRef<GraphNode[]>([]);
 const deleting = ref(false);
 const pasting = ref(false);
-const directNodes = ref(false);
 const menuAnchor = shallowRef({ getBoundingClientRect: () => new DOMRect() });
 const flow = useVueFlow();
 const { addNodes, screenToFlowCoordinate, onPaneContextMenu, onSelectionContextMenu, onPaneClick, onMoveStart } = flow;
@@ -185,9 +225,102 @@ const menuItems = computed(() => filterNodeMenu(
 
 async function onMenuVisibleChange(visible: boolean) {
   menuVisible.value = visible;
+  closeFlyout();
   if (!visible) return clearConnection();
   await nextTick();
   if (menuLevel.value === "nodes") nodeMenuItemsRef.value?.focusFirst();
+}
+
+// ACT: 悬浮「添加节点 / 整理选中节点」稍作停留即在主菜单旁边弹出独立子面板，主菜单保持不动；
+// 从相邻项划过时停留不足延迟不会误触，点击则立即弹出。离开触发项或子面板后延迟收起。
+const hoverExpandDelay = 180;
+const flyoutCloseDelay = 150;
+let hoverExpandTimer: ReturnType<typeof setTimeout> | undefined;
+let flyoutCloseTimer: ReturnType<typeof setTimeout> | undefined;
+const flyoutVisible = ref(false);
+const flyoutKind = ref<"nodes" | "arrange">("nodes");
+const flyoutSide = ref<"left" | "right">("right");
+const flyoutRef = ref<HTMLElement>();
+const flyoutStyle = ref<{ [key: string]: string }>({});
+
+function cancelHoverExpand() {
+  if (hoverExpandTimer === undefined) return;
+  clearTimeout(hoverExpandTimer);
+  hoverExpandTimer = undefined;
+}
+
+function cancelFlyoutClose() {
+  if (flyoutCloseTimer === undefined) return;
+  clearTimeout(flyoutCloseTimer);
+  flyoutCloseTimer = undefined;
+}
+
+function closeFlyout() {
+  cancelHoverExpand();
+  cancelFlyoutClose();
+  flyoutVisible.value = false;
+}
+
+function scheduleFlyoutClose() {
+  cancelFlyoutClose();
+  flyoutCloseTimer = setTimeout(() => {
+    flyoutCloseTimer = undefined;
+    closeFlyout();
+  }, flyoutCloseDelay);
+}
+
+function hoverExpand(kind: "nodes" | "arrange") {
+  if (disabled || (kind === "arrange" && !canArrangeSelection.value)) return;
+  if (flyoutVisible.value && flyoutKind.value === kind) {
+    cancelHoverExpand();
+    cancelFlyoutClose();
+    return;
+  }
+  cancelHoverExpand();
+  hoverExpandTimer = setTimeout(() => {
+    hoverExpandTimer = undefined;
+    openFlyout(kind);
+  }, hoverExpandDelay);
+}
+
+function onTriggerLeave() {
+  cancelHoverExpand();
+  if (flyoutVisible.value) scheduleFlyoutClose();
+}
+
+function openFlyout(kind: "nodes" | "arrange", focus = false) {
+  if (disabled || !menuVisible.value) return;
+  if (kind === "arrange" && !canArrangeSelection.value) return;
+  const trigger = menuList.value?.$el.querySelector<HTMLElement>(`[data-flyout="${kind}"]`);
+  const popper = menuList.value?.$el.closest<HTMLElement>(".el-popper");
+  if (!trigger || !popper) return;
+  cancelHoverExpand();
+  cancelFlyoutClose();
+  const popperRect = popper.getBoundingClientRect();
+  const rect = trigger.getBoundingClientRect();
+  // 宽度用估算值即可：右侧空间不足时翻转到菜单左侧弹出。
+  const width = kind === "nodes" ? 210 : 160;
+  const openLeft = rect.right + 4 + width > window.innerWidth - 8 && rect.left - 4 - width >= 8;
+  flyoutSide.value = openLeft ? "left" : "right";
+  const side = openLeft
+    ? { left: "auto", right: `${popperRect.right - rect.left + 4}px` }
+    : { left: `${rect.right - popperRect.left + 4}px`, right: "auto" };
+  flyoutKind.value = kind;
+  flyoutStyle.value = { ...side, top: `${rect.top - popperRect.top - 5}px` };
+  flyoutVisible.value = true;
+  void nextTick().then(() => {
+    const el = flyoutRef.value;
+    if (!el || !flyoutVisible.value) return;
+    // 垂直方向夹在视口内，节点列表较高时不溢出屏幕底部。
+    let top = rect.top - 5;
+    top = Math.min(top, window.innerHeight - 8 - el.offsetHeight);
+    top = Math.max(top, 8);
+    flyoutStyle.value = { ...flyoutStyle.value, top: `${top - popperRect.top}px` };
+    if (focus) {
+      if (kind === "nodes") nodeMenuItemsRef.value?.focusFirst(true);
+      else el.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus();
+    }
+  });
 }
 
 function clearSelectionHandles() {
@@ -212,10 +345,14 @@ function startSelectionConnection() {
   menu.value?.handleClose();
 }
 
-onBeforeUnmount(clearConnection);
+onBeforeUnmount(() => {
+  closeFlyout();
+  clearConnection();
+});
 watch(() => disabled, value => {
   if (!value) return;
   menu.value?.handleClose();
+  closeFlyout();
   clearConnection();
 });
 flow.onConnectStart(() => {
@@ -241,13 +378,14 @@ async function openMenu(event: MouseEvent | TouchEvent, nodesOnly = false, selec
   event.stopPropagation();
   if (disabled) return;
   emit("history");
+  cancelHoverExpand();
   menu.value?.handleClose();
+  closeFlyout();
   clearConnection();
   await nextTick();
   if (disabled || !menu.value || (handle && flow.findNode(handle.node.id) !== handle.node)) return;
   pendingHandle.value = handle;
   pendingGroup.value = group;
-  directNodes.value = nodesOnly;
   selectedNodes.value = [...selection];
   menuLevel.value = selection.length ? "selection" : nodesOnly ? "nodes" : "actions";
   const point = "changedTouches" in event ? event.changedTouches[0] : event;
@@ -283,12 +421,9 @@ async function addNode(type: string, position: { x: number; y: number }) {
 
 async function handleCommand(command: unknown) {
   if (disabled) return;
-  if (command === "nodes" || command === "actions" || command === "selection" || command === "arrange") {
-    if (command === "arrange" && !canArrangeSelection.value) return;
-    menuLevel.value = command;
-    await nextTick();
-    if (command === "nodes") nodeMenuItemsRef.value?.focusFirst();
-    else menuList.value?.$el.focus();
+  cancelHoverExpand();
+  if (command === "nodes" || command === "arrange") {
+    openFlyout(command, true);
     return;
   }
   if (command === "duplicateSelection") {
@@ -445,6 +580,66 @@ async function deleteSelection(selection = selectedNodes.value) {
 
   .nextIcon {
     margin-left: auto;
+  }
+}
+
+.nodeFlyout {
+  position: absolute;
+  z-index: 1;
+  min-width: 180px;
+  padding: 5px 0;
+  background: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-light);
+  border-radius: var(--el-border-radius-base);
+  box-shadow: var(--el-box-shadow-light);
+
+  // ACT: 朝向主菜单一侧的隐形桥接条，覆盖缝隙避免跨过去的瞬间触发收起。
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+  }
+
+  &.is-right::before {
+    left: -8px;
+  }
+
+  &.is-left::before {
+    right: -8px;
+  }
+}
+
+.flyoutItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 150px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 5px 16px;
+  background: transparent;
+  color: var(--el-text-color-regular);
+  font: inherit;
+  font-size: var(--el-font-size-base);
+  line-height: 22px;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover:not(:disabled),
+  &:focus-visible {
+    outline: none;
+    background: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
+  }
+
+  &:disabled {
+    background: transparent;
+    color: var(--el-text-color-disabled);
+    cursor: not-allowed;
   }
 }
 </style>

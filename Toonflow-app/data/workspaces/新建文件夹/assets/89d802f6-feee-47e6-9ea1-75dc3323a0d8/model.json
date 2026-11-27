@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "scene": {
+    "version": "next",
+    "sceneConfig": {
+      "scene": {
+        "background": "#202024"
+      },
+      "camera": {
+        "position": {
+          "x": 3,
+          "y": 2.2,
+          "z": 4
+        },
+        "fov": 55,
+        "near": 0.1,
+        "far": 1000
+      },
+      "controls": {
+        "target": {
+          "x": 0,
+          "y": 0.9,
+          "z": 0
+        }
+      },
+      "lights": [
+        {
+          "type": "ambient",
+          "color": "#ffffff",
+          "intensity": 0.8
+        },
+        {
+          "type": "directional",
+          "color": "#ffffff",
+          "intensity": 2,
+          "position": {
+            "x": 10,
+            "y": 16,
+            "z": 12
+          }
+        }
+      ]
+    },
+    "objectList": [
+      {
+        "threeJsonId": "bb69ff6f-00c0-4708-a366-a9862ca8a406",
+        "name": "关节人偶",
+        "objType": "mannequin",
+        "geometry": {},
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "material": {
+          "type": "standard",
+          "color": "#c7a77b",
+          "roughness": 0.75
+        }
+      }
+    ]
+  },
+  "plans": []
+}

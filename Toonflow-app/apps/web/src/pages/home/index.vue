@@ -19,6 +19,10 @@
           <span class="sidebarText">{{ translate(section.label) }}</span>
         </button>
         <hr class="sidebarDivider" />
+        <button class="sidebarItem" type="button" aria-label="电商套图" title="电商套图" @click="router.push('/ecommerce')">
+          <icon-photo-star :size="18" aria-hidden="true" />
+          <span class="sidebarText">电商套图</span>
+        </button>
         <button class="sidebarItem" :class="{ active: assetsVisible }" type="button" aria-label="素材库" title="素材库" aria-haspopup="dialog" :aria-expanded="assetsVisible" @click="assetsVisible = true">
           <icon-library-photo :size="18" aria-hidden="true" />
           <span class="sidebarText">素材库</span>
@@ -32,6 +36,14 @@
             <span v-if="deviceHubEnabled || mobileConnection.online === true" class="connectionDot" />
           </span>
           <span class="sidebarText">{{ mobileConnectionLabel }}</span>
+        </button>
+        <button v-if="isAdmin" class="sidebarItem" type="button" aria-label="管理后台" title="管理后台" @click="router.push('/admin')">
+          <icon-shield-lock :size="18" aria-hidden="true" />
+          <span class="sidebarText">管理后台</span>
+        </button>
+        <button class="sidebarItem" type="button" aria-label="退出登录" title="退出登录" @click="logoutToLogin">
+          <icon-logout :size="18" aria-hidden="true" />
+          <span class="sidebarText">退出登录</span>
         </button>
         <button class="sidebarItem" type="button" :aria-label="hasDesktopUpdate ? '设置，有新版本可用' : '设置'" :title="hasDesktopUpdate ? '设置，有新版本可用' : '设置'" @click="settingsVisible = true">
           <span class="sidebarIcon">
@@ -144,6 +156,7 @@ import useWorkspaceFiles from "@/lib/workspaceFiles";
 import saveFile from "@/lib/saveFile";
 import http from "@/lib/http";
 import { waitForControlValue } from "@/lib/mcpControl";
+import { isAdmin, logout } from "@/lib/auth";
 import settings from "@/components/settings/index.vue";
 import assetLibraryDialog from "./assetLibraryDialog.vue";
 import bg from "./bg.vue";
@@ -168,6 +181,16 @@ const homeSections = [
 ];
 const mobileConnect = defineAsyncComponent(() => import("@/components/mobileConnect.vue"));
 const router = useRouter();
+
+async function logoutToLogin() {
+  try {
+    await ElMessageBox.confirm("退出后需要重新输入账号密码才能继续创作。", "退出登录", { confirmButtonText: "退出", cancelButtonText: "取消" });
+  } catch {
+    return;
+  }
+  await logout();
+  await router.replace("/login");
+}
 const pageLifetime = new AbortController();
 const creating = ref(false);
 const opening = ref(false);
